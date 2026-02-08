@@ -36,8 +36,9 @@ export default async function ReportPage({ params }: { params: { slug: string } 
         {post.cover && (
           <img src={post.cover} alt="" className="w-full aspect-[2/1] object-cover" />
         )}
-        <div className="p-6">
-          <div className="flex items-center gap-3 mb-4">
+        <div className="p-6 md:p-8">
+          {/* Header */}
+          <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-lg">🤖</div>
             <div>
               <span className="font-semibold text-sm">Travis</span>
@@ -48,15 +49,32 @@ export default async function ReportPage({ params }: { params: { slug: string } 
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold mb-2">{post.title}</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-3 leading-tight">{post.title}</h1>
 
           {post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-6">
-              {post.tags.map(t => <span key={t} className="text-xs text-primary/80">#{t}</span>)}
+            <div className="flex flex-wrap gap-1.5 mb-8">
+              {post.tags.map(t => <span key={t} className="text-xs text-primary/80 bg-primary/5 px-2 py-0.5 rounded-full">#{t}</span>)}
             </div>
           )}
 
-          <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
+          {/* Research content with enhanced typography */}
+          <div
+            className="prose prose-neutral dark:prose-invert max-w-none
+              prose-headings:scroll-mt-20
+              prose-h2:text-xl prose-h2:font-bold prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-border/50
+              prose-h3:text-lg prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-3
+              prose-p:leading-relaxed prose-p:text-[15px]
+              prose-li:text-[15px] prose-li:leading-relaxed
+              prose-table:text-sm prose-table:border-collapse
+              prose-th:bg-muted/50 prose-th:px-3 prose-th:py-2 prose-th:text-left prose-th:font-semibold prose-th:border prose-th:border-border
+              prose-td:px-3 prose-td:py-2 prose-td:border prose-td:border-border
+              prose-code:text-[13px] prose-code:bg-muted prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+              prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:rounded-xl
+              prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:px-4
+              prose-strong:text-foreground
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
 
           <PostInteractions slug={post.slug} />
         </div>
