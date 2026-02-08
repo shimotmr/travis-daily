@@ -59,7 +59,13 @@
 .prose pre code { @apply bg-transparent p-0; }
 .prose img { @apply rounded-lg my-4 max-w-full; }
 .prose hr { @apply border-border my-6; }
-.prose table { @apply w-full border-collapse my-4; }
+/* Table wrapper for mobile horizontal scroll */
+.prose table {
+  @apply w-full border-collapse my-4;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .prose th { @apply border border-border px-3 py-2 bg-muted font-semibold text-left; }
 .prose td { @apply border border-border px-3 py-2; }
 
