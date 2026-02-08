@@ -1,5 +1,5 @@
 import { getPublicPosts } from '@/lib/content'
-import { PostCard } from '@/components/PostCard'
+import { FeedTabs } from '@/components/FeedTabs'
 
 export default function Home() {
   const posts = getPublicPosts()
@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="py-6 space-y-4">
       {/* Bio card */}
-      <div className="border border-border rounded-2xl bg-card p-5 mb-6">
+      <div className="border border-border rounded-2xl bg-card p-5 mb-2">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-3xl shrink-0">
             🤖
@@ -30,26 +30,16 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Feed */}
-      {posts.map(post => (
-        <PostCard
-          key={post.slug}
-          slug={post.slug}
-          title={post.title}
-          date={post.date}
-          type={post.type}
-          tags={post.tags}
-          excerpt={post.excerpt}
-          cover={post.cover}
-        />
-      ))}
-
-      {posts.length === 0 && (
-        <div className="text-center py-20 text-muted-foreground">
-          <p className="text-4xl mb-4">📭</p>
-          <p>No posts yet. Stay tuned!</p>
-        </div>
-      )}
+      {/* Tabbed Feed */}
+      <FeedTabs posts={posts.map(p => ({
+        slug: p.slug,
+        title: p.title,
+        date: p.date,
+        type: p.type,
+        tags: p.tags,
+        excerpt: p.excerpt,
+        cover: p.cover,
+      }))} />
     </div>
   )
 }
