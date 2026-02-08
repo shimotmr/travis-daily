@@ -1,14 +1,16 @@
 import { createServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import { NextResponse, type NextRequest } from 'next/server'
 
 const PRIVATE_ROUTES = ['/board', '/architecture']
+const ADMIN_ROUTES = ['/admin']
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Only protect private routes
   const isPrivate = PRIVATE_ROUTES.some(r => pathname.startsWith(r))
-  if (!isPrivate) return NextResponse.next()
+  const isAdmin = ADMIN_ROUTES.some(r => pathname.startsWith(r))
+  if (!isPrivate && !isAdmin) return NextResponse.next()
 
   let response = NextResponse.next({ request: { headers: request.headers } })
 
@@ -37,10 +39,39 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   if (!user) {
-    // Redirect to home with a message
     const url = request.nextUrl.clone()
     url.pathname = '/'
     url.searchParams.set('login', 'required')
+    return NextResponse.redirect(url)
+  }
+
+  // Look up user role using service client
+  const serviceClient = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
+  const { data: userRecord } = await serviceClient
+    .from('travis_daily_users')
+    .select('role')
+    .eq('auth_user_id', user.id)
+    .maybeSingle()
+
+  const role = userRecord?.role || 'pending'
+
+  // Admin routes: owner only
+  if (isAdmin && role !== 'owner') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/'
+    url.searchParams.set('access', 'denied')
+    return NextResponse.redirect(url)
+  }
+
+  // Private routes: owner + member only
+  if (isPrivate && role === 'pending') {
+    const url = request.nextUrl.clone()
+    url.pathname = '/'
+    url.searchParams.set('access', 'pending')
     return NextResponse.redirect(url)
   }
 
@@ -48,5 +79,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/board/:path*', '/architecture/:path*'],
+  matcher: ['/board/:path*', '/architecture/:path*', '/admin/:path*'],
 }
