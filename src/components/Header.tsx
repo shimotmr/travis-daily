@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useTheme } from './ThemeProvider'
-import { Sun, Moon, Newspaper, LayoutDashboard } from 'lucide-react'
+import { Sun, Moon, Newspaper, LayoutDashboard, Network } from 'lucide-react'
 
 export function Header() {
   const { theme, toggle } = useTheme()
@@ -23,6 +23,13 @@ export function Header() {
             title="Feed"
           >
             <Newspaper size={18} />
+          </Link>
+          <Link
+            href="/architecture"
+            className="p-2 rounded-lg hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
+            title="Architecture"
+          >
+            <Network size={18} />
           </Link>
           <Link
             href="/board"
