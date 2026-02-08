@@ -10,28 +10,35 @@ const tabs = [
     label: 'Skills 調用',
     icon: Cpu,
     title: 'Skills 調用邏輯架構',
-    description: '使用者訊息如何經過 Gateway、Session Manager、Skill Router，最終觸發合適的技能完成任務。',
+    description: '使用者訊息經過 Gateway → Session → Agent 後，先進行複雜度判斷：簡單問答直接回覆，複雜任務則經 Request Orchestrator 拆解、Prompt Engineering Expert 結構化改寫，再由 Skill Router 分派至對應技能執行。',
     details: [
       { title: 'OpenClaw Gateway 🦞', desc: '接收來自 Telegram 的訊息，管理 session 與認證' },
-      { title: 'Skill Router 🧭', desc: '根據意圖偵測結果，選擇最適合的技能組合（研究、開發、工作、金融、通訊）' },
-      { title: 'Sub-Agent Spawning 🔄', desc: '複雜任務會 spawn 獨立的子代理，平行處理後回報' },
-      { title: 'Memory System 🧠', desc: 'Daily Logs（短期）+ MEMORY.md（長期）+ qmd Semantic Search（語義搜尋）' },
+      { title: '複雜度判斷 🔍', desc: '判斷請求為簡單問答（直接回覆）或複雜任務（進入 Orchestrator 流程）' },
+      { title: 'Request Orchestrator 📐', desc: '將口語化請求轉譯為結構化任務，拆解子任務清單並調度技能' },
+      { title: 'Prompt Engineering Expert ✍️', desc: '對拆解後的任務進行結構化改寫，提升技能調用的精準度' },
+      { title: 'Skill Router 🧭', desc: '根據意圖分類結果，匹配最適合的技能組合（研究、開發、工作、金融、通訊）' },
+      { title: 'Sub-Agent 派遣 🔄', desc: '複雜任務 spawn 獨立子代理，平行處理後回報主代理' },
+      { title: '記憶系統 🧠', desc: '每日紀錄（短期）+ MEMORY.md（長期）+ qmd 語義搜尋（RAG）' },
     ],
     diagram: `graph TD
     User["👤 William / Telegram"] --> Gateway["🦞 OpenClaw Gateway"]
     Gateway --> Session["📋 Session Manager"]
     Session --> Agent["🤖 Travis / Claude Opus 4.6"]
-    Agent --> Router["🧭 Skill Router"]
+    Agent --> Judge{"🔍 複雜度判斷"}
+    Judge -->|簡單問答| DirectReply["💬 直接回覆"]
+    Judge -->|複雜任務| Orchestrator["📐 Request Orchestrator<br/>請求轉譯・任務拆解"]
+    Orchestrator --> PromptExpert["✍️ Prompt Engineering Expert<br/>結構化改寫"]
+    PromptExpert --> Router["🧭 Skill Router<br/>意圖分類・技能匹配"]
     Router --> Research["🔍 研究類<br/>tavily, perplexity, deep-research"]
     Router --> Coding["💻 開發類<br/>github, nextjs, react"]
     Router --> Work["📊 工作類<br/>gog, excel, zimbra"]
     Router --> Finance["💰 金融類<br/>yahoo-finance, stock-analysis"]
     Router --> Communication["📱 通訊類<br/>telegram, LINE, WeCom"]
-    Agent --> SubAgent["🔄 Sub-Agent Spawning"]
-    Agent --> Memory["🧠 Memory System"]
-    Memory --> Daily["📝 Daily Logs"]
-    Memory --> Long["📚 MEMORY.md"]
-    Memory --> QMD["🔍 qmd Semantic Search"]
+    Router --> SubAgent["🔄 Sub-Agent 派遣<br/>獨立任務並行處理"]
+    Agent --> Memory["🧠 記憶系統"]
+    Memory --> Daily["📝 每日紀錄"]
+    Memory --> Long["📚 長期記憶 MEMORY.md"]
+    Memory --> QMD["🔍 qmd 語義搜尋"]
     SubAgent --> Agent`,
   },
   {
