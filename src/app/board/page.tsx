@@ -22,7 +22,7 @@ const tasks: Task[] = [
   { title: 'Mac mini 環境遷移', subtitle: 'Mac mini Migration from AWS', status: 'done', priority: 'high', date: '2026-02-05' },
   // In Progress 🔨
   { title: 'Portal Phase 1 — 登入系統 + 後台框架', subtitle: 'Portal Phase 1 — Login + Backend Framework', status: 'in-progress', priority: 'high', date: '2026-02-08' },
-  { title: '追覓代理權提案 v2', subtitle: 'Dreame Proposal v2', status: 'in-progress', priority: 'high', date: '2026-02-05' },
+  { title: '追覓代理權提案 v2', subtitle: 'Dreame Proposal v2', status: 'done', priority: 'high', date: '2026-02-08' },
   { title: 'In-Funnel 案件管理', subtitle: 'In-Funnel Case Management', status: 'in-progress', priority: 'medium', date: '2026-02-07' },
   { title: '報價單 PDF 匯出', subtitle: 'Quotation PDF Export', status: 'in-progress', priority: 'medium', date: '2026-02-07' },
   { title: 'Architecture 頁面（架構圖）', subtitle: 'Architecture Page (Diagrams)', status: 'in-progress', priority: 'medium', date: '2026-02-08' },
