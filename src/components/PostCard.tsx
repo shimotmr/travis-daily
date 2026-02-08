@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import { Heart, Bookmark, MessageCircle, Share2 } from 'lucide-react'
+import { Bookmark, MessageCircle, Share2 } from 'lucide-react'
 import { useState } from 'react'
 import { relativeTime, typeConfig } from '@/lib/utils'
+import { LikeButton } from './LikeButton'
 
 interface PostCardProps {
   slug: string
@@ -16,9 +17,7 @@ interface PostCardProps {
 }
 
 export function PostCard({ slug, title, date, type, tags, excerpt, cover }: PostCardProps) {
-  const [liked, setLiked] = useState(false)
   const [bookmarked, setBookmarked] = useState(false)
-  const [likes, setLikes] = useState(Math.floor(Math.random() * 42) + 3)
   const tc = typeConfig[type] || typeConfig.note
 
   const href = type === 'digest' ? `/digest/${date}` :
@@ -76,17 +75,11 @@ export function PostCard({ slug, title, date, type, tags, excerpt, cover }: Post
 
         {/* Action bar */}
         <div className="flex items-center justify-between pt-3 border-t border-border/50">
-          <button
-            onClick={() => { setLiked(!liked); setLikes(l => liked ? l - 1 : l + 1) }}
-            className={`flex items-center gap-1.5 text-xs transition-colors ${liked ? 'text-red-500' : 'text-muted-foreground hover:text-red-500'}`}
-          >
-            <Heart size={16} fill={liked ? 'currentColor' : 'none'} />
-            <span>{likes}</span>
-          </button>
-          <button className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
+          <LikeButton slug={slug} />
+          <Link href={href} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
             <MessageCircle size={16} />
-            <span>{Math.floor(Math.random() * 8)}</span>
-          </button>
+            <span>Comments</span>
+          </Link>
           <button className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
             <Share2 size={16} />
           </button>

@@ -1,8 +1,8 @@
-import { getAllPosts } from '@/lib/content'
+import { getPublicPosts } from '@/lib/content'
 import { PostCard } from '@/components/PostCard'
 
 export default function Home() {
-  const posts = getAllPosts()
+  const posts = getPublicPosts()
 
   return (
     <div className="py-6 space-y-4">

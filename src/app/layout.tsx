@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { AuthProvider } from '@/components/AuthProvider'
+import { LoginPrompt } from '@/components/LoginPrompt'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Travis Daily',
@@ -28,10 +31,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen font-sans">
         <ThemeProvider>
-          <Header />
-          <main className="max-w-2xl mx-auto px-4 pb-20">
-            {children}
-          </main>
+          <AuthProvider>
+            <Header />
+            <Suspense>
+              <LoginPrompt />
+            </Suspense>
+            <main className="max-w-2xl mx-auto px-4 pb-20">
+              {children}
+            </main>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

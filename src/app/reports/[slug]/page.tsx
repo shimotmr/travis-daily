@@ -2,6 +2,7 @@ import { getAllPosts, renderMarkdown } from '@/lib/content'
 import { formatDate, typeConfig } from '@/lib/utils'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
+import { PostInteractions } from '@/components/PostInteractions'
 
 export async function generateStaticParams() {
   const posts = getAllPosts().filter(p => p.type === 'research')
@@ -56,6 +57,8 @@ export default async function ReportPage({ params }: { params: { slug: string } 
           )}
 
           <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
+
+          <PostInteractions slug={post.slug} />
         </div>
       </div>
     </article>

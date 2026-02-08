@@ -2,10 +2,13 @@
 
 import Link from 'next/link'
 import { useTheme } from './ThemeProvider'
-import { Sun, Moon, Newspaper, LayoutDashboard, Network } from 'lucide-react'
+import { Sun, Moon, Newspaper, LayoutDashboard, Network, Lock } from 'lucide-react'
+import { AuthButton } from './AuthButton'
+import { useAuth } from './AuthProvider'
 
 export function Header() {
   const { theme, toggle } = useTheme()
+  const { user } = useAuth()
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border">
@@ -45,6 +48,9 @@ export function Header() {
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
+          <div className="ml-1 pl-1 border-l border-border">
+            <AuthButton />
+          </div>
         </nav>
       </div>
     </header>
