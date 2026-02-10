@@ -1,3 +1,4 @@
+import { MarkdownContent } from '@/components/MarkdownContent'
 import { getAllPosts, renderMarkdown } from '@/lib/content'
 import { formatDate, typeConfig } from '@/lib/utils'
 import { ArrowLeft } from 'lucide-react'
@@ -56,7 +57,7 @@ export default async function DigestPage({ params }: { params: { date: string } 
             </div>
           )}
 
-          <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
+          <MarkdownContent html={html} className="prose prose-neutral dark:prose-invert max-w-none" />
 
           <PostInteractions slug={post.slug} />
         </div>
