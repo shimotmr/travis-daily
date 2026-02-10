@@ -73,7 +73,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 A：單臂 + 半自動機** ⏱ 2-3 min ❌ 不可行
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 140" viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 140" viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="138" rx="8" fill="none" stroke="#dc2626" stroke-width="2"/>
   <!-- 磨豆機 -->
   <rect x="30" y="45" width="90" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
@@ -109,7 +109,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 B：雙臂式** ⏱ 1.5-2 min ❌ 不可行
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 150" viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 150" viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="148" rx="8" fill="none" stroke="#dc2626" stroke-width="2"/>
   <!-- 半自動機 -->
   <rect x="30" y="30" width="120" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -142,7 +142,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 C：單臂 + 全自動機** ⏱ 45-90s ⚠️ 勉強
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="118" rx="8" fill="none" stroke="#f59e0b" stroke-width="2"/>
   <!-- 全自動機 -->
   <rect x="50" y="35" width="140" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -169,7 +169,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 D：全自動機 + 手臂遞送** ⏱ 35-40s ✅ 推薦
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="118" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
   <!-- WMF/Eversys -->
   <rect x="40" y="35" width="170" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -196,7 +196,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 E：雙機 Pipeline** ⏱ 20-25s ✅✅ 最佳
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 160" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 160" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="158" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
   <!-- 全自動機 A -->
   <rect x="40" y="25" width="140" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -270,7 +270,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 動作時序圖
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <defs><marker id="ga" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#374151"/></marker></defs>
   <!-- title -->
   <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 A 動作時序圖</text>
@@ -335,7 +335,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 硬體佈局圖（俯視圖）
 
 <div align="center">
-<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="dim-a" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
     <marker id="dim-a2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
@@ -404,7 +404,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 動作時序圖
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 B 動作時序圖</text>
   <!-- Y labels -->
   <text x="85" y="55" text-anchor="end" font-size="11" fill="#16a34a">沖煮頭 1</text>
@@ -457,7 +457,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 硬體佈局圖（俯視圖）
 
 <div align="center">
-<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="dim-b" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
     <marker id="dim-b2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
@@ -515,7 +515,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 動作時序圖
 
 <div align="center">
-<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 C 動作時序圖</text>
   <!-- Y labels -->
   <text x="85" y="55" text-anchor="end" font-size="11" fill="#16a34a">WMF 5000S+</text>
@@ -565,7 +565,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 硬體佈局圖（俯視圖）
 
 <div align="center">
-<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="dim-c" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
     <marker id="dim-c2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
@@ -668,18 +668,181 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 4. **雲端同步**：支持多店同步管理
 5. **安全認證**：ISO 15066 / ISO 13849 合規
 
-### 5.2 咖啡機推薦
+### 5.2 商用全自動咖啡機深度分析
 
-| 品牌 | 型號 | 產能（杯/hr） | 適配方案 | 價格（USD） |
-|------|------|-------------|---------|-----------|
-| **Eversys** | Shotmaster | **700** | 方案 B | $30-50K |
-| **Eversys** | Cameo C'2 | 175 | 方案 C | $15-25K |
-| **Eversys** | Enigma E'4S | 350 | 方案 A/B | $20-35K |
-| **WMF** | 5000 S+ | 150-200 | 方案 C（推薦） | $15-30K |
-| **WMF** | 1500 S+ | 100-150 | 方案 A（×2台） | $10-20K |
-| **JURA** | GIGA X3c | 80-100 | 方案 A（經濟版） | $5-10K |
+#### Eversys Shotmaster Pro
 
-### 5.3 末端執行器（夾爪）
+| 項目 | 規格 |
+|------|------|
+| 產能 | 700 espresso/hr、350 cappuccino/hr |
+| 同時出杯 | 8 杯 |
+| 沖煮頭 | 4 組（雙沖煮頭 ×2） |
+| 研磨器 | 4 × 64mm 陶瓷刀盤 |
+| 奶泡系統 | Everfoam 蒸氣棒 + EMT 牛奶模組 |
+| 尺寸 (W×H×D) | 849 × 743 × 710 mm |
+| 重量 | 163-167 kg |
+| 豆倉 | 4 × 1.5 kg = 6 kg（~850 杯） |
+| 渣盒 | 2 × 700g（~200 杯清一次） |
+| 水源 | 直連水線（必須） |
+| 壽命 | 8-12 年、刀盤 50,000-80,000 杯 |
+| 價格 | USD $28,000 - $70,000 |
+| 機器人介面 | **CCI/CSI/API ✅** |
+| 適合 | 超高流量：機場、體育場、大型連鎖 |
+
+**特殊功能**：e'Levelling 自動整粉、e'Connect 遠端監控、3 × 10.1" 觸控螢幕
+
+**維護**：每日自動清洗 + 牛奶沖洗、每月除鈣、年度大保養
+
+---
+
+#### Eversys Cameo C'2
+
+| 項目 | 規格 |
+|------|------|
+| 產能 | 175 espresso/hr |
+| 同時出杯 | 2 杯 |
+| 沖煮頭 | 1 組 |
+| 研磨器 | 2 × 64mm 陶瓷刀盤 |
+| 尺寸 (W×H×D) | 430 × 580 × 600 mm |
+| 重量 | 53 kg |
+| 豆倉 | 2 × 1.2 kg = 2.4 kg（~340 杯） |
+| 渣盒 | 400g（~55 杯清一次） |
+| 壽命 | 8-10 年、保固 24 個月或 100,000 次 |
+| 價格 | USD $17,000 - $23,000 |
+| 機器人介面 | **CCI/CSI/API ✅** |
+| 適合 | 中流量：精品咖啡店、餐廳、飯店 |
+
+**特殊功能**：15.7" 觸控螢幕、PowerPlus 5.6kW 蒸氣鍋爐、粉槽（巧克力粉）
+
+---
+
+#### Eversys Enigma E'4S ⭐ 機器人整合首選
+
+| 項目 | 規格 |
+|------|------|
+| 產能 | 350 espresso/hr、350 cappuccino/hr |
+| 同時出杯 | 4 杯 |
+| 沖煮頭 | 2 組 |
+| 研磨器 | 2 × 64mm 陶瓷刀盤 |
+| 奶泡系統 | Everfoam + MAD（電子控制奶泡） |
+| 尺寸 (W×H×D) | 838 × 743 × 600 mm |
+| 重量 | 90-94 kg |
+| 豆倉 | 2 × 1.5 kg = 3 kg（~430 杯） |
+| 渣盒 | 700g（~100 杯清一次） |
+| 杯架加熱 | 64-128 杯 espresso |
+| 壽命 | 8-12 年、刀盤 50,000-80,000 杯 |
+| 價格 | USD $38,000 - $57,000 |
+| 機器人介面 | **CCI/CSI/API ✅** |
+| 適合 | 高流量：連鎖咖啡、機器人咖啡亭 |
+
+**特殊功能**：ETC 萃取時間控制、自動校準、2 × 10.1" 觸控螢幕（Linux 平台）、模組化快拆設計
+
+> **為何是機器人整合首選**：性價比最佳（$38K 起）、350 杯/hr、CCI/CSI/API 完整、多國成功案例（Crown Coffee 新加坡、Megarobo 中國）
+
+---
+
+#### WMF 5000 S+
+
+| 項目 | 規格 |
+|------|------|
+| 產能 | 推薦每日 250 杯（150-200 杯/hr 峰值） |
+| 沖煮頭 | 1 組 |
+| 研磨器 | 最多 3 豆倉（鋼刀盤） |
+| 奶泡系統 | Dynamic Milk（4 種熱奶泡 + 3 種冷奶泡） |
+| 尺寸 (W×H×D) | 325 × 716 × 590 mm |
+| 重量 | 37 kg |
+| 豆倉 | 左右各 1100g + 中央 700g = 2.9 kg（~410 杯） |
+| 渣盒 | ~40-50 杯清一次 |
+| 壽命 | 7-10 年、鋼刀盤 30,000-50,000 杯 |
+| 價格 | USD $15,000 - $25,000 |
+| 機器人介面 | **無原生介面 ⚠️**（CoffeeConnect 僅監控） |
+| 適合 | 中高流量：飯店、便利商店、企業 |
+
+**特殊功能**：Dynamic Coffee Assist 自動調整研磨、SteamJet 杯子預熱、Cup Sensor 杯子感應、Syrup Station 糖漿站（選配 4 種口味）、CoolBrew 冰咖啡
+
+---
+
+#### WMF 1500 S+
+
+| 項目 | 規格 |
+|------|------|
+| 產能 | 推薦每日 180 杯（100-150 杯/hr 峰值） |
+| 尺寸 (W×H×D) | 325 × 675 × 590 mm |
+| 重量 | 37 kg |
+| 豆倉 | 2.9 kg（~410 杯） |
+| 壽命 | 7-10 年 |
+| 價格 | USD $10,000 - $15,000 |
+| 機器人介面 | **無原生介面 ⚠️** |
+| 適合 | 中流量：辦公室、小型咖啡店 |
+
+與 5000 S+ 結構相似，產能和功能略低，價格更實惠。
+
+---
+
+#### JURA GIGA X3c
+
+| 項目 | 規格 |
+|------|------|
+| 產能 | 每日最多 150 杯（80-100 杯/hr） |
+| 飲品 | 31 種可程式 + 12 種 Barista 配方 |
+| 尺寸 (W×H×D) | 320 × 555 × 497 mm |
+| 重量 | 19 kg |
+| 豆倉 | 1 kg（~125 杯） |
+| 渣盒 | 40 杯清一次 |
+| 壽命 | 5-8 年、刀盤 ~40,000 杯 |
+| 價格 | USD $4,500 - $6,000 |
+| 機器人介面 | **無 ❌**（J.O.E.® App 僅藍牙/WiFi 消費級） |
+| 適合 | 低流量：小型辦公室、移動咖啡車 |
+
+> ⚠️ **不建議用於機器人整合**：無工業 API、無硬體信號介面、出杯區域小
+
+---
+
+#### 咖啡機綜合比較
+
+| 規格 | Shotmaster | Cameo C'2 | Enigma E'4S ⭐ | WMF 5000 S+ | WMF 1500 S+ | JURA X3c |
+|------|-----------|-----------|---------------|-------------|-------------|----------|
+| 產能 | 700杯/hr | 175杯/hr | 350杯/hr | 250杯/日 | 180杯/日 | 150杯/日 |
+| 同時出杯 | 8 | 2 | 4 | 1 | 1 | 1 |
+| 重量 | 163kg | 53kg | 90kg | 37kg | 37kg | 19kg |
+| 豆倉 | 6kg | 2.4kg | 3kg | 2.9kg | 2.9kg | 1kg |
+| 機器人API | ✅ CCI/CSI | ✅ CCI/CSI | ✅ CCI/CSI | ⚠️ 需客製 | ⚠️ 需客製 | ❌ |
+| 價格 | $28-70K | $17-23K | $38-57K | $15-25K | $10-15K | $4.5-6K |
+| 壽命 | 8-12年 | 8-10年 | 8-12年 | 7-10年 | 7-10年 | 5-8年 |
+
+---
+
+### 5.3 通信與控制串接分析
+
+#### Eversys 系列（最佳整合性）⭐⭐⭐
+
+| 介面 | 說明 |
+|------|------|
+| **CCI**（Coffee Command Interface） | 硬體信號，PLC/手臂控制器觸發指定飲品 |
+| **CSI**（Coffee Status Interface） | 回傳狀態：製作中、完成、錯誤、需補料 |
+| **e'API** | REST API，Ethernet (RJ45) 連接，程式化控制所有配方 |
+| **連接** | USB + Ethernet |
+
+**已知機器人整合案例**：Crown Coffee（新加坡）、Café+（中國）、Megarobo（中國）、Happy Bones（韓國）、Spazekøf（泰國）
+
+**工作流範例**：手臂放杯 → CCI 觸發製作 → CSI 回傳「完成」→ 手臂取杯遞送
+
+#### WMF 系列（需客製整合）⭐⭐
+
+- CoffeeConnect 是雲端**監控**平台，非即時控制 API
+- Cup Sensor 可偵測杯子，但非設計給機器人
+- 需與 WMF 原廠洽談 OEM 整合方案
+
+#### JURA（不建議）⭐
+
+- J.O.E.® App 僅藍牙/WiFi，消費級
+- 無工業 API、無硬體信號介面
+
+> **結論**：機器人咖啡必選 **Eversys**。CCI/CSI 是業界最完整的手臂串接介面，已有 5+ 國家成功案例。
+
+---
+
+### 5.4 末端執行器（夾爪）
 
 > **推薦**：客製化咖啡杯夾具（$200-500），針對固定杯型設計，NOVA 系列的法蘭接口直接安裝
 
@@ -689,9 +852,22 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 | 二指平行夾爪 | 多種杯型 | $500-2K |
 | 真空吸盤 | 杯蓋操作 | $300-1K |
 
-### 5.4 感測器
+### 5.5 感測器
 
 NOVA 系列已內建力矩感測器和碰撞檢測，**額外只需選配 2D 視覺相機**（杯位檢測，$500-2K）。
+
+### 5.6 出杯口與手臂整合注意事項
+
+| 機型 | 出杯口最大高度 | 手臂整合備註 |
+|------|---------------|-------------|
+| Shotmaster | 190 mm | 4 個出杯口，間距需確認 |
+| Cameo C'2 | 165 mm | 單出杯口，空間緊湊 |
+| Enigma E'4S | 190 mm | 2 個出杯口，X-Wide 版有更大操作空間 |
+| WMF 5000 S+ | 自動調整 | Cup Guard 防燙門可能干擾手臂，需移除 |
+| WMF 1500 S+ | 可調 | 同上 |
+| JURA X3c | 可調雙出口 | 出杯區域小，不適合手臂操作 |
+
+> ⚠️ 一般 espresso 杯 60mm、拿鐵杯 120-150mm，需確認出杯口能容納目標杯型
 
 ---
 
@@ -738,7 +914,7 @@ NOVA 系列已內建力矩感測器和碰撞檢測，**額外只需選配 2D 視
 ## 七、NOVA 咖啡工站完整動作流程
 
 <div align="center">
-<svg width="100%" viewBox="0 0 600 680" viewBox="0 0 600 680" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 600 680" viewBox="0 0 600 680" xmlns="http://www.w3.org/2000/svg" style="font-family:PingFang SC,Hiragino Sans GB,system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="af" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker>
   </defs>
