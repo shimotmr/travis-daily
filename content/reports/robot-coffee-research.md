@@ -72,37 +72,158 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 
 ### 五大架構示意圖
 
-> **架構 A：單臂 + 半自動機** ⏱ 2-3 min ❌ 不可行
->
-> `[磨豆機] → [🤖 NOVA] → [☕ 半自動咖啡機] → [📦 取餐口]`
-> `[奶泡機] ↗`
->
+**架構 A：單臂 + 半自動機** ⏱ 2-3 min ❌ 不可行
+
+<div align="center">
+<svg width="700" height="140" viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <rect x="1" y="1" width="698" height="138" rx="8" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <!-- 磨豆機 -->
+  <rect x="30" y="45" width="90" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="75" y="70" text-anchor="middle" font-size="13" fill="#374151">磨豆機</text>
+  <!-- arrow -->
+  <line x1="120" y1="65" x2="160" y2="65" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-a)"/>
+  <!-- NOVA -->
+  <rect x="160" y="45" width="100" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="210" y="70" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="bold">🤖 NOVA</text>
+  <!-- arrow -->
+  <line x1="260" y1="65" x2="310" y2="65" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-a)"/>
+  <!-- 半自動機 -->
+  <rect x="310" y="45" width="120" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="370" y="70" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">半自動咖啡機</text>
+  <!-- arrow -->
+  <line x1="430" y1="65" x2="490" y2="65" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-a)"/>
+  <!-- 取餐口 -->
+  <rect x="490" y="45" width="80" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="530" y="70" text-anchor="middle" font-size="13" fill="#374151">取餐口</text>
+  <!-- 奶泡機 branch -->
+  <rect x="310" y="100" width="90" height="30" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="355" y="120" text-anchor="middle" font-size="12" fill="#16a34a">奶泡機</text>
+  <line x1="355" y1="100" x2="355" y2="85" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-a)"/>
+  <!-- ❌ badge -->
+  <rect x="600" y="50" width="70" height="30" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="635" y="70" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">❌ 不可行</text>
+  <defs><marker id="ah-a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker></defs>
+</svg>
+</div>
+
 > 手臂負責所有動作：磨豆、填粉、萃取、打奶泡，步驟太多
 
-> **架構 B：雙臂式** ⏱ 1.5-2 min ❌ 不可行
->
-> `[☕ 半自動機] → [🤖 NOVA 左臂：操作咖啡機] → [📦 取餐口]`
-> `[🤖 NOVA 右臂：打奶泡/遞送] ──────────────↗`
->
+**架構 B：雙臂式** ⏱ 1.5-2 min ❌ 不可行
+
+<div align="center">
+<svg width="700" height="150" viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <rect x="1" y="1" width="698" height="148" rx="8" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <!-- 半自動機 -->
+  <rect x="30" y="30" width="120" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="90" y="55" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">半自動咖啡機</text>
+  <!-- arrow to left arm -->
+  <line x1="150" y1="50" x2="200" y2="50" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-b)"/>
+  <!-- 左臂 -->
+  <rect x="200" y="30" width="160" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="280" y="55" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="bold">🤖 NOVA 左臂</text>
+  <!-- arrow to 取餐口 -->
+  <line x1="360" y1="50" x2="470" y2="50" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-b)"/>
+  <!-- 取餐口 -->
+  <rect x="470" y="30" width="80" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="510" y="55" text-anchor="middle" font-size="13" fill="#374151">取餐口</text>
+  <!-- 右臂 -->
+  <rect x="200" y="90" width="160" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="280" y="115" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="bold">🤖 NOVA 右臂</text>
+  <text x="280" y="128" text-anchor="middle" font-size="11" fill="#6b7280">打奶泡 / 遞送</text>
+  <!-- arrow from right arm to 取餐口 -->
+  <path d="M360,110 Q420,110 470,70" fill="none" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-b)"/>
+  <!-- badge -->
+  <rect x="590" y="50" width="70" height="30" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="625" y="70" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">❌ 不可行</text>
+  <defs><marker id="ah-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker></defs>
+</svg>
+</div>
+
 > 成本高、複雜度高，仍然太慢
 
-> **架構 C：單臂 + 全自動機** ⏱ 45-90s ⚠️ 勉強
->
-> `[☕ 全自動咖啡機] → [🤖 NOVA 2 取杯遞送] → [📦 取餐口]`
->
+**架構 C：單臂 + 全自動機** ⏱ 45-90s ⚠️ 勉強
+
+<div align="center">
+<svg width="700" height="120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <rect x="1" y="1" width="698" height="118" rx="8" fill="none" stroke="#f59e0b" stroke-width="2"/>
+  <!-- 全自動機 -->
+  <rect x="50" y="35" width="140" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="120" y="60" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">全自動咖啡機</text>
+  <!-- arrow -->
+  <line x1="190" y1="55" x2="260" y2="55" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-c)"/>
+  <!-- NOVA 2 -->
+  <rect x="260" y="35" width="160" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="340" y="60" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="bold">🤖 NOVA 2 取杯遞送</text>
+  <!-- arrow -->
+  <line x1="420" y1="55" x2="490" y2="55" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-c)"/>
+  <!-- 取餐口 -->
+  <rect x="490" y="35" width="80" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="530" y="60" text-anchor="middle" font-size="13" fill="#374151">取餐口</text>
+  <!-- badge -->
+  <rect x="600" y="40" width="70" height="30" rx="12" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="635" y="60" text-anchor="middle" font-size="12" fill="#f59e0b" font-weight="bold">⚠️ 勉強</text>
+  <defs><marker id="ah-c" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker></defs>
+</svg>
+</div>
+
 > 咖啡機自動完成萃取+奶泡，手臂只負責取杯遞送
 
-> **架構 D：全自動機 + 手臂遞送** ⏱ 35-40s ✅ 推薦
->
-> `[☕ WMF/Eversys 一鍵出品] → [🤖 NOVA 2 取杯遞送] → [📦 取餐口]`
->
+**架構 D：全自動機 + 手臂遞送** ⏱ 35-40s ✅ 推薦
+
+<div align="center">
+<svg width="700" height="120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <rect x="1" y="1" width="698" height="118" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
+  <!-- WMF/Eversys -->
+  <rect x="40" y="35" width="170" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="125" y="60" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">WMF/Eversys 一鍵出品</text>
+  <!-- arrow -->
+  <line x1="210" y1="55" x2="270" y2="55" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-d)"/>
+  <!-- NOVA 2 -->
+  <rect x="270" y="35" width="160" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="350" y="60" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="bold">🤖 NOVA 2 取杯遞送</text>
+  <!-- arrow -->
+  <line x1="430" y1="55" x2="490" y2="55" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-d)"/>
+  <!-- 取餐口 -->
+  <rect x="490" y="35" width="80" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="530" y="60" text-anchor="middle" font-size="13" fill="#374151">取餐口</text>
+  <!-- badge -->
+  <rect x="600" y="40" width="70" height="30" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="635" y="60" text-anchor="middle" font-size="12" fill="#16a34a" font-weight="bold">✅ 推薦</text>
+  <defs><marker id="ah-d" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker></defs>
+</svg>
+</div>
+
 > 高速全自動機 + 手臂遞送，剛好達標 40 秒
 
-> **架構 E：雙機 Pipeline** ⏱ 20-25s ✅✅ 最佳
->
-> `[☕ 全自動機 A] ↘ [🤖 NOVA 5 輪流取杯] → [📦 取餐口]`
-> `[☕ 全自動機 B] ↗`
->
+**架構 E：雙機 Pipeline** ⏱ 20-25s ✅✅ 最佳
+
+<div align="center">
+<svg width="700" height="160" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <rect x="1" y="1" width="698" height="158" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
+  <!-- 全自動機 A -->
+  <rect x="40" y="25" width="140" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="110" y="50" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">全自動機 A</text>
+  <!-- 全自動機 B -->
+  <rect x="40" y="90" width="140" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="110" y="115" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">全自動機 B</text>
+  <!-- arrows converge -->
+  <line x1="180" y1="45" x2="270" y2="75" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-e)"/>
+  <line x1="180" y1="110" x2="270" y2="85" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-e)"/>
+  <!-- NOVA 5 -->
+  <rect x="270" y="55" width="170" height="40" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="355" y="80" text-anchor="middle" font-size="13" fill="#2563eb" font-weight="bold">🤖 NOVA 5 輪流取杯</text>
+  <!-- arrow -->
+  <line x1="440" y1="75" x2="500" y2="75" stroke="#374151" stroke-width="1.5" marker-end="url(#ah-e)"/>
+  <!-- 取餐口 -->
+  <rect x="500" y="55" width="80" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="540" y="80" text-anchor="middle" font-size="13" fill="#374151">取餐口</text>
+  <!-- badge -->
+  <rect x="610" y="60" width="70" height="30" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="645" y="80" text-anchor="middle" font-size="12" fill="#16a34a" font-weight="bold">✅✅ 最佳</text>
+  <defs><marker id="ah-e" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker></defs>
+</svg>
+</div>
+
 > 兩台機器交替出品，手臂輪流取杯，速度翻倍
 
 ### 架構對比總表
@@ -150,38 +271,129 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 
 #### 動作時序圖
 
-| 時間(秒) | ☕ 全自動機 A | ☕ 全自動機 B | 🤖 NOVA 5 手臂 | 出杯 |
-|----------|-------------|-------------|----------------|------|
-| 0-35 | 萃取第1杯 | | 待機 | |
-| 20-55 | | 萃取第2杯 | | |
-| 35-43 | | | 取A杯→遞送 | ☕ 第1杯 |
-| 40-75 | 萃取第3杯 | | | |
-| 43-47 | | | 移動到B機位 | |
-| 55-63 | | | 取B杯→遞送 | ☕ 第2杯 |
-| 60-95 | | 萃取第4杯 | | |
-| 63-67 | | | 移動到A機位 | |
-| 75-83 | | | 取A杯→遞送 | ☕ 第3杯 |
+<div align="center">
+<svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <defs><marker id="ga" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#374151"/></marker></defs>
+  <!-- title -->
+  <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 A 動作時序圖</text>
+  <!-- Y axis labels -->
+  <text x="85" y="55" text-anchor="end" font-size="11" fill="#16a34a">全自動機 A</text>
+  <text x="85" y="90" text-anchor="end" font-size="11" fill="#16a34a">全自動機 B</text>
+  <text x="85" y="125" text-anchor="end" font-size="11" fill="#2563eb">NOVA 5</text>
+  <text x="85" y="160" text-anchor="end" font-size="11" fill="#374151">出杯</text>
+  <!-- grid lines -->
+  <line x1="90" y1="30" x2="90" y2="175" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- time axis: 0 to 95s, scale: 90px = 0s, 680px = 95s → px = 90 + t*6.2 -->
+  <!-- X axis -->
+  <line x1="90" y1="175" x2="680" y2="175" stroke="#374151" stroke-width="1"/>
+  <text x="90" y="190" text-anchor="middle" font-size="10" fill="#6b7280">0</text>
+  <text x="214" y="190" text-anchor="middle" font-size="10" fill="#6b7280">20</text>
+  <text x="338" y="190" text-anchor="middle" font-size="10" fill="#6b7280">40</text>
+  <text x="462" y="190" text-anchor="middle" font-size="10" fill="#6b7280">60</text>
+  <text x="586" y="190" text-anchor="middle" font-size="10" fill="#6b7280">80</text>
+  <text x="400" y="200" text-anchor="middle" font-size="10" fill="#6b7280">時間（秒）</text>
+  <!-- tick marks -->
+  <line x1="214" y1="175" x2="214" y2="170" stroke="#374151" stroke-width="1"/>
+  <line x1="338" y1="175" x2="338" y2="170" stroke="#374151" stroke-width="1"/>
+  <line x1="462" y1="175" x2="462" y2="170" stroke="#374151" stroke-width="1"/>
+  <line x1="586" y1="175" x2="586" y2="170" stroke="#374151" stroke-width="1"/>
+  <!-- Machine A bars: 0-35, 40-75 -->
+  <rect x="90" y="42" width="217" height="18" rx="3" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <text x="198" y="55" text-anchor="middle" font-size="9" fill="#166534">萃取 #1</text>
+  <rect x="338" y="42" width="217" height="18" rx="3" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <text x="446" y="55" text-anchor="middle" font-size="9" fill="#166534">萃取 #3</text>
+  <!-- Machine B bars: 20-55, 60-95 -->
+  <rect x="214" y="77" width="217" height="18" rx="3" fill="#bbf7d0" stroke="#16a34a" stroke-width="1"/>
+  <text x="322" y="90" text-anchor="middle" font-size="9" fill="#166534">萃取 #2</text>
+  <rect x="462" y="77" width="217" height="18" rx="3" fill="#bbf7d0" stroke="#16a34a" stroke-width="1"/>
+  <text x="570" y="90" text-anchor="middle" font-size="9" fill="#166534">萃取 #4</text>
+  <!-- NOVA bars: 35-43 取A, 43-47 move, 55-63 取B, 63-67 move, 75-83 取A -->
+  <rect x="307" y="112" width="50" height="18" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="332" y="125" text-anchor="middle" font-size="8" fill="#1e40af">取A→送</text>
+  <rect x="357" y="112" width="25" height="18" rx="3" fill="#e0e7ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="369" y="125" text-anchor="middle" font-size="7" fill="#6b7280">移</text>
+  <rect x="432" y="112" width="50" height="18" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="457" y="125" text-anchor="middle" font-size="8" fill="#1e40af">取B→送</text>
+  <rect x="482" y="112" width="25" height="18" rx="3" fill="#e0e7ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="494" y="125" text-anchor="middle" font-size="7" fill="#6b7280">移</text>
+  <rect x="556" y="112" width="50" height="18" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="581" y="125" text-anchor="middle" font-size="8" fill="#1e40af">取A→送</text>
+  <!-- cups out -->
+  <text x="332" y="155" text-anchor="middle" font-size="12">☕</text>
+  <text x="457" y="155" text-anchor="middle" font-size="12">☕</text>
+  <text x="581" y="155" text-anchor="middle" font-size="12">☕</text>
+  <!-- Cycle time red dashed lines at t=35(307), t=55(432), t=75(556) → ~20s apart -->
+  <line x1="332" y1="30" x2="332" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="457" y1="30" x2="457" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="581" y1="30" x2="581" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- Cycle time annotation -->
+  <line x1="332" y1="35" x2="457" y2="35" stroke="#dc2626" stroke-width="1"/>
+  <text x="395" y="33" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">Cycle ≈ 20s</text>
+</svg>
+</div>
 
 > **Cycle Time ≈ 20 秒** — 遠超 40 秒目標 ✅
 
 #### 硬體佈局圖（俯視圖）
 
-```
-┌───────────────────────────┐
-│   Kiosk 俯視圖 — 方案 A    │
-│       2.0m × 1.5m          │
-│                             │
-│  ☕ 全自動機A  ☕ 全自動機B   │ ← 後方設備區
-│  (WMF 1500S+) (WMF 1500S+) │
-│   💧 水箱       🥛 牛奶冷藏  │
-│                             │
-│  🥤 杯架(左) 🤖NOVA5 🥤杯架(右)│ ← 中央作業區
-│          (臂展 850mm)        │
-│                             │
-│        📱 點餐面板           │ ← 前方顧客區
-│        📦 取餐窗口           │
-└───────────────────────────┘
-```
+<div align="center">
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <defs>
+    <marker id="dim-a" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
+    <marker id="dim-a2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
+  </defs>
+  <!-- outer box -->
+  <rect x="60" y="40" width="360" height="300" rx="4" fill="#fafafa" stroke="#374151" stroke-width="2"/>
+  <!-- dimension lines -->
+  <!-- width 2.0m -->
+  <line x1="60" y1="25" x2="420" y2="25" stroke="#6b7280" stroke-width="1" marker-start="url(#dim-a2)" marker-end="url(#dim-a)"/>
+  <line x1="60" y1="20" x2="60" y2="30" stroke="#6b7280" stroke-width="1"/>
+  <line x1="420" y1="20" x2="420" y2="30" stroke="#6b7280" stroke-width="1"/>
+  <text x="240" y="20" text-anchor="middle" font-size="12" fill="#6b7280">2.0 m</text>
+  <!-- height 1.5m -->
+  <line x1="45" y1="40" x2="45" y2="340" stroke="#6b7280" stroke-width="1" marker-start="url(#dim-a2)" marker-end="url(#dim-a)"/>
+  <line x1="40" y1="40" x2="50" y2="40" stroke="#6b7280" stroke-width="1"/>
+  <line x1="40" y1="340" x2="50" y2="340" stroke="#6b7280" stroke-width="1"/>
+  <text x="35" y="195" text-anchor="middle" font-size="12" fill="#6b7280" transform="rotate(-90 35 195)">1.5 m</text>
+  <!-- 後方設備區 label -->
+  <text x="440" y="90" font-size="11" fill="#9ca3af">後方設備區</text>
+  <!-- 全自動機A -->
+  <rect x="80" y="60" width="130" height="70" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="145" y="90" text-anchor="middle" font-size="12" fill="#16a34a" font-weight="bold">全自動機 A</text>
+  <text x="145" y="105" text-anchor="middle" font-size="10" fill="#6b7280">WMF 1500S+</text>
+  <!-- 全自動機B -->
+  <rect x="230" y="60" width="130" height="70" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="295" y="90" text-anchor="middle" font-size="12" fill="#16a34a" font-weight="bold">全自動機 B</text>
+  <text x="295" y="105" text-anchor="middle" font-size="10" fill="#6b7280">WMF 1500S+</text>
+  <!-- 水箱 & 牛奶 -->
+  <rect x="80" y="140" width="60" height="30" rx="3" fill="#e0f2fe" stroke="#6b7280" stroke-width="1"/>
+  <text x="110" y="160" text-anchor="middle" font-size="10" fill="#6b7280">水箱</text>
+  <rect x="300" y="140" width="60" height="30" rx="3" fill="#fef3c7" stroke="#6b7280" stroke-width="1"/>
+  <text x="330" y="160" text-anchor="middle" font-size="10" fill="#6b7280">牛奶冷藏</text>
+  <!-- 中央作業區 label -->
+  <text x="440" y="215" font-size="11" fill="#9ca3af">中央作業區</text>
+  <!-- 杯架左 -->
+  <rect x="90" y="195" width="50" height="40" rx="3" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+  <text x="115" y="220" text-anchor="middle" font-size="10" fill="#6b7280">杯架</text>
+  <!-- NOVA 5 -->
+  <circle cx="220" cy="215" r="18" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="220" y="220" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="bold">N5</text>
+  <!-- arm reach arc (850mm) -->
+  <circle cx="220" cy="215" r="90" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="320" y="175" font-size="10" fill="#2563eb">臂展 850mm</text>
+  <!-- 杯架右 -->
+  <rect x="300" y="195" width="50" height="40" rx="3" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+  <text x="325" y="220" text-anchor="middle" font-size="10" fill="#6b7280">杯架</text>
+  <!-- 前方顧客區 label -->
+  <text x="440" y="305" font-size="11" fill="#9ca3af">前方顧客區</text>
+  <!-- 點餐面板 -->
+  <rect x="150" y="280" width="100" height="25" rx="3" fill="#ede9fe" stroke="#6b7280" stroke-width="1"/>
+  <text x="200" y="297" text-anchor="middle" font-size="10" fill="#6b7280">📱 點餐面板</text>
+  <!-- 取餐窗口 -->
+  <rect x="150" y="310" width="100" height="25" rx="3" fill="#fef3c7" stroke="#374151" stroke-width="1.5"/>
+  <text x="200" y="327" text-anchor="middle" font-size="10" fill="#374151" font-weight="bold">📦 取餐窗口</text>
+</svg>
+</div>
 
 **NOVA 5 選擇理由**：臂展 850mm 可覆蓋左右兩台咖啡機（間距約 700mm），無需滑軌
 
@@ -193,37 +405,106 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 
 #### 動作時序圖
 
-| 時間(秒) | ☕ 沖煮頭 1 | ☕ 沖煮頭 2 | 🤖 NOVA 2 | 出杯 |
-|----------|-----------|-----------|----------|------|
-| 0-3 | | | 取杯→放出口 | |
-| 0-25 | 第1杯萃取 | | | |
-| 10-35 | | 第2杯萃取 | | |
-| 25-31 | | | 取第1杯→遞送 | ☕ 第1杯 |
-| 30-55 | 第3杯萃取 | | | |
-| 35-41 | | | 取第2杯→遞送 | ☕ 第2杯 |
-| 40-65 | | 第4杯萃取 | | |
-| 55-61 | | | 取第3杯→遞送 | ☕ 第3杯 |
+<div align="center">
+<svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 B 動作時序圖</text>
+  <!-- Y labels -->
+  <text x="85" y="55" text-anchor="end" font-size="11" fill="#16a34a">沖煮頭 1</text>
+  <text x="85" y="90" text-anchor="end" font-size="11" fill="#16a34a">沖煮頭 2</text>
+  <text x="85" y="125" text-anchor="end" font-size="11" fill="#2563eb">NOVA 2</text>
+  <text x="85" y="160" text-anchor="end" font-size="11" fill="#374151">出杯</text>
+  <!-- X axis: 0-65s, scale px = 90 + t*9.08 -->
+  <line x1="90" y1="175" x2="680" y2="175" stroke="#374151" stroke-width="1"/>
+  <text x="90" y="190" text-anchor="middle" font-size="10" fill="#6b7280">0</text>
+  <text x="181" y="190" text-anchor="middle" font-size="10" fill="#6b7280">10</text>
+  <text x="272" y="190" text-anchor="middle" font-size="10" fill="#6b7280">20</text>
+  <text x="362" y="190" text-anchor="middle" font-size="10" fill="#6b7280">30</text>
+  <text x="453" y="190" text-anchor="middle" font-size="10" fill="#6b7280">40</text>
+  <text x="544" y="190" text-anchor="middle" font-size="10" fill="#6b7280">50</text>
+  <text x="635" y="190" text-anchor="middle" font-size="10" fill="#6b7280">60</text>
+  <text x="400" y="200" text-anchor="middle" font-size="10" fill="#6b7280">時間（秒）</text>
+  <!-- Head 1: 0-25, 30-55 -->
+  <rect x="90" y="42" width="227" height="18" rx="3" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <text x="203" y="55" text-anchor="middle" font-size="9" fill="#166534">萃取 #1</text>
+  <rect x="362" y="42" width="227" height="18" rx="3" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <text x="476" y="55" text-anchor="middle" font-size="9" fill="#166534">萃取 #3</text>
+  <!-- Head 2: 10-35, 40-65 -->
+  <rect x="181" y="77" width="227" height="18" rx="3" fill="#bbf7d0" stroke="#16a34a" stroke-width="1"/>
+  <text x="294" y="90" text-anchor="middle" font-size="9" fill="#166534">萃取 #2</text>
+  <rect x="453" y="77" width="227" height="18" rx="3" fill="#bbf7d0" stroke="#16a34a" stroke-width="1"/>
+  <text x="567" y="90" text-anchor="middle" font-size="9" fill="#166534">萃取 #4</text>
+  <!-- NOVA: 0-3 取杯, 25-31 送#1, 35-41 送#2, 55-61 送#3 -->
+  <rect x="90" y="112" width="27" height="18" rx="3" fill="#e0e7ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="103" y="125" text-anchor="middle" font-size="7" fill="#6b7280">杯</text>
+  <rect x="317" y="112" width="55" height="18" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="344" y="125" text-anchor="middle" font-size="8" fill="#1e40af">送#1</text>
+  <rect x="408" y="112" width="55" height="18" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="435" y="125" text-anchor="middle" font-size="8" fill="#1e40af">送#2</text>
+  <rect x="589" y="112" width="55" height="18" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="617" y="125" text-anchor="middle" font-size="8" fill="#1e40af">送#3</text>
+  <!-- cups -->
+  <text x="344" y="155" text-anchor="middle" font-size="12">☕</text>
+  <text x="435" y="155" text-anchor="middle" font-size="12">☕</text>
+  <text x="617" y="155" text-anchor="middle" font-size="12">☕</text>
+  <!-- Cycle time lines -->
+  <line x1="344" y1="30" x2="344" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="435" y1="30" x2="435" y2="170" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="344" y1="35" x2="435" y2="35" stroke="#dc2626" stroke-width="1"/>
+  <text x="390" y="33" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">Cycle ≈ 10s</text>
+</svg>
+</div>
 
 > **Cycle Time ≈ 10-15 秒**（Shotmaster 超高速）✅✅
 
 #### 硬體佈局圖（俯視圖）
 
-```
-┌─────────────────────────┐
-│  Kiosk 俯視圖 — 方案 B   │
-│      1.5m × 1.2m         │
-│                           │
-│  ☕ Eversys Shotmaster    │ ← 後方
-│  (雙沖煮頭 70×55cm)       │
-│  💧 水箱  🥛 牛奶  ☕ 豆倉  │
-│                           │
-│   🤖 NOVA 2  🥤 杯架(50杯)│ ← 中央
-│   (臂展 625mm)            │
-│                           │
-│      📱 點餐面板           │ ← 前方
-│      📦 取餐窗口           │
-└─────────────────────────┘
-```
+<div align="center">
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <defs>
+    <marker id="dim-b" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
+    <marker id="dim-b2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
+  </defs>
+  <!-- outer box -->
+  <rect x="80" y="40" width="300" height="310" rx="4" fill="#fafafa" stroke="#374151" stroke-width="2"/>
+  <!-- dimension: width 1.5m -->
+  <line x1="80" y1="25" x2="380" y2="25" stroke="#6b7280" stroke-width="1" marker-start="url(#dim-b2)" marker-end="url(#dim-b)"/>
+  <line x1="80" y1="20" x2="80" y2="30" stroke="#6b7280" stroke-width="1"/>
+  <line x1="380" y1="20" x2="380" y2="30" stroke="#6b7280" stroke-width="1"/>
+  <text x="230" y="20" text-anchor="middle" font-size="12" fill="#6b7280">1.5 m</text>
+  <!-- dimension: height 1.2m -->
+  <line x1="65" y1="40" x2="65" y2="350" stroke="#6b7280" stroke-width="1" marker-start="url(#dim-b2)" marker-end="url(#dim-b)"/>
+  <line x1="60" y1="40" x2="70" y2="40" stroke="#6b7280" stroke-width="1"/>
+  <line x1="60" y1="350" x2="70" y2="350" stroke="#6b7280" stroke-width="1"/>
+  <text x="52" y="200" text-anchor="middle" font-size="12" fill="#6b7280" transform="rotate(-90 52 200)">1.2 m</text>
+  <!-- Shotmaster -->
+  <rect x="110" y="60" width="200" height="80" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="210" y="95" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">Eversys Shotmaster</text>
+  <text x="210" y="115" text-anchor="middle" font-size="10" fill="#6b7280">雙沖煮頭 70×55cm</text>
+  <!-- 水箱 牛奶 豆倉 -->
+  <rect x="100" y="150" width="50" height="25" rx="3" fill="#e0f2fe" stroke="#6b7280" stroke-width="1"/>
+  <text x="125" y="167" text-anchor="middle" font-size="9" fill="#6b7280">水箱</text>
+  <rect x="160" y="150" width="50" height="25" rx="3" fill="#fef3c7" stroke="#6b7280" stroke-width="1"/>
+  <text x="185" y="167" text-anchor="middle" font-size="9" fill="#6b7280">牛奶</text>
+  <rect x="220" y="150" width="50" height="25" rx="3" fill="#fef3c7" stroke="#6b7280" stroke-width="1"/>
+  <text x="245" y="167" text-anchor="middle" font-size="9" fill="#6b7280">豆倉</text>
+  <!-- NOVA 2 -->
+  <circle cx="180" cy="225" r="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="180" y="230" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="bold">N2</text>
+  <!-- arm reach (625mm) -->
+  <circle cx="180" cy="225" r="75" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="265" y="195" font-size="10" fill="#2563eb">臂展 625mm</text>
+  <!-- 杯架 -->
+  <rect x="280" y="210" width="60" height="35" rx="3" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+  <text x="310" y="225" text-anchor="middle" font-size="10" fill="#6b7280">杯架</text>
+  <text x="310" y="238" text-anchor="middle" font-size="9" fill="#9ca3af">50杯</text>
+  <!-- 點餐面板 -->
+  <rect x="160" y="290" width="100" height="22" rx="3" fill="#ede9fe" stroke="#6b7280" stroke-width="1"/>
+  <text x="210" y="305" text-anchor="middle" font-size="10" fill="#6b7280">📱 點餐面板</text>
+  <!-- 取餐窗口 -->
+  <rect x="160" y="318" width="100" height="22" rx="3" fill="#fef3c7" stroke="#374151" stroke-width="1.5"/>
+  <text x="210" y="333" text-anchor="middle" font-size="10" fill="#374151" font-weight="bold">📦 取餐窗口</text>
+</svg>
+</div>
 
 **NOVA 2 選擇理由**：單機佈局、空間緊湊、625mm 臂展足夠覆蓋
 
@@ -235,37 +516,102 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 
 #### 動作時序圖
 
-| 時間(秒) | ☕ WMF 5000S+ | 🤖 NOVA 2 | 出杯 |
-|----------|-------------|----------|------|
-| 0-4 | | 取空杯→放到出口 | |
-| 0-30 | 第1杯：美式出品 | | |
-| 4-30 | | ⏳ 等待出品 | |
-| 30-38 | | 取成品→遞送窗口 | ☕ 第1杯(美式) |
-| 38-42 | | 取空杯→放出口 | |
-| 38-78 | 第2杯：拿鐵出品 | | |
-| 42-78 | | ⏳ 等待出品 | |
-| 78-86 | | 取成品→遞送 | ☕ 第2杯(拿鐵) |
+<div align="center">
+<svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 C 動作時序圖</text>
+  <!-- Y labels -->
+  <text x="85" y="55" text-anchor="end" font-size="11" fill="#16a34a">WMF 5000S+</text>
+  <text x="85" y="100" text-anchor="end" font-size="11" fill="#2563eb">NOVA 2</text>
+  <text x="85" y="145" text-anchor="end" font-size="11" fill="#374151">出杯</text>
+  <!-- X axis: 0-90s, scale px = 90 + t*6.56 -->
+  <line x1="90" y1="165" x2="680" y2="165" stroke="#374151" stroke-width="1"/>
+  <text x="90" y="180" text-anchor="middle" font-size="10" fill="#6b7280">0</text>
+  <text x="222" y="180" text-anchor="middle" font-size="10" fill="#6b7280">20</text>
+  <text x="353" y="180" text-anchor="middle" font-size="10" fill="#6b7280">40</text>
+  <text x="484" y="180" text-anchor="middle" font-size="10" fill="#6b7280">60</text>
+  <text x="616" y="180" text-anchor="middle" font-size="10" fill="#6b7280">80</text>
+  <text x="400" y="195" text-anchor="middle" font-size="10" fill="#6b7280">時間（秒）</text>
+  <!-- WMF: 0-30 美式, 38-78 拿鐵 -->
+  <rect x="90" y="42" width="197" height="20" rx="3" fill="#86efac" stroke="#16a34a" stroke-width="1"/>
+  <text x="188" y="56" text-anchor="middle" font-size="9" fill="#166534">美式 #1 (30s)</text>
+  <rect x="339" y="42" width="263" height="20" rx="3" fill="#bbf7d0" stroke="#16a34a" stroke-width="1"/>
+  <text x="470" y="56" text-anchor="middle" font-size="9" fill="#166534">拿鐵 #2 (40s)</text>
+  <!-- NOVA: 0-4 取杯, 4-30 等, 30-38 送, 38-42 取杯, 42-78 等, 78-86 送 -->
+  <rect x="90" y="87" width="26" height="20" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="103" y="101" text-anchor="middle" font-size="7" fill="#1e40af">杯</text>
+  <rect x="116" y="87" width="171" height="20" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="201" y="101" text-anchor="middle" font-size="8" fill="#9ca3af">⏳ 等待</text>
+  <rect x="287" y="87" width="52" height="20" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="313" y="101" text-anchor="middle" font-size="8" fill="#1e40af">送 #1</text>
+  <rect x="339" y="87" width="26" height="20" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="352" y="101" text-anchor="middle" font-size="7" fill="#1e40af">杯</text>
+  <rect x="365" y="87" width="237" height="20" rx="3" fill="#f3f4f6" stroke="#d1d5db" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="484" y="101" text-anchor="middle" font-size="8" fill="#9ca3af">⏳ 等待</text>
+  <rect x="602" y="87" width="52" height="20" rx="3" fill="#93c5fd" stroke="#2563eb" stroke-width="1"/>
+  <text x="628" y="101" text-anchor="middle" font-size="8" fill="#1e40af">送 #2</text>
+  <!-- cups -->
+  <text x="313" y="142" text-anchor="middle" font-size="12">☕</text>
+  <text x="313" y="155" text-anchor="middle" font-size="9" fill="#6b7280">美式</text>
+  <text x="628" y="142" text-anchor="middle" font-size="12">☕</text>
+  <text x="628" y="155" text-anchor="middle" font-size="9" fill="#6b7280">拿鐵</text>
+  <!-- Cycle time lines -->
+  <line x1="313" y1="28" x2="313" y2="160" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="628" y1="28" x2="628" y2="160" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="313" y1="32" x2="628" y2="32" stroke="#dc2626" stroke-width="1"/>
+  <text x="470" y="30" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">Cycle: 美式~35s / 拿鐵~45s</text>
+</svg>
+</div>
 
 > **Cycle Time**：美式 ~35s ✅ / 拿鐵 ~45s ⚠️
 
 #### 硬體佈局圖（俯視圖）
 
-```
-┌───────────────────────┐
-│ Kiosk 俯視圖 — 方案 C  │
-│   1.2m × 1.0m 最小佔地  │
-│                         │
-│   ☕ WMF 5000S+         │ ← 後方
-│   (全自動 55×50cm)       │
-│   💧水 🥛奶 ☕豆         │
-│                         │
-│   🤖 NOVA 2   🥤 杯架   │ ← 中央
-│   (臂展 625mm)          │
-│                         │
-│     📱 點餐面板          │ ← 前方
-│     📦 取餐口            │
-└───────────────────────┘
-```
+<div align="center">
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <defs>
+    <marker id="dim-c" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
+    <marker id="dim-c2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
+  </defs>
+  <!-- outer box -->
+  <rect x="100" y="40" width="260" height="310" rx="4" fill="#fafafa" stroke="#374151" stroke-width="2"/>
+  <!-- dimension: width 1.2m -->
+  <line x1="100" y1="25" x2="360" y2="25" stroke="#6b7280" stroke-width="1" marker-start="url(#dim-c2)" marker-end="url(#dim-c)"/>
+  <line x1="100" y1="20" x2="100" y2="30" stroke="#6b7280" stroke-width="1"/>
+  <line x1="360" y1="20" x2="360" y2="30" stroke="#6b7280" stroke-width="1"/>
+  <text x="230" y="20" text-anchor="middle" font-size="12" fill="#6b7280">1.2 m</text>
+  <!-- dimension: height 1.0m -->
+  <line x1="85" y1="40" x2="85" y2="350" stroke="#6b7280" stroke-width="1" marker-start="url(#dim-c2)" marker-end="url(#dim-c)"/>
+  <line x1="80" y1="40" x2="90" y2="40" stroke="#6b7280" stroke-width="1"/>
+  <line x1="80" y1="350" x2="90" y2="350" stroke="#6b7280" stroke-width="1"/>
+  <text x="72" y="200" text-anchor="middle" font-size="12" fill="#6b7280" transform="rotate(-90 72 200)">1.0 m</text>
+  <!-- WMF 5000S+ -->
+  <rect x="130" y="60" width="170" height="75" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="215" y="93" text-anchor="middle" font-size="13" fill="#16a34a" font-weight="bold">WMF 5000S+</text>
+  <text x="215" y="112" text-anchor="middle" font-size="10" fill="#6b7280">全自動 55×50cm</text>
+  <!-- 水 奶 豆 -->
+  <rect x="120" y="148" width="40" height="22" rx="3" fill="#e0f2fe" stroke="#6b7280" stroke-width="1"/>
+  <text x="140" y="163" text-anchor="middle" font-size="9" fill="#6b7280">水</text>
+  <rect x="170" y="148" width="40" height="22" rx="3" fill="#fef3c7" stroke="#6b7280" stroke-width="1"/>
+  <text x="190" y="163" text-anchor="middle" font-size="9" fill="#6b7280">奶</text>
+  <rect x="220" y="148" width="40" height="22" rx="3" fill="#fef3c7" stroke="#6b7280" stroke-width="1"/>
+  <text x="240" y="163" text-anchor="middle" font-size="9" fill="#6b7280">豆</text>
+  <!-- NOVA 2 -->
+  <circle cx="190" cy="225" r="16" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="190" y="230" text-anchor="middle" font-size="10" fill="#2563eb" font-weight="bold">N2</text>
+  <!-- arm reach (625mm) -->
+  <circle cx="190" cy="225" r="70" fill="none" stroke="#2563eb" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="270" y="200" font-size="10" fill="#2563eb">臂展 625mm</text>
+  <!-- 杯架 -->
+  <rect x="280" y="212" width="50" height="30" rx="3" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+  <text x="305" y="232" text-anchor="middle" font-size="10" fill="#6b7280">杯架</text>
+  <!-- 點餐面板 -->
+  <rect x="170" y="295" width="90" height="22" rx="3" fill="#ede9fe" stroke="#6b7280" stroke-width="1"/>
+  <text x="215" y="310" text-anchor="middle" font-size="10" fill="#6b7280">📱 點餐面板</text>
+  <!-- 取餐口 -->
+  <rect x="170" y="322" width="90" height="22" rx="3" fill="#fef3c7" stroke="#374151" stroke-width="1.5"/>
+  <text x="215" y="337" text-anchor="middle" font-size="10" fill="#374151" font-weight="bold">📦 取餐口</text>
+</svg>
+</div>
 
 ---
 
@@ -393,20 +739,99 @@ NOVA 系列已內建力矩感測器和碰撞檢測，**額外只需選配 2D 視
 
 ## 七、NOVA 咖啡工站完整動作流程
 
-> **NOVA 咖啡工站動作流程**
->
-> 1. 📱 **顧客下單**
-> 2. 🥤 檢查杯架 → 無杯則 ⚠️ 補杯提醒
-> 3. 🤖 NOVA 取空杯（⏱ 2s）
-> 4. 🤖 NOVA 放杯至咖啡機出口（⏱ 3s）
-> 5. ☕ 全自動機開始萃取（⏱ 25-35s）
->    - 美式 → 萃取完成（總計 ~30s）
->    - 拿鐵/卡布 → 自動打奶泡+混合（額外 ~10s，總計 ~40s）
-> 6. 🤖 NOVA 取成品杯（⏱ 2s）
-> 7. 🤖 NOVA 移至取餐窗口（⏱ 3s）
-> 8. 📦 安全門開啟（⏱ 1s）
-> 9. ☕ **顧客取餐！**
-> 10. 🔄 有下一杯 → 回到步驟 3 ｜ 無訂單 → 🤖 回待機位
+<div align="center">
+<svg width="600" height="680" viewBox="0 0 600 680" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+  <defs>
+    <marker id="af" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker>
+  </defs>
+  <!-- 開始 -->
+  <ellipse cx="300" cy="25" rx="50" ry="18" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="300" y="30" text-anchor="middle" font-size="12" fill="#2563eb" font-weight="bold">顧客下單</text>
+  <line x1="300" y1="43" x2="300" y2="58" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 檢查杯架 -->
+  <rect x="225" y="60" width="150" height="35" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="300" y="82" text-anchor="middle" font-size="12" fill="#374151">檢查杯架</text>
+  <line x1="300" y1="95" x2="300" y2="110" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 有杯？菱形 -->
+  <polygon points="300,112 360,140 300,168 240,140" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="300" y="144" text-anchor="middle" font-size="11" fill="#92400e">有杯？</text>
+  <!-- No branch -->
+  <line x1="360" y1="140" x2="450" y2="140" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+  <rect x="450" y="125" width="100" height="30" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="500" y="145" text-anchor="middle" font-size="11" fill="#dc2626">⚠️ 補杯提醒</text>
+  <text x="400" y="135" font-size="10" fill="#6b7280">否</text>
+  <!-- Yes branch -->
+  <line x1="300" y1="168" x2="300" y2="188" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+  <text x="310" y="182" font-size="10" fill="#6b7280">是</text>
+
+  <!-- 取空杯 -->
+  <rect x="225" y="190" width="150" height="35" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="300" y="212" text-anchor="middle" font-size="12" fill="#2563eb">🤖 取空杯 (2s)</text>
+  <line x1="300" y1="225" x2="300" y2="240" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 放杯 -->
+  <rect x="225" y="242" width="150" height="35" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="300" y="264" text-anchor="middle" font-size="12" fill="#2563eb">🤖 放杯至出口 (3s)</text>
+  <line x1="300" y1="277" x2="300" y2="292" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 萃取 -->
+  <rect x="210" y="294" width="180" height="35" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="300" y="316" text-anchor="middle" font-size="12" fill="#16a34a">☕ 萃取 (25-35s)</text>
+  <line x1="300" y1="329" x2="300" y2="344" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 美式/拿鐵 菱形 -->
+  <polygon points="300,346 370,374 300,402 230,374" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="300" y="378" text-anchor="middle" font-size="11" fill="#92400e">飲品類型？</text>
+  <!-- 美式 left -->
+  <line x1="230" y1="374" x2="130" y2="374" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+  <rect x="50" y="359" width="80" height="30" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="90" y="378" text-anchor="middle" font-size="10" fill="#16a34a">美式 ~30s</text>
+  <line x1="90" y1="389" x2="90" y2="430" stroke="#374151" stroke-width="1"/>
+  <line x1="90" y1="430" x2="300" y2="430" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+  <!-- 拿鐵 right -->
+  <line x1="370" y1="374" x2="460" y2="374" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+  <rect x="460" y="359" width="90" height="30" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="505" y="378" text-anchor="middle" font-size="10" fill="#16a34a">拿鐵 ~40s</text>
+  <line x1="505" y1="389" x2="505" y2="430" stroke="#374151" stroke-width="1"/>
+  <line x1="505" y1="430" x2="305" y2="430" stroke="#374151" stroke-width="1"/>
+
+  <!-- 取成品 -->
+  <rect x="225" y="420" width="150" height="35" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="300" y="442" text-anchor="middle" font-size="12" fill="#2563eb">🤖 取成品杯 (2s)</text>
+  <line x1="300" y1="455" x2="300" y2="470" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 遞送 -->
+  <rect x="225" y="472" width="150" height="35" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="300" y="494" text-anchor="middle" font-size="12" fill="#2563eb">🤖 遞送窗口 (3s)</text>
+  <line x1="300" y1="507" x2="300" y2="522" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 開門 -->
+  <rect x="225" y="524" width="150" height="35" rx="8" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
+  <text x="300" y="546" text-anchor="middle" font-size="12" fill="#374151">📦 安全門開啟 (1s)</text>
+  <line x1="300" y1="559" x2="300" y2="574" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 顧客取餐 -->
+  <rect x="225" y="576" width="150" height="35" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="300" y="598" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">☕ 顧客取餐！</text>
+  <line x1="300" y1="611" x2="300" y2="626" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+
+  <!-- 下一杯？菱形 -->
+  <polygon points="300,628 360,650 300,672 240,650" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="300" y="654" text-anchor="middle" font-size="11" fill="#92400e">下一杯？</text>
+  <!-- Yes: loop back -->
+  <line x1="240" y1="650" x2="50" y2="650" stroke="#374151" stroke-width="1"/>
+  <line x1="50" y1="650" x2="50" y2="207" stroke="#374151" stroke-width="1"/>
+  <line x1="50" y1="207" x2="225" y2="207" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+  <text x="130" y="665" font-size="10" fill="#6b7280">是 → 回取杯</text>
+  <!-- No: end -->
+  <line x1="360" y1="650" x2="440" y2="650" stroke="#374151" stroke-width="1.5" marker-end="url(#af)"/>
+  <ellipse cx="495" cy="650" rx="50" ry="18" fill="#f3f4f6" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="495" y="655" text-anchor="middle" font-size="11" fill="#6b7280">🤖 回待機位</text>
+  <text x="395" y="645" font-size="10" fill="#6b7280">否</text>
+</svg>
+</div>
 
 ---
 
