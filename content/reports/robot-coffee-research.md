@@ -72,43 +72,38 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 
 ### 五大架構示意圖
 
-```mermaid
-graph TB
-    subgraph A["架構 A：單臂 + 半自動機<br/>⏱ 2-3 min | ❌ 不可行"]
-        A1[☕ 半自動<br/>咖啡機] --> A2[🤖 NOVA<br/>手臂]
-        A2 --> A3[📦 取餐口]
-        A4[磨豆機] --> A2
-        A5[奶泡機] --> A2
-    end
+> **架構 A：單臂 + 半自動機** ⏱ 2-3 min ❌ 不可行
+>
+> `[磨豆機] → [🤖 NOVA] → [☕ 半自動咖啡機] → [📦 取餐口]`
+> `[奶泡機] ↗`
+>
+> 手臂負責所有動作：磨豆、填粉、萃取、打奶泡，步驟太多
 
-    subgraph B["架構 B：雙臂式<br/>⏱ 1.5-2 min | ❌ 不可行"]
-        B1[🤖 NOVA 左臂<br/>操作咖啡機] --> B3[📦 取餐口]
-        B2[🤖 NOVA 右臂<br/>打奶泡/遞送] --> B3
-        B4[☕ 半自動機] --> B1
-    end
+> **架構 B：雙臂式** ⏱ 1.5-2 min ❌ 不可行
+>
+> `[☕ 半自動機] → [🤖 NOVA 左臂：操作咖啡機] → [📦 取餐口]`
+> `[🤖 NOVA 右臂：打奶泡/遞送] ──────────────↗`
+>
+> 成本高、複雜度高，仍然太慢
 
-    subgraph C["架構 C：單臂 + 全自動機<br/>⏱ 45-90s | ⚠️ 勉強"]
-        C1[☕ 全自動<br/>咖啡機] --> C2[🤖 NOVA 2<br/>取杯遞送]
-        C2 --> C3[📦 取餐口]
-    end
+> **架構 C：單臂 + 全自動機** ⏱ 45-90s ⚠️ 勉強
+>
+> `[☕ 全自動咖啡機] → [🤖 NOVA 2 取杯遞送] → [📦 取餐口]`
+>
+> 咖啡機自動完成萃取+奶泡，手臂只負責取杯遞送
 
-    subgraph D["架構 D：全自動機 + 手臂遞送<br/>⏱ 35-40s | ✅ 推薦"]
-        D1[☕ WMF/Eversys<br/>全自動<br/>一鍵出品] --> D2[🤖 NOVA 2<br/>取杯遞送]
-        D2 --> D3[📦 取餐口]
-    end
+> **架構 D：全自動機 + 手臂遞送** ⏱ 35-40s ✅ 推薦
+>
+> `[☕ WMF/Eversys 一鍵出品] → [🤖 NOVA 2 取杯遞送] → [📦 取餐口]`
+>
+> 高速全自動機 + 手臂遞送，剛好達標 40 秒
 
-    subgraph E["架構 E：雙機 Pipeline<br/>⏱ 20-25s | ✅✅ 最佳"]
-        E1[☕ 全自動機 A] --> E3[🤖 NOVA 5<br/>輪流取杯]
-        E2[☕ 全自動機 B] --> E3
-        E3 --> E4[📦 取餐口]
-    end
-
-    style A fill:#ffcccc,stroke:#cc0000
-    style B fill:#ffcccc,stroke:#cc0000
-    style C fill:#fff3cd,stroke:#cc9900
-    style D fill:#d4edda,stroke:#28a745
-    style E fill:#cce5ff,stroke:#0066cc
-```
+> **架構 E：雙機 Pipeline** ⏱ 20-25s ✅✅ 最佳
+>
+> `[☕ 全自動機 A] ↘ [🤖 NOVA 5 輪流取杯] → [📦 取餐口]`
+> `[☕ 全自動機 B] ↗`
+>
+> 兩台機器交替出品，手臂輪流取杯，速度翻倍
 
 ### 架構對比總表
 
@@ -155,66 +150,37 @@ graph TB
 
 #### 動作時序圖
 
-```mermaid
-gantt
-    title 方案 A：NOVA 5 雙機 Pipeline 時序（連續出杯）
-    dateFormat ss
-    axisFormat %S秒
-
-    section 全自動機 A
-    第1杯：磨豆+萃取+出品    :a1, 00, 35s
-    第3杯：磨豆+萃取+出品    :a3, 40, 35s
-
-    section 全自動機 B
-    第2杯：磨豆+萃取+出品    :b2, 20, 35s
-    第4杯：磨豆+萃取+出品    :b4, 60, 35s
-
-    section NOVA 5 手臂
-    取A杯→遞送第1杯          :n1, 35, 8s
-    移動到B機位              :n2, 43, 4s
-    取B杯→遞送第2杯          :n3, 55, 8s
-    移動到A機位              :n4, 63, 4s
-    取A杯→遞送第3杯          :n5, 75, 8s
-
-    section 出杯節點
-    ☕ 第1杯完成              :milestone, m1, 43, 0
-    ☕ 第2杯完成              :milestone, m2, 63, 0
-    ☕ 第3杯完成              :milestone, m3, 83, 0
-```
+| 時間(秒) | ☕ 全自動機 A | ☕ 全自動機 B | 🤖 NOVA 5 手臂 | 出杯 |
+|----------|-------------|-------------|----------------|------|
+| 0-35 | 萃取第1杯 | | 待機 | |
+| 20-55 | | 萃取第2杯 | | |
+| 35-43 | | | 取A杯→遞送 | ☕ 第1杯 |
+| 40-75 | 萃取第3杯 | | | |
+| 43-47 | | | 移動到B機位 | |
+| 55-63 | | | 取B杯→遞送 | ☕ 第2杯 |
+| 60-95 | | 萃取第4杯 | | |
+| 63-67 | | | 移動到A機位 | |
+| 75-83 | | | 取A杯→遞送 | ☕ 第3杯 |
 
 > **Cycle Time ≈ 20 秒** — 遠超 40 秒目標 ✅
 
 #### 硬體佈局圖（俯視圖）
 
-```mermaid
-graph LR
-    subgraph KIOSK["Kiosk 俯視圖 — 方案 A（2.0m × 1.5m）"]
-        direction TB
-
-        subgraph TOP["後方設備區"]
-            MA["☕ 全自動機 A<br/>WMF 1500S+<br/>60×50cm"] --- WATER["💧 水箱<br/>& 排水"]
-            MB["☕ 全自動機 B<br/>WMF 1500S+<br/>60×50cm"] --- MILK["🥛 牛奶<br/>冷藏"]
-        end
-
-        subgraph MID["中央作業區"]
-            NOVA["🤖 NOVA 5<br/>臂展 850mm<br/>安裝於中央底座"] 
-            CUP_L["🥤 杯架<br/>（左）"]
-            CUP_R["🥤 杯架<br/>（右）"]
-        end
-
-        subgraph BOT["前方顧客區"]
-            PAD["📱 點餐面板"] --- WIN["📦 取餐窗口<br/>（安全門）"]
-        end
-
-        MA --> NOVA
-        MB --> NOVA
-        NOVA --> WIN
-        CUP_L --> NOVA
-        CUP_R --> NOVA
-    end
-
-    style KIOSK fill:#f0f8ff,stroke:#336699
-    style NOVA fill:#ff9900,stroke:#cc6600,color:#fff
+```
+┌───────────────────────────┐
+│   Kiosk 俯視圖 — 方案 A    │
+│       2.0m × 1.5m          │
+│                             │
+│  ☕ 全自動機A  ☕ 全自動機B   │ ← 後方設備區
+│  (WMF 1500S+) (WMF 1500S+) │
+│   💧 水箱       🥛 牛奶冷藏  │
+│                             │
+│  🥤 杯架(左) 🤖NOVA5 🥤杯架(右)│ ← 中央作業區
+│          (臂展 850mm)        │
+│                             │
+│        📱 點餐面板           │ ← 前方顧客區
+│        📦 取餐窗口           │
+└───────────────────────────┘
 ```
 
 **NOVA 5 選擇理由**：臂展 850mm 可覆蓋左右兩台咖啡機（間距約 700mm），無需滑軌
@@ -227,63 +193,36 @@ graph LR
 
 #### 動作時序圖
 
-```mermaid
-gantt
-    title 方案 B：NOVA 2 + Eversys Shotmaster 時序
-    dateFormat ss
-    axisFormat %S秒
-
-    section Eversys 沖煮頭 1
-    第1杯萃取+出品           :e1, 00, 25s
-    第3杯萃取+出品           :e3, 30, 25s
-
-    section Eversys 沖煮頭 2
-    第2杯萃取+出品           :e2, 10, 25s
-    第4杯萃取+出品           :e4, 40, 25s
-
-    section NOVA 2 手臂
-    取杯→放出口1             :n0, 00, 3s
-    等待出品                 :nw1, 03, 22s
-    取第1杯→遞送             :n1, 25, 6s
-    取第2杯→遞送             :n2, 35, 6s
-    取第3杯→遞送             :n3, 55, 6s
-
-    section 出杯節點
-    ☕ 第1杯                 :milestone, m1, 31, 0
-    ☕ 第2杯                 :milestone, m2, 41, 0
-    ☕ 第3杯                 :milestone, m3, 61, 0
-```
+| 時間(秒) | ☕ 沖煮頭 1 | ☕ 沖煮頭 2 | 🤖 NOVA 2 | 出杯 |
+|----------|-----------|-----------|----------|------|
+| 0-3 | | | 取杯→放出口 | |
+| 0-25 | 第1杯萃取 | | | |
+| 10-35 | | 第2杯萃取 | | |
+| 25-31 | | | 取第1杯→遞送 | ☕ 第1杯 |
+| 30-55 | 第3杯萃取 | | | |
+| 35-41 | | | 取第2杯→遞送 | ☕ 第2杯 |
+| 40-65 | | 第4杯萃取 | | |
+| 55-61 | | | 取第3杯→遞送 | ☕ 第3杯 |
 
 > **Cycle Time ≈ 10-15 秒**（Shotmaster 超高速）✅✅
 
 #### 硬體佈局圖（俯視圖）
 
-```mermaid
-graph LR
-    subgraph KIOSK["Kiosk 俯視圖 — 方案 B（1.5m × 1.2m）"]
-        direction TB
-
-        subgraph TOP["後方"]
-            EV["☕ Eversys Shotmaster<br/>雙沖煮頭<br/>70×55cm"] --- WATER["💧 水箱+排水"]
-            MILK["🥛 牛奶冷藏"] --- BEAN["☕ 豆倉"]
-        end
-
-        subgraph MID["中央"]
-            NOVA2["🤖 NOVA 2<br/>臂展 625mm<br/>底座固定"]
-            CUP["🥤 杯架<br/>（50杯）"]
-        end
-
-        subgraph BOT["前方"]
-            PAD["📱 點餐面板"] --- WIN["📦 取餐窗口"]
-        end
-
-        EV --> NOVA2
-        NOVA2 --> WIN
-        CUP --> NOVA2
-    end
-
-    style KIOSK fill:#f0fff0,stroke:#339933
-    style NOVA2 fill:#ff9900,stroke:#cc6600,color:#fff
+```
+┌─────────────────────────┐
+│  Kiosk 俯視圖 — 方案 B   │
+│      1.5m × 1.2m         │
+│                           │
+│  ☕ Eversys Shotmaster    │ ← 後方
+│  (雙沖煮頭 70×55cm)       │
+│  💧 水箱  🥛 牛奶  ☕ 豆倉  │
+│                           │
+│   🤖 NOVA 2  🥤 杯架(50杯)│ ← 中央
+│   (臂展 625mm)            │
+│                           │
+│      📱 點餐面板           │ ← 前方
+│      📦 取餐窗口           │
+└─────────────────────────┘
 ```
 
 **NOVA 2 選擇理由**：單機佈局、空間緊湊、625mm 臂展足夠覆蓋
@@ -296,82 +235,51 @@ graph LR
 
 #### 動作時序圖
 
-```mermaid
-gantt
-    title 方案 C：NOVA 2 + WMF 5000S+（推薦起步方案）
-    dateFormat ss
-    axisFormat %S秒
-
-    section WMF 5000S+
-    第1杯：一鍵出品（美式）    :w1, 00, 30s
-    第2杯：一鍵出品（拿鐵）    :w2, 38, 40s
-
-    section NOVA 2 手臂
-    取空杯→放到出口           :n0, 00, 4s
-    等待咖啡機出品             :nw, 04, 26s
-    取成品杯→遞送到窗口       :n1, 30, 8s
-    取空杯→放到出口（第2杯）  :n2, 38, 4s
-    等待出品                   :nw2, 42, 36s
-    取成品→遞送               :n3, 78, 8s
-
-    section 出杯節點
-    ☕ 第1杯（美式）           :milestone, m1, 38, 0
-    ☕ 第2杯（拿鐵）           :milestone, m2, 86, 0
-```
+| 時間(秒) | ☕ WMF 5000S+ | 🤖 NOVA 2 | 出杯 |
+|----------|-------------|----------|------|
+| 0-4 | | 取空杯→放到出口 | |
+| 0-30 | 第1杯：美式出品 | | |
+| 4-30 | | ⏳ 等待出品 | |
+| 30-38 | | 取成品→遞送窗口 | ☕ 第1杯(美式) |
+| 38-42 | | 取空杯→放出口 | |
+| 38-78 | 第2杯：拿鐵出品 | | |
+| 42-78 | | ⏳ 等待出品 | |
+| 78-86 | | 取成品→遞送 | ☕ 第2杯(拿鐵) |
 
 > **Cycle Time**：美式 ~35s ✅ / 拿鐵 ~45s ⚠️
 
 #### 硬體佈局圖（俯視圖）
 
-```mermaid
-graph LR
-    subgraph KIOSK["Kiosk 俯視圖 — 方案 C（1.2m × 1.0m）最小佔地"]
-        direction TB
-
-        subgraph TOP["後方"]
-            WMF["☕ WMF 5000S+<br/>全自動一鍵出品<br/>55×50cm"]
-            SUPPLY["💧🥛☕<br/>水/奶/豆"]
-        end
-
-        subgraph MID["中央"]
-            NOVA2["🤖 NOVA 2<br/>臂展 625mm"]
-            CUP["🥤 杯架"]
-        end
-
-        subgraph BOT["前方"]
-            PAD["📱 點餐"] --- WIN["📦 取餐口"]
-        end
-
-        WMF --> NOVA2
-        NOVA2 --> WIN
-        CUP --> NOVA2
-        SUPPLY --> WMF
-    end
-
-    style KIOSK fill:#fffde7,stroke:#f9a825
-    style NOVA2 fill:#ff9900,stroke:#cc6600,color:#fff
+```
+┌───────────────────────┐
+│ Kiosk 俯視圖 — 方案 C  │
+│   1.2m × 1.0m 最小佔地  │
+│                         │
+│   ☕ WMF 5000S+         │ ← 後方
+│   (全自動 55×50cm)       │
+│   💧水 🥛奶 ☕豆         │
+│                         │
+│   🤖 NOVA 2   🥤 杯架   │ ← 中央
+│   (臂展 625mm)          │
+│                         │
+│     📱 點餐面板          │ ← 前方
+│     📦 取餐口            │
+└───────────────────────┘
 ```
 
 ---
 
 ### 方案總覽比較
 
-```mermaid
-graph LR
-    subgraph 選擇指南
-        START{{"客戶需求？"}}
-        START -->|"嚴格 40 秒<br/>含拿鐵"| PA["方案 A<br/>NOVA 5 + 雙機<br/>Cycle: 20s<br/>💰 $75K"]
-        START -->|"極速出杯<br/>高人流場域"| PB["方案 B<br/>NOVA 2 + Shotmaster<br/>Cycle: 15s<br/>💰 $65K"]
-        START -->|"成本優先<br/>先行驗證"| PC["方案 C ⭐<br/>NOVA 2 + WMF<br/>Cycle: 35s<br/>💰 $50K"]
-
-        PA -->|升級| PB
-        PC -->|加一台機| PA
-    end
-
-    style PA fill:#cce5ff,stroke:#0066cc
-    style PB fill:#e8d5f5,stroke:#6f42c1
-    style PC fill:#d4edda,stroke:#28a745
-```
+> **🎯 方案選擇指南 — 客戶需求是什麼？**
+>
+> | 需求 | 推薦方案 | Cycle Time | 預算 |
+> |------|---------|-----------|------|
+> | 嚴格 40 秒（含拿鐵） | **方案 A** — NOVA 5 + 雙機 | 20s | 💰 $75K |
+> | 極速出杯、高人流場域 | **方案 B** — NOVA 2 + Shotmaster | 15s | 💰 $65K |
+> | 成本優先、先行驗證 | **方案 C ⭐** — NOVA 2 + WMF | 35s | 💰 $50K |
+>
+> 📈 升級路徑：**方案 C** →（加一台機）→ **方案 A** →（換 Shotmaster）→ **方案 B**
 
 ---
 
@@ -485,38 +393,20 @@ NOVA 系列已內建力矩感測器和碰撞檢測，**額外只需選配 2D 視
 
 ## 七、NOVA 咖啡工站完整動作流程
 
-```mermaid
-flowchart TD
-    START([📱 顧客下單]) --> CHECK{杯架<br/>有杯？}
-    CHECK -->|有| GRAB[🤖 NOVA 取空杯<br/>⏱ 2s]
-    CHECK -->|無| ALERT[⚠️ 補杯提醒]
-    ALERT --> GRAB
-
-    GRAB --> PLACE[🤖 NOVA 放杯至咖啡機出口<br/>⏱ 3s]
-    PLACE --> BREW[☕ 全自動機開始萃取<br/>⏱ 25-35s]
-    
-    BREW --> TYPE{飲品<br/>類型？}
-    TYPE -->|美式| DONE_BREW[萃取完成<br/>⏱ 總計 ~30s]
-    TYPE -->|拿鐵/卡布| MILK[自動打奶泡+混合<br/>⏱ 額外 ~10s]
-    MILK --> DONE_BREW2[出品完成<br/>⏱ 總計 ~40s]
-
-    DONE_BREW --> PICK[🤖 NOVA 取成品杯<br/>⏱ 2s]
-    DONE_BREW2 --> PICK
-
-    PICK --> DELIVER[🤖 NOVA 移至取餐窗口<br/>⏱ 3s]
-    DELIVER --> OPEN[📦 安全門開啟<br/>⏱ 1s]
-    OPEN --> SERVE([☕ 顧客取餐！])
-
-    SERVE --> NEXT{下一杯<br/>訂單？}
-    NEXT -->|有| GRAB
-    NEXT -->|無| IDLE[🤖 NOVA 回到待機位]
-
-    style START fill:#4CAF50,color:#fff
-    style SERVE fill:#4CAF50,color:#fff
-    style BREW fill:#FF9800,color:#fff
-    style MILK fill:#FF9800,color:#fff
-    style NOVA fill:#ff9900
-```
+> **NOVA 咖啡工站動作流程**
+>
+> 1. 📱 **顧客下單**
+> 2. 🥤 檢查杯架 → 無杯則 ⚠️ 補杯提醒
+> 3. 🤖 NOVA 取空杯（⏱ 2s）
+> 4. 🤖 NOVA 放杯至咖啡機出口（⏱ 3s）
+> 5. ☕ 全自動機開始萃取（⏱ 25-35s）
+>    - 美式 → 萃取完成（總計 ~30s）
+>    - 拿鐵/卡布 → 自動打奶泡+混合（額外 ~10s，總計 ~40s）
+> 6. 🤖 NOVA 取成品杯（⏱ 2s）
+> 7. 🤖 NOVA 移至取餐窗口（⏱ 3s）
+> 8. 📦 安全門開啟（⏱ 1s）
+> 9. ☕ **顧客取餐！**
+> 10. 🔄 有下一杯 → 回到步驟 3 ｜ 無訂單 → 🤖 回待機位
 
 ---
 
