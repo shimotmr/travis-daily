@@ -75,7 +75,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 A：單臂 + 半自動機** ⏱ 2-3 min ❌ 不可行
 
 <div align="center">
-<svg width="700" height="140" viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 140" viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="138" rx="8" fill="none" stroke="#dc2626" stroke-width="2"/>
   <!-- 磨豆機 -->
   <rect x="30" y="45" width="90" height="40" rx="6" fill="#f3f4f6" stroke="#374151" stroke-width="1.5"/>
@@ -111,7 +111,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 B：雙臂式** ⏱ 1.5-2 min ❌ 不可行
 
 <div align="center">
-<svg width="700" height="150" viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 150" viewBox="0 0 700 150" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="148" rx="8" fill="none" stroke="#dc2626" stroke-width="2"/>
   <!-- 半自動機 -->
   <rect x="30" y="30" width="120" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -144,7 +144,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 C：單臂 + 全自動機** ⏱ 45-90s ⚠️ 勉強
 
 <div align="center">
-<svg width="700" height="120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="118" rx="8" fill="none" stroke="#f59e0b" stroke-width="2"/>
   <!-- 全自動機 -->
   <rect x="50" y="35" width="140" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -171,7 +171,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 D：全自動機 + 手臂遞送** ⏱ 35-40s ✅ 推薦
 
 <div align="center">
-<svg width="700" height="120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="118" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
   <!-- WMF/Eversys -->
   <rect x="40" y="35" width="170" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -198,7 +198,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 **架構 E：雙機 Pipeline** ⏱ 20-25s ✅✅ 最佳
 
 <div align="center">
-<svg width="700" height="160" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 160" viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <rect x="1" y="1" width="698" height="158" rx="8" fill="none" stroke="#16a34a" stroke-width="2"/>
   <!-- 全自動機 A -->
   <rect x="40" y="25" width="140" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
@@ -272,7 +272,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 動作時序圖
 
 <div align="center">
-<svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <defs><marker id="ga" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#374151"/></marker></defs>
   <!-- title -->
   <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 A 動作時序圖</text>
@@ -337,7 +337,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 硬體佈局圖（俯視圖）
 
 <div align="center">
-<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="dim-a" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
     <marker id="dim-a2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
@@ -406,7 +406,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 動作時序圖
 
 <div align="center">
-<svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 B 動作時序圖</text>
   <!-- Y labels -->
   <text x="85" y="55" text-anchor="end" font-size="11" fill="#16a34a">沖煮頭 1</text>
@@ -459,7 +459,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 硬體佈局圖（俯視圖）
 
 <div align="center">
-<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="dim-b" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
     <marker id="dim-b2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
@@ -517,7 +517,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 動作時序圖
 
 <div align="center">
-<svg width="700" height="200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 700 200" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <text x="350" y="18" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">方案 C 動作時序圖</text>
   <!-- Y labels -->
   <text x="85" y="55" text-anchor="end" font-size="11" fill="#16a34a">WMF 5000S+</text>
@@ -567,7 +567,7 @@ description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯�
 #### 硬體佈局圖（俯視圖）
 
 <div align="center">
-<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 500 400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="dim-c" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
     <marker id="dim-c2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto-start-reverse"><path d="M0,0 L6,3 L0,6" fill="#6b7280"/></marker>
@@ -740,7 +740,7 @@ NOVA 系列已內建力矩感測器和碰撞檢測，**額外只需選配 2D 視
 ## 七、NOVA 咖啡工站完整動作流程
 
 <div align="center">
-<svg width="600" height="680" viewBox="0 0 600 680" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
+<svg width="100%" viewBox="0 0 600 680" viewBox="0 0 600 680" xmlns="http://www.w3.org/2000/svg" style="font-family:system-ui,sans-serif;background:#fff">
   <defs>
     <marker id="af" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#374151"/></marker>
   </defs>
