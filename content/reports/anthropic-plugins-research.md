@@ -1,7 +1,7 @@
 ---
 title: "Anthropic 開源 11 個 AI 員工外掛 — 企業如何用 AI Agent Skills 重塑工作流"
 date: 2026-02-10
-category: research
+type: research
 tags: [anthropic, claude, cowork, plugins, AI-agent, enterprise, MCP]
 description: "深度解析 Anthropic knowledge-work-plugins 的架構設計、全球市場衝擊、企業落地策略，以及與 OpenClaw 的整合路徑。"
 ---
