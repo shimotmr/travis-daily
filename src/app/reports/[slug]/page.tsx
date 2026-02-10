@@ -3,6 +3,7 @@ import { formatDate, typeConfig } from '@/lib/utils'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { PostInteractions } from '@/components/PostInteractions'
+import { MarkdownContent } from '@/components/MarkdownContent'
 
 export async function generateStaticParams() {
   const posts = getAllPosts().filter(p => p.type === 'research')
@@ -37,7 +38,6 @@ export default async function ReportPage({ params }: { params: { slug: string } 
           <img src={post.cover} alt="" className="w-full aspect-[2/1] object-cover" />
         )}
         <div className="p-6 md:p-8">
-          {/* Header */}
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-lg">🤖</div>
             <div>
@@ -57,8 +57,8 @@ export default async function ReportPage({ params }: { params: { slug: string } 
             </div>
           )}
 
-          {/* Research content with enhanced typography */}
-          <div
+          <MarkdownContent
+            html={html}
             className="prose prose-neutral dark:prose-invert max-w-none
               prose-headings:scroll-mt-20
               prose-h2:text-xl prose-h2:font-bold prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-border/50
@@ -73,7 +73,6 @@ export default async function ReportPage({ params }: { params: { slug: string } 
               prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:rounded-r-lg prose-blockquote:py-1 prose-blockquote:px-4
               prose-strong:text-foreground
               prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
-            dangerouslySetInnerHTML={{ __html: html }}
           />
 
           <PostInteractions slug={post.slug} />
