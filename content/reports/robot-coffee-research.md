@@ -1,7 +1,7 @@
 ---
 title: "自動機器人咖啡機 — 40 秒出杯方案深度研究"
 date: "2026-02-10"
-category: "research"
+type: "research"
 description: "全球咖啡機器人市場調查、結構分析與 40 秒出杯方案設計——以越疆 NOVA 協作手臂為核心"
 ---
 
