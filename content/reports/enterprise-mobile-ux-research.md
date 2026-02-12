@@ -4,6 +4,8 @@ date: "2026-02-12"
 type: "research"
 tags: ["UX/UI", "Mobile", "Portal", "Enterprise"]
 summary: "深入分析釘釘、飛書、Salesforce、HubSpot 等 12 個企業 App 的手機端導航設計，為 Aurotek Sales Portal 行動化提供設計依據"
+pdf: "https://github.com/shimotmr/travis-daily/releases/download/pdf-exports/enterprise-mobile-ux-research-v2.pdf"
+google_doc: "https://docs.google.com/document/d/1OmOPaCbYW0wFrijF0EAGReb5j_x3Enb8tbsq6iUe0yI/edit"
 ---
 
 # 企業級行動端 Portal 導航設計深度研究報告
