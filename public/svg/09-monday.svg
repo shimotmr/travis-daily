@@ -1,0 +1,99 @@
+<svg width="375" height="812" viewBox="0 0 375 812" xmlns="http://www.w3.org/2000/svg">
+  <!-- Phone Frame -->
+  <rect width="375" height="812" rx="40" fill="#F5F5F5"/>
+  
+  <!-- Status Bar -->
+  <rect width="375" height="44" fill="#FFFFFF"/>
+  <text x="20" y="28" font-family="sans-serif" font-size="14" fill="#333">9:41</text>
+  <rect x="335" y="18" width="24" height="12" rx="3" fill="none" stroke="#333" stroke-width="1.5"/>
+  <rect x="339" y="21" width="16" height="6" fill="#333"/>
+  
+  <!-- Header -->
+  <rect y="44" width="375" height="56" fill="#FFFFFF"/>
+  <text x="20" y="78" font-family="sans-serif" font-size="20" font-weight="bold" fill="#333">My Work</text>
+  <circle cx="340" cy="72" r="16" fill="#E5E5E5"/>
+  
+  <!-- Content Area - Board View -->
+  <g transform="translate(0, 100)">
+    <!-- View Selector -->
+    <rect x="20" y="10" width="80" height="32" rx="16" fill="#007AFF"/>
+    <text x="60" y="30" font-family="sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">看板</text>
+    
+    <rect x="110" y="10" width="80" height="32" rx="16" fill="#E5E5E5"/>
+    <text x="150" y="30" font-family="sans-serif" font-size="12" fill="#666" text-anchor="middle">時間軸</text>
+    
+    <rect x="200" y="10" width="80" height="32" rx="16" fill="#E5E5E5"/>
+    <text x="240" y="30" font-family="sans-serif" font-size="12" fill="#666" text-anchor="middle">日曆</text>
+    
+    <!-- Board Columns -->
+    <g transform="translate(20, 60)">
+      <!-- Column 1: To Do -->
+      <text x="0" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">待辦 (3)</text>
+      
+      <rect x="0" y="30" width="100" height="80" rx="8" fill="#FFFFFF"/>
+      <rect x="0" y="30" width="100" height="4" rx="2" fill="#E5E5E5"/>
+      <text x="10" y="55" font-family="sans-serif" font-size="12" fill="#333">設計新功能</text>
+      <text x="10" y="70" font-family="sans-serif" font-size="10" fill="#999">高優先級</text>
+      <circle cx="15" cy="95" r="8" fill="#E5E5E5"/>
+      
+      <!-- Column 2: In Progress -->
+      <text x="117.5" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">進行中 (2)</text>
+      
+      <rect x="117.5" y="30" width="100" height="80" rx="8" fill="#FFFFFF"/>
+      <rect x="117.5" y="30" width="100" height="4" rx="2" fill="#007AFF"/>
+      <text x="127.5" y="55" font-family="sans-serif" font-size="12" fill="#333">API 開發</text>
+      <text x="127.5" y="70" font-family="sans-serif" font-size="10" fill="#999">中優先級</text>
+      <circle cx="132.5" cy="95" r="8" fill="#E5E5E5"/>
+      
+      <rect x="117.5" y="120" width="100" height="80" rx="8" fill="#FFFFFF"/>
+      <rect x="117.5" y="120" width="100" height="4" rx="2" fill="#007AFF"/>
+      <text x="127.5" y="145" font-family="sans-serif" font-size="12" fill="#333">測試流程</text>
+      <text x="127.5" y="160" font-family="sans-serif" font-size="10" fill="#999">低優先級</text>
+      <circle cx="132.5" cy="185" r="8" fill="#E5E5E5"/>
+      
+      <!-- Column 3: Done -->
+      <text x="235" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#333">完成 (1)</text>
+      
+      <rect x="235" y="30" width="100" height="80" rx="8" fill="#FFFFFF"/>
+      <rect x="235" y="30" width="100" height="4" rx="2" fill="#66BB6A"/>
+      <text x="245" y="55" font-family="sans-serif" font-size="12" fill="#333">需求分析</text>
+      <text x="245" y="70" font-family="sans-serif" font-size="10" fill="#999">已完成</text>
+      <circle cx="250" cy="95" r="8" fill="#E5E5E5"/>
+    </g>
+    
+    <!-- Add New Item -->
+    <rect x="20" y="450" width="335" height="50" rx="8" fill="#FFFFFF"/>
+    <text x="187.5" y="480" font-family="sans-serif" font-size="14" fill="#007AFF" text-anchor="middle">+ 新增項目</text>
+  </g>
+  
+  <!-- Tab Bar -->
+  <rect y="762" width="375" height="50" fill="#FFFFFF"/>
+  <line x1="0" y1="762" x2="375" y2="762" stroke="#E5E5E5" stroke-width="1"/>
+  
+  <!-- Tabs -->
+  <g transform="translate(0, 762)">
+    <!-- Tab 1: Inbox -->
+    <rect x="7.5" y="6" width="20" height="14" rx="2" fill="none" stroke="#E5E5E5" stroke-width="1.5"/>
+    <text x="37.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Inbox</text>
+    
+    <!-- Tab 2: My Work (Active) -->
+    <circle cx="112.5" cy="11" r="4" fill="none" stroke="#007AFF" stroke-width="2"/>
+    <line x1="111" y1="11" x2="114" y2="14" stroke="#007AFF" stroke-width="2"/>
+    <text x="112.5" y="32" font-family="sans-serif" font-size="10" fill="#007AFF" text-anchor="middle">My Work</text>
+    
+    <!-- Tab 3: Search -->
+    <circle cx="187.5" cy="11" r="6" fill="none" stroke="#E5E5E5" stroke-width="1.5"/>
+    <line x1="192" y1="15" x2="195" y2="18" stroke="#E5E5E5" stroke-width="1.5"/>
+    <text x="187.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Search</text>
+    
+    <!-- Tab 4: Boards -->
+    <rect x="247.5" y="6" width="30" height="10" rx="2" fill="#E5E5E5"/>
+    <text x="262.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Boards</text>
+    
+    <!-- Tab 5: Menu -->
+    <circle cx="337.5" cy="6" r="1.5" fill="#E5E5E5"/>
+    <circle cx="337.5" cy="11" r="1.5" fill="#E5E5E5"/>
+    <circle cx="337.5" cy="16" r="1.5" fill="#E5E5E5"/>
+    <text x="337.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Menu</text>
+  </g>
+</svg>
