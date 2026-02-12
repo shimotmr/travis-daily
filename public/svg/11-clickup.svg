@@ -1,0 +1,103 @@
+<svg width="375" height="812" viewBox="0 0 375 812" xmlns="http://www.w3.org/2000/svg">
+  <!-- Phone Frame -->
+  <rect width="375" height="812" rx="40" fill="#F5F5F5"/>
+  
+  <!-- Status Bar -->
+  <rect width="375" height="44" fill="#FFFFFF"/>
+  <text x="20" y="28" font-family="sans-serif" font-size="14" fill="#333">9:41</text>
+  <rect x="335" y="18" width="24" height="12" rx="3" fill="none" stroke="#333" stroke-width="1.5"/>
+  <rect x="339" y="21" width="16" height="6" fill="#333"/>
+  
+  <!-- Header -->
+  <rect y="44" width="375" height="56" fill="#FFFFFF"/>
+  <text x="20" y="78" font-family="sans-serif" font-size="20" font-weight="bold" fill="#333">Home</text>
+  <circle cx="320" cy="72" r="16" fill="#E5E5E5"/>
+  <circle cx="350" cy="72" r="16" fill="#E5E5E5"/>
+  
+  <!-- Content Area - Task List -->
+  <g transform="translate(0, 100)">
+    <!-- Today Section -->
+    <text x="20" y="30" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333">今天</text>
+    
+    <!-- Task Item 1 -->
+    <rect x="20" y="45" width="335" height="70" rx="8" fill="#FFFFFF"/>
+    <circle cx="40" cy="75" r="8" fill="none" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="60" y="70" font-family="sans-serif" font-size="14" fill="#333">完成產品設計文檔</text>
+    <rect x="60" y="80" width="60" height="20" rx="4" fill="#E5E5E5"/>
+    <text x="90" y="94" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">高優先級</text>
+    <text x="130" y="94" font-family="sans-serif" font-size="10" fill="#999">下午 5:00</text>
+    
+    <!-- Task Item 2 -->
+    <rect x="20" y="125" width="335" height="70" rx="8" fill="#FFFFFF"/>
+    <circle cx="40" cy="155" r="8" fill="none" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="60" y="150" font-family="sans-serif" font-size="14" fill="#333">團隊週會準備</text>
+    <rect x="60" y="160" width="50" height="20" rx="4" fill="#E5E5E5"/>
+    <text x="85" y="174" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">中優先級</text>
+    <text x="120" y="174" font-family="sans-serif" font-size="10" fill="#999">明天</text>
+    
+    <!-- Overdue Section -->
+    <text x="20" y="235" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333">逾期</text>
+    
+    <!-- Overdue Task -->
+    <rect x="20" y="250" width="335" height="70" rx="8" fill="#FFFFFF"/>
+    <circle cx="40" cy="280" r="8" fill="none" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="60" y="275" font-family="sans-serif" font-size="14" fill="#333">代碼審查</text>
+    <rect x="60" y="285" width="40" height="20" rx="4" fill="#E5E5E5"/>
+    <text x="80" y="299" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">緊急</text>
+    <text x="110" y="299" font-family="sans-serif" font-size="10" fill="#999">逾期 2 天</text>
+    
+    <!-- This Week Section -->
+    <text x="20" y="360" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333">本週</text>
+    
+    <!-- Week Task 1 -->
+    <rect x="20" y="375" width="335" height="70" rx="8" fill="#FFFFFF"/>
+    <circle cx="40" cy="405" r="8" fill="none" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="60" y="400" font-family="sans-serif" font-size="14" fill="#333">撰寫技術文檔</text>
+    <rect x="60" y="410" width="50" height="20" rx="4" fill="#E5E5E5"/>
+    <text x="85" y="424" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">低優先級</text>
+    <text x="120" y="424" font-family="sans-serif" font-size="10" fill="#999">週五</text>
+    
+    <!-- Week Task 2 -->
+    <rect x="20" y="455" width="335" height="70" rx="8" fill="#FFFFFF"/>
+    <circle cx="40" cy="485" r="8" fill="none" stroke="#E5E5E5" stroke-width="2"/>
+    <text x="60" y="480" font-family="sans-serif" font-size="14" fill="#333">客戶需求評估</text>
+    <rect x="60" y="490" width="50" height="20" rx="4" fill="#E5E5E5"/>
+    <text x="85" y="504" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">中優先級</text>
+    <text x="120" y="504" font-family="sans-serif" font-size="10" fill="#999">週四</text>
+  </g>
+  
+  <!-- Floating Action Button -->
+  <circle cx="315" cy="700" r="28" fill="#007AFF"/>
+  <text x="315" y="710" font-family="sans-serif" font-size="28" fill="#FFFFFF" text-anchor="middle">+</text>
+  
+  <!-- Tab Bar -->
+  <rect y="762" width="375" height="50" fill="#FFFFFF"/>
+  <line x1="0" y1="762" x2="375" y2="762" stroke="#E5E5E5" stroke-width="1"/>
+  
+  <!-- Tabs -->
+  <g transform="translate(0, 762)">
+    <!-- Tab 1: Home (Active) -->
+    <circle cx="37.5" cy="11" r="5" fill="#007AFF"/>
+    <text x="37.5" y="32" font-family="sans-serif" font-size="10" fill="#007AFF" text-anchor="middle">Home</text>
+    
+    <!-- Tab 2: Inbox -->
+    <rect x="82.5" y="6" width="20" height="14" rx="2" fill="none" stroke="#E5E5E5" stroke-width="1.5"/>
+    <circle cx="98" cy="8" r="3" fill="#E5E5E5"/>
+    <text x="112.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Inbox</text>
+    
+    <!-- Tab 3: Chat -->
+    <rect x="157.5" y="8" width="60" height="6" rx="3" fill="#E5E5E5"/>
+    <text x="187.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Chat</text>
+    
+    <!-- Tab 4: Search -->
+    <circle cx="262.5" cy="11" r="6" fill="none" stroke="#E5E5E5" stroke-width="1.5"/>
+    <line x1="267" y1="15" x2="270" y2="18" stroke="#E5E5E5" stroke-width="1.5"/>
+    <text x="262.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">Search</text>
+    
+    <!-- Tab 5: More -->
+    <circle cx="337.5" cy="6" r="1.5" fill="#E5E5E5"/>
+    <circle cx="337.5" cy="11" r="1.5" fill="#E5E5E5"/>
+    <circle cx="337.5" cy="16" r="1.5" fill="#E5E5E5"/>
+    <text x="337.5" y="32" font-family="sans-serif" font-size="10" fill="#666" text-anchor="middle">More</text>
+  </g>
+</svg>
