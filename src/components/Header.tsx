@@ -11,7 +11,7 @@ import { TravisAvatar } from './TravisAvatar'
 const navItems = [
   { href: '/', icon: Newspaper, label: 'Feed' },
   { href: '/architecture', icon: Network, label: 'Architecture' },
-  { href: '/board', icon: LayoutDashboard, label: 'Board' },
+  // Board removed — use William Hub instead
   { href: '/private', icon: Lock, label: 'Private' },
 ]
 
