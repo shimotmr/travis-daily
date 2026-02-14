@@ -133,13 +133,23 @@ export function CommentSection({ slug }: { slug: string }) {
                   <img src={user.user_metadata.avatar_url} alt="" className="w-8 h-8 rounded-full shrink-0" />
                 )}
                 <div className="flex-1 flex gap-2">
-                  <input
-                    type="text"
+                  <textarea
                     value={text}
-                    onChange={e => setText(e.target.value)}
-                    onKeyDown={e => e.key === 'Enter' && submit()}
+                    onChange={e => {
+                      setText(e.target.value)
+                      // Auto-resize
+                      e.target.style.height = 'auto'
+                      e.target.style.height = Math.min(e.target.scrollHeight, 160) + 'px'
+                    }}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault()
+                        submit()
+                      }
+                    }}
                     placeholder={replyTo ? `Reply to ${replyTo.name}...` : 'Write a comment...'}
-                    className="flex-1 bg-muted border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 ring-primary/30"
+                    rows={3}
+                    className="flex-1 bg-muted border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 ring-primary/30 resize-none"
                   />
                   <button
                     onClick={submit}

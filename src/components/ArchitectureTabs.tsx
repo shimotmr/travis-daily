@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Cpu, Shield, Globe, ChevronDown, Download } from 'lucide-react'
+import { Cpu, Shield, Globe, ChevronDown, Download, Server, Search, FileText, Pen, Compass, RefreshCw, Brain, Inbox, ShieldCheck, FileKey, Lock, Eye, Database, Workflow, Mail, Smartphone } from 'lucide-react'
 import mermaid from 'mermaid'
 
 const tabs = [
@@ -12,33 +12,33 @@ const tabs = [
     title: 'Skills 調用邏輯架構',
     description: '使用者訊息經過 Gateway → Session → Agent 後，先進行複雜度判斷：簡單問答直接回覆，複雜任務則經 Request Orchestrator 拆解、Prompt Engineering Expert 結構化改寫，再由 Skill Router 分派至對應技能執行。',
     details: [
-      { title: 'OpenClaw Gateway 🦞', desc: '接收來自 Telegram 的訊息，管理 session 與認證' },
-      { title: '複雜度判斷 🔍', desc: '判斷請求為簡單問答（直接回覆）或複雜任務（進入 Orchestrator 流程）' },
-      { title: 'Request Orchestrator 📐', desc: '將口語化請求轉譯為結構化任務，拆解子任務清單並調度技能' },
-      { title: 'Prompt Engineering Expert ✍️', desc: '對拆解後的任務進行結構化改寫，提升技能調用的精準度' },
-      { title: 'Skill Router 🧭', desc: '根據意圖分類結果，匹配最適合的技能組合（研究、開發、工作、金融、通訊）' },
-      { title: 'Sub-Agent 派遣 🔄', desc: '複雜任務 spawn 獨立子代理，平行處理後回報主代理' },
-      { title: '記憶系統 🧠', desc: '每日紀錄（短期）+ MEMORY.md（長期）+ qmd 語義搜尋（RAG）' },
+      { title: 'OpenClaw Gateway', icon: Server, desc: '接收來自 Telegram 的訊息，管理 session 與認證' },
+      { title: '複雜度判斷', icon: Search, desc: '判斷請求為簡單問答（直接回覆）或複雜任務（進入 Orchestrator 流程）' },
+      { title: 'Request Orchestrator', icon: FileText, desc: '將口語化請求轉譯為結構化任務，拆解子任務清單並調度技能' },
+      { title: 'Prompt Engineering Expert', icon: Pen, desc: '對拆解後的任務進行結構化改寫，提升技能調用的精準度' },
+      { title: 'Skill Router', icon: Compass, desc: '根據意圖分類結果，匹配最適合的技能組合（研究、開發、工作、金融、通訊）' },
+      { title: 'Sub-Agent 派遣', icon: RefreshCw, desc: '複雜任務 spawn 獨立子代理，平行處理後回報主代理' },
+      { title: '記憶系統', icon: Brain, desc: '每日紀錄（短期）+ MEMORY.md（長期）+ qmd 語義搜尋（RAG）' },
     ],
     diagram: `graph TD
-    User["👤 William / Telegram"] --> Gateway["🦞 OpenClaw Gateway"]
-    Gateway --> Session["📋 Session Manager"]
-    Session --> Agent["🤖 Travis / Claude Opus 4.6"]
-    Agent --> Judge{"🔍 複雜度判斷"}
-    Judge -->|簡單問答| DirectReply["💬 直接回覆"]
-    Judge -->|複雜任務| Orchestrator["📐 Request Orchestrator<br/>請求轉譯・任務拆解"]
-    Orchestrator --> PromptExpert["✍️ Prompt Engineering Expert<br/>結構化改寫"]
-    PromptExpert --> Router["🧭 Skill Router<br/>意圖分類・技能匹配"]
-    Router --> Research["🔍 研究類<br/>tavily, perplexity, deep-research"]
-    Router --> Coding["💻 開發類<br/>github, nextjs, react"]
-    Router --> Work["📊 工作類<br/>gog, excel, zimbra"]
-    Router --> Finance["💰 金融類<br/>yahoo-finance, stock-analysis"]
-    Router --> Communication["📱 通訊類<br/>telegram, LINE, WeCom"]
-    Router --> SubAgent["🔄 Sub-Agent 派遣<br/>獨立任務並行處理"]
-    Agent --> Memory["🧠 記憶系統"]
-    Memory --> Daily["📝 每日紀錄"]
-    Memory --> Long["📚 長期記憶 MEMORY.md"]
-    Memory --> QMD["🔍 qmd 語義搜尋"]
+    User["William / Telegram"] --> Gateway["OpenClaw Gateway"]
+    Gateway --> Session["Session Manager"]
+    Session --> Agent["Travis / Claude Opus 4.6"]
+    Agent --> Judge{"複雜度判斷"}
+    Judge -->|簡單問答| DirectReply["直接回覆"]
+    Judge -->|複雜任務| Orchestrator["Request Orchestrator\n請求轉譯・任務拆解"]
+    Orchestrator --> PromptExpert["Prompt Engineering Expert\n結構化改寫"]
+    PromptExpert --> Router["Skill Router\n意圖分類・技能匹配"]
+    Router --> Research["研究類\ntavily, perplexity, deep-research"]
+    Router --> Coding["開發類\ngithub, nextjs, react"]
+    Router --> Work["工作類\ngog, excel, zimbra"]
+    Router --> Finance["金融類\nyahoo-finance, stock-analysis"]
+    Router --> Communication["通訊類\ntelegram, LINE, WeCom"]
+    Router --> SubAgent["Sub-Agent 派遣\n獨立任務並行處理"]
+    Agent --> Memory["記憶系統"]
+    Memory --> Daily["每日紀錄"]
+    Memory --> Long["長期記憶 MEMORY.md"]
+    Memory --> QMD["qmd 語義搜尋"]
     SubAgent --> Agent`,
   },
   {
@@ -48,36 +48,36 @@ const tabs = [
     title: '安全性處理架構',
     description: '多層安全架構：從輸入過濾、認證、執行沙箱到記憶防篡改，確保系統安全運行。',
     details: [
-      { title: 'Prompt Injection 防護 🛡️', desc: '偵測「忽略指令」等惡意注入，Content Sanitization 過濾外部內容' },
-      { title: '三層認證 🔐', desc: 'Anthropic OAuth Token → Gateway Auth Token → Telegram Pairing' },
-      { title: '執行沙箱 ⚙️', desc: 'Allowlist 模式限制可執行命令，Sandbox Isolation 隔離執行環境' },
-      { title: '記憶安全 🧠', desc: 'Poisoning Prevention + File Integrity Check 防止記憶篡改' },
-      { title: '外部 API 安全 🌐', desc: 'Google OAuth Scoping + Zimbra API Isolation 最小權限存取' },
-      { title: '監控 📊', desc: 'Daily Security Digest + ClawHub Skill Audit 持續監控' },
+      { title: 'Prompt Injection 防護', icon: ShieldCheck, desc: '偵測「忽略指令」等惡意注入，Content Sanitization 過濾外部內容' },
+      { title: '三層認證', icon: Lock, desc: 'Anthropic OAuth Token → Gateway Auth Token → Telegram Pairing' },
+      { title: '執行沙箱', icon: Cpu, desc: 'Allowlist 模式限制可執行命令，Sandbox Isolation 隔離執行環境' },
+      { title: '記憶安全', icon: Brain, desc: 'Poisoning Prevention + File Integrity Check 防止記憶篡改' },
+      { title: '外部 API 安全', icon: Globe, desc: 'Google OAuth Scoping + Zimbra API Isolation 最小權限存取' },
+      { title: '監控', icon: Eye, desc: 'Daily Security Digest + ClawHub Skill Audit 持續監控' },
     ],
     diagram: `graph TD
-    Inbound["📨 Inbound Messages"] --> PIDetect["🛡️ Prompt Injection Detection"]
-    PIDetect --> Sanitize["🧹 Content Sanitization"]
-    Sanitize --> Agent["🤖 Agent Processing"]
+    Inbound["Inbound Messages"] --> PIDetect["Prompt Injection Detection"]
+    PIDetect --> Sanitize["Content Sanitization"]
+    Sanitize --> Agent["Agent Processing"]
 
-    Auth["🔐 Authentication Layer"]
+    Auth["Authentication Layer"]
     Auth --> Anthropic["Anthropic OAuth Token"]
     Auth --> GW["Gateway Auth Token"]
     Auth --> TG["Telegram Pairing"]
 
-    Exec["⚙️ Execution Security"]
+    Exec["Execution Security"]
     Exec --> Allowlist["Allowlist Mode"]
     Exec --> Sandbox["Sandbox Isolation"]
 
-    MemSec["🧠 Memory Security"]
+    MemSec["Memory Security"]
     MemSec --> Poison["Poisoning Prevention"]
     MemSec --> Integrity["File Integrity Check"]
 
-    External["🌐 External API Security"]
+    External["External API Security"]
     External --> Google["Google OAuth Scoping"]
     External --> Zimbra["Zimbra API Isolation"]
 
-    Monitor["📊 Monitoring"]
+    Monitor["Monitoring"]
     Monitor --> Digest["Daily Security Digest"]
     Monitor --> Audit["ClawHub Skill Audit"]`,
   },
@@ -88,22 +88,22 @@ const tabs = [
     title: '網頁開發周邊工具架構',
     description: '完整的網頁開發與自動化生態系——從 Portal 到通知推送，所有工具如何協同運作。',
     details: [
-      { title: 'Mac mini 🖥️', desc: 'OpenClaw Gateway 主機，運行 Scripts + Cron Jobs' },
-      { title: 'Aurotek Portal 🌐', desc: 'Sales Portal（Next.js on Vercel），連接 Supabase PostgreSQL' },
-      { title: 'Travis Daily 📰', desc: 'AI 專欄網站（Next.js on Vercel），透過 GitHub 自動部署' },
-      { title: 'Google APIs 📧', desc: 'Calendar, Docs, Sheets, Drive 整合' },
-      { title: 'Zimbra 📮', desc: 'Email + Calendar Sync（Aurotek 內部郵件）' },
-      { title: 'LINE Push API 📱', desc: '業績通知推送' },
+      { title: 'Mac mini', icon: Server, desc: 'OpenClaw Gateway 主機，運行 Scripts + Cron Jobs' },
+      { title: 'Aurotek Portal', icon: Globe, desc: 'Sales Portal（Next.js on Vercel），連接 Supabase PostgreSQL' },
+      { title: 'Travis Daily', icon: FileText, desc: 'AI 專欄網站（Next.js on Vercel），透過 GitHub 自動部署' },
+      { title: 'Google APIs', icon: Mail, desc: 'Calendar, Docs, Sheets, Drive 整合' },
+      { title: 'Zimbra', icon: Inbox, desc: 'Email + Calendar Sync（Aurotek 內部郵件）' },
+      { title: 'LINE Push API', icon: Smartphone, desc: '業績通知推送' },
     ],
     diagram: `graph TD
-    Mac["🖥️ Mac mini<br/>OpenClaw Gateway"] --> Scripts["📜 Scripts + Cron Jobs"]
+    Mac["Mac mini\nOpenClaw Gateway"] --> Scripts["Scripts + Cron Jobs"]
 
-    Portal["🌐 Aurotek Portal<br/>vercel.app"] --> Supabase[("🗄️ Supabase<br/>PostgreSQL")]
-    Travis["📰 Travis Daily<br/>vercel.app"] --> GitHub["🐙 GitHub<br/>shimotmr"]
+    Portal["Aurotek Portal\nvercel.app"] --> Supabase[("Supabase\nPostgreSQL")]
+    Travis["Travis Daily\nvercel.app"] --> GitHub["GitHub\nshimotmr"]
 
-    Mac --> Google["📧 Google APIs<br/>Calendar, Docs, Sheets, Drive"]
-    Mac --> Zimbra["📮 Zimbra<br/>Email + Calendar Sync"]
-    Mac --> LINE["📱 LINE Push API<br/>業績通知"]
+    Mac --> Google["Google APIs\nCalendar, Docs, Sheets, Drive"]
+    Mac --> Zimbra["Zimbra\nEmail + Calendar Sync"]
+    Mac --> LINE["LINE Push API\n業績通知"]
 
     GitHub --> Portal
     GitHub --> Travis
@@ -165,30 +165,25 @@ function MermaidDiagram({ chart, id }: { chart: string; id: string }) {
 }
 
 async function saveAsImage(containerId: string, title: string) {
-  // Dynamically import html2canvas
   const html2canvas = (await import('html2canvas')).default
   const el = document.getElementById(containerId)
   if (!el) return
 
-  // Create a wrapper with title, diagram, and watermark
   const wrapper = document.createElement('div')
   wrapper.style.cssText = 'position:fixed;left:-9999px;top:0;background:#0a0a1a;padding:32px;min-width:800px;'
 
-  // Title
   const titleEl = document.createElement('div')
   titleEl.style.cssText = 'font-size:24px;font-weight:bold;color:#e2e8f0;margin-bottom:20px;font-family:Inter,system-ui,sans-serif;text-align:center;'
   titleEl.textContent = title
   wrapper.appendChild(titleEl)
 
-  // Clone diagram
   const clone = el.cloneNode(true) as HTMLElement
   clone.style.overflow = 'visible'
   wrapper.appendChild(clone)
 
-  // Watermark
   const watermark = document.createElement('div')
   watermark.style.cssText = 'text-align:center;color:#64748b;font-size:14px;margin-top:24px;padding-top:16px;border-top:1px solid #1e293b;font-family:Inter,system-ui,sans-serif;'
-  watermark.textContent = 'Edited by Travis 🤖 from William Hsiao'
+  watermark.textContent = 'Travis Research Lab by William Hsiao'
   wrapper.appendChild(watermark)
 
   document.body.appendChild(wrapper)
@@ -262,7 +257,7 @@ export function ArchitectureTabs() {
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors disabled:opacity-50"
             >
               <Download size={14} />
-              {saving ? '儲存中...' : '📥 Save as Image'}
+              {saving ? '儲存中...' : 'Save as Image'}
             </button>
           </div>
           <p className="text-sm text-muted-foreground">{current.description}</p>
@@ -275,7 +270,7 @@ export function ArchitectureTabs() {
 
         {/* Credit */}
         <div className="text-center text-xs text-muted-foreground pb-3">
-          Edited by Travis 🤖 from William Hsiao
+          Travis Research Lab by William Hsiao
         </div>
 
         {/* Component details */}
@@ -288,6 +283,7 @@ export function ArchitectureTabs() {
           <div className="px-4 pb-4 space-y-1">
             {current.details.map(d => {
               const isOpen = expandedDetail === d.title
+              const Icon = d.icon
               return (
                 <button
                   key={d.title}
@@ -295,14 +291,17 @@ export function ArchitectureTabs() {
                   className="w-full text-left rounded-xl border border-border hover:bg-accent/30 transition-colors overflow-hidden"
                 >
                   <div className="flex items-center justify-between p-3">
-                    <span className="font-medium text-sm">{d.title}</span>
+                    <div className="flex items-center gap-2">
+                      <Icon size={16} className="text-primary/70" />
+                      <span className="font-medium text-sm">{d.title}</span>
+                    </div>
                     <ChevronDown
                       size={14}
                       className={`text-muted-foreground transition-transform ${isOpen ? 'rotate-180' : ''}`}
                     />
                   </div>
                   {isOpen && (
-                    <div className="px-3 pb-3 pt-0 text-sm text-muted-foreground">
+                    <div className="px-3 pb-3 pt-0 text-sm text-muted-foreground ml-7">
                       {d.desc}
                     </div>
                   )}
