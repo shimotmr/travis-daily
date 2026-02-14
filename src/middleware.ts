@@ -8,6 +8,15 @@ const ADMIN_ROUTES = ['/admin']
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // 檢查是否請求 markdown 格式
+  const acceptHeader = request.headers.get('accept') || ''
+  if (acceptHeader.includes('text/markdown')) {
+    // Rewrite 到 markdown API
+    const url = request.nextUrl.clone()
+    url.pathname = `/api/markdown${pathname}`
+    return NextResponse.rewrite(url)
+  }
+
   const isPrivate = PRIVATE_ROUTES.some(r => pathname.startsWith(r))
   const isAdmin = ADMIN_ROUTES.some(r => pathname.startsWith(r))
   if (!isPrivate && !isAdmin) return NextResponse.next()
@@ -79,5 +88,14 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/board/:path*', '/architecture/:path*', '/admin/:path*'],
+  matcher: [
+    '/board/:path*',
+    '/architecture/:path*',
+    '/admin/:path*',
+    // Markdown API: 所有可能的文章路徑
+    '/digest/:path*',
+    '/research/:path*',
+    '/notes/:path*',
+    '/task-updates/:path*',
+  ],
 }
