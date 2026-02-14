@@ -1,6 +1,8 @@
 import { getPublicPosts } from '@/lib/content'
 import { FeedTabs } from '@/components/FeedTabs'
 import { TravisAvatar } from '@/components/TravisAvatar'
+import Link from 'next/link'
+import { Users, ArrowRight } from 'lucide-react'
 
 export default function Home() {
   const posts = getPublicPosts()
@@ -41,6 +43,28 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* AI Agent Team Card */}
+      <Link 
+        href="/agents"
+        className="group relative rounded-xl overflow-hidden block hover:shadow-lg hover:shadow-primary/10 transition-all"
+      >
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-purple-500/0 via-transparent to-pink-500/0 group-hover:from-purple-500/10 group-hover:to-pink-500/10 pointer-events-none transition-all" />
+        <div className="relative border border-border group-hover:border-primary/50 rounded-xl bg-card p-4 transition-colors">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Users size={20} className="text-primary" />
+              </div>
+              <div>
+                <h2 className="font-semibold text-sm">AI 多 Agent 控台</h2>
+                <p className="text-xs text-muted-foreground">認識 Travis 的 AI 團隊成員</p>
+              </div>
+            </div>
+            <ArrowRight size={16} className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+          </div>
+        </div>
+      </Link>
 
       {/* Tabbed Feed */}
       <FeedTabs posts={posts.map(p => ({
