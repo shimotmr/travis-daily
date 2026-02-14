@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { showcaseAgents, type ShowcaseAgent } from '@/lib/showcase-agents-data'
-import Image from 'next/image'
+// // Image replaced with img
 import { ArrowLeft, Users, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
