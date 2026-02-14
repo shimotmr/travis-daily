@@ -3,7 +3,7 @@ title: "AI Agent 展示頁面遊戲 UI 設計文件"
 date: "2026-02-14"
 type: "research"
 tags: ["agent", "gamification", "UI", "design"]
-draft: true
+visibility: "private"
 ---
 
 
