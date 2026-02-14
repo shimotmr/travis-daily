@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { showcaseAgents, type ShowcaseAgent } from '@/lib/showcase-agents-data'
-// // Image replaced with img
+// 
 import { ArrowLeft, Users, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 
@@ -230,12 +230,11 @@ function OfficeView({
               <div className="w-full aspect-square rounded-2xl overflow-hidden mb-4 
                              shadow-lg group-hover:shadow-2xl transition-shadow relative">
                 {agent.maleImage ? (
-                  <Image
+                  <img
                     src={agent.maleImage}
                     alt={agent.name}
-                    fill
-                    className="object-cover"
-                    unoptimized
+                    
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 ) : (
                   <div className={`w-full h-full bg-gradient-to-br ${agent.gradient}`} />
@@ -312,13 +311,11 @@ function AgentScene({
       <div className="absolute left-0 bottom-0 w-1/2 h-full flex items-end justify-start p-8 animate-slideInLeft">
         <div className="relative w-full max-w-md aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl">
           {agent.maleImage ? (
-            <Image
-              src={agent.maleImage}
-              alt={agent.name}
-              fill
-              className="object-cover"
-              unoptimized
-              priority
+            <img
+                    src={agent.maleImage}
+                    alt={agent.name}
+                    
+                    className="absolute inset-0 w-full h-full object-cover"
             />
           ) : (
             <div className={`w-full h-full bg-gradient-to-br ${agent.gradient}`} />
@@ -454,12 +451,11 @@ function TeamView({
             <div className="w-40 md:w-48 aspect-[3/4] rounded-2xl overflow-hidden shadow-xl 
                            hover:shadow-2xl transition-shadow relative border-4 border-white">
               {agent.maleImage ? (
-                <Image
-                  src={agent.maleImage}
-                  alt={agent.name}
-                  fill
-                  className="object-cover"
-                  unoptimized
+                <img
+                    src={agent.maleImage}
+                    alt={agent.name}
+                    
+                    className="absolute inset-0 w-full h-full object-cover"
                 />
               ) : (
                 <div className={`w-full h-full bg-gradient-to-br ${agent.gradient}`} />
@@ -486,126 +482,4 @@ function TeamView({
       </div>
     </div>
   )
-}
-/* Galgame Showcase 動畫樣式 */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes blink {
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0;
-  }
-}
-
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-.animate-slideUp {
-  animation: slideUp 0.4s ease-out forwards;
-}
-
-.animate-slideInLeft {
-  animation: slideInLeft 0.6s ease-out forwards;
-}
-
-.animate-slideInRight {
-  animation: slideInRight 0.6s ease-out forwards;
-}
-
-.animate-blink {
-  animation: blink 1s step-end infinite;
-}
-
-.animate-blob {
-  animation: blob 7s infinite;
-}
-
-.animation-delay-1000 {
-  animation-delay: 1000ms;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2000ms;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4000ms;
-}
-
-/* Dialogue Box 樣式 */
-.dialogue-box {
-  position: relative;
-}
-
-.dialogue-box::before {
-  content: '';
-  position: absolute;
-  left: -4px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(to bottom, currentColor, transparent);
-  opacity: 0.5;
-}
-
-.name-tag {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
