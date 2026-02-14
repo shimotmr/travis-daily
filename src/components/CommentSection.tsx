@@ -21,7 +21,7 @@ export function CommentSection({ slug }: { slug: string }) {
   const [comments, setComments] = useState<Comment[]>([])
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(false)
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(true)
   const [replyTo, setReplyTo] = useState<{ id: string; name: string } | null>(null)
   const supabase = createClient()
 

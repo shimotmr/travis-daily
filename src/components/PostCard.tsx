@@ -24,6 +24,7 @@ export function PostCard({ slug, title, date, type, tags, excerpt, cover }: Post
 
   const href = type === 'digest' ? `/digest/${date}` :
                type === 'research' ? `/reports/${slug.replace('reports/', '')}` :
+               type === 'note' ? `/notes/${slug.replace('notes/', '')}` :
                `/digest/${date}`
 
   return (
