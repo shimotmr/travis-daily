@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ArrowLeft, Shield, UserCheck, UserX, Clock, Crown, Users } from 'lucide-react'
+import { ArrowLeft, Shield, UserCheck, UserX, Clock, Crown, Users, UserCircle } from 'lucide-react'
 import Link from 'next/link'
 
 interface UserRecord {
@@ -128,7 +128,7 @@ export default function AdminPage() {
 
           {users.length === 0 && (
             <div className="text-center py-20 text-muted-foreground">
-              <p className="text-4xl mb-4">👤</p>
+              <UserCircle size={48} className="mx-auto mb-4 text-muted-foreground" />
               <p>No users yet</p>
             </div>
           )}

@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Blocks } from 'lucide-react'
 import Link from 'next/link'
 import { ArchitectureTabs } from '@/components/ArchitectureTabs'
 
@@ -15,7 +15,7 @@ export default function ArchitecturePage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-2">🏗️ System Architecture</h1>
+        <h1 className="text-2xl font-bold mb-2 flex items-center gap-2"><Blocks size={24} /> System Architecture</h1>
         <p className="text-muted-foreground text-sm">
           Travis 的系統架構全覽——從技能調用到安全防護，再到開發生態系。點擊各分頁探索不同層面。
         </p>

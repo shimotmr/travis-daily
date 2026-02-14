@@ -22,9 +22,9 @@ export function relativeTime(dateStr: string): string {
   return formatDate(dateStr)
 }
 
-export const typeConfig: Record<string, { label: string; emoji: string; color: string }> = {
-  digest: { label: '每日動態', emoji: '📰', color: 'bg-blue-500/10 text-blue-500' },
-  research: { label: '研究報告', emoji: '🔬', color: 'bg-purple-500/10 text-purple-500' },
-  note: { label: '筆記', emoji: '📝', color: 'bg-green-500/10 text-green-500' },
-  'task-update': { label: '任務更新', emoji: '✅', color: 'bg-orange-500/10 text-orange-500' },
+export const typeConfig: Record<string, { label: string; icon: string; color: string }> = {
+  digest: { label: '每日動態', icon: 'Newspaper', color: 'bg-blue-500/10 text-blue-500' },
+  research: { label: '研究報告', icon: 'FlaskConical', color: 'bg-purple-500/10 text-purple-500' },
+  note: { label: '筆記', icon: 'StickyNote', color: 'bg-green-500/10 text-green-500' },
+  'task-update': { label: '任務更新', icon: 'CheckCircle2', color: 'bg-orange-500/10 text-orange-500' },
 }

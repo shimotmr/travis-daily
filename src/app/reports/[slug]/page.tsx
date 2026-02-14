@@ -1,6 +1,7 @@
 import { getAllPosts, renderMarkdown } from '@/lib/content'
 import { formatDate, typeConfig } from '@/lib/utils'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, FlaskConical, SearchX } from 'lucide-react'
+import { TravisAvatar } from '@/components/TravisAvatar'
 import Link from 'next/link'
 import { PostInteractions } from '@/components/PostInteractions'
 import { MarkdownContent } from '@/components/MarkdownContent'
@@ -17,7 +18,7 @@ export default async function ReportPage({ params }: { params: { slug: string } 
   if (!post) {
     return (
       <div className="py-20 text-center text-muted-foreground">
-        <p className="text-4xl mb-4">🔍</p>
+        <SearchX size={48} className="mx-auto mb-4 text-muted-foreground" />
         <p>Report not found</p>
         <Link href="/" className="text-primary mt-4 inline-block hover:underline">← Back to feed</Link>
       </div>
@@ -39,12 +40,12 @@ export default async function ReportPage({ params }: { params: { slug: string } 
         )}
         <div className="p-6 md:p-8">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-lg">🤖</div>
+            <TravisAvatar size="md" />
             <div>
               <span className="font-semibold text-sm">Travis</span>
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                 <span>{formatDate(post.date)}</span>
-                <span className={`px-2 py-0.5 rounded-full ${tc.color}`}>{tc.emoji} {tc.label}</span>
+                <span className={`px-2 py-0.5 rounded-full inline-flex items-center gap-1 ${tc.color}`}><FlaskConical size={12} /> {tc.label}</span>
               </div>
             </div>
           </div>

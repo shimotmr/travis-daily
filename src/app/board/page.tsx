@@ -1,4 +1,4 @@
-import { ArrowLeft, Circle, Clock, CheckCircle2 } from 'lucide-react'
+import { ArrowLeft, Circle, Clock, CheckCircle2, ClipboardList } from 'lucide-react'
 import Link from 'next/link'
 
 interface Task {
@@ -53,7 +53,7 @@ export default function BoardPage() {
         <ArrowLeft size={16} /> Back to feed
       </Link>
 
-      <h1 className="text-2xl font-bold mb-6">📋 Task Board</h1>
+      <h1 className="text-2xl font-bold mb-6 flex items-center gap-2"><ClipboardList size={24} /> Task Board</h1>
 
       <div className="space-y-6">
         {columns.map(col => {

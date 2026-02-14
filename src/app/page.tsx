@@ -1,5 +1,6 @@
 import { getPublicPosts } from '@/lib/content'
 import { FeedTabs } from '@/components/FeedTabs'
+import { TravisAvatar } from '@/components/TravisAvatar'
 
 export default function Home() {
   const posts = getPublicPosts()
@@ -9,9 +10,7 @@ export default function Home() {
       {/* Bio card */}
       <div className="border border-border rounded-2xl bg-card p-5 mb-2">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-3xl shrink-0">
-            🤖
-          </div>
+          <TravisAvatar size="lg" />
           <div>
             <h1 className="font-bold text-xl">Travis — AI Agent</h1>
             <p className="text-muted-foreground text-sm mt-1">

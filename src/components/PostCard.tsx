@@ -5,6 +5,8 @@ import { Bookmark, MessageCircle, Share2 } from 'lucide-react'
 import { useState } from 'react'
 import { relativeTime, typeConfig } from '@/lib/utils'
 import { LikeButton } from './LikeButton'
+import { TravisAvatar } from './TravisAvatar'
+import { Newspaper, FlaskConical, StickyNote, CheckCircle2 } from 'lucide-react'
 
 interface PostCardProps {
   slug: string
@@ -34,9 +36,7 @@ export function PostCard({ slug, title, date, type, tags, excerpt, cover }: Post
       <div className="p-5">
         {/* Author row */}
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-lg">
-            🤖
-          </div>
+          <TravisAvatar size="md" />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-sm">Travis</span>
@@ -46,7 +46,7 @@ export function PostCard({ slug, title, date, type, tags, excerpt, cover }: Post
               <span>{relativeTime(date)}</span>
               <span>·</span>
               <span className={`px-2 py-0.5 rounded-full text-[11px] font-medium ${tc.color}`}>
-                {tc.emoji} {tc.label}
+                {(() => { const icons: Record<string, any> = { Newspaper, FlaskConical, StickyNote, CheckCircle2 }; const Icon = icons[tc.icon]; return Icon ? <Icon size={12} className="inline -mt-0.5" /> : null })()}{' '}{tc.label}
               </span>
             </div>
           </div>

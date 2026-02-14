@@ -19,7 +19,7 @@ export default function PrivatePage() {
             <Lock size={32} className="text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-xl">🔒 Private Posts</h1>
+            <h1 className="font-bold text-xl flex items-center gap-2"><Lock size={20} /> Private Posts</h1>
             <p className="text-muted-foreground text-sm mt-1">
               Internal reports, drafts, and private notes. Not shown in public feed.
             </p>

@@ -3,7 +3,7 @@
 import { useAuth } from './AuthProvider'
 import { createClient } from '@/lib/supabase-client'
 import { useEffect, useState } from 'react'
-import { MessageCircle, Send, Reply } from 'lucide-react'
+import { MessageCircle, Send, Reply, X } from 'lucide-react'
 
 interface Comment {
   id: string
@@ -65,12 +65,12 @@ export function CommentSection({ slug }: { slug: string }) {
   }
 
   const CommentItem = ({ c, depth = 0 }: { c: Comment; depth?: number }) => (
-    <div className={depth > 0 ? 'ml-8 border-l-2 border-muted pl-4' : ''}>
+    <div className={depth > 0 ? 'ml-10 mt-3 border-l-2 border-primary/20 pl-4' : ''}>
       <div className="flex gap-3">
         {c.user_avatar ? (
-          <img src={c.user_avatar} alt="" className="w-8 h-8 rounded-full shrink-0" />
+          <img src={c.user_avatar} alt="" className={`${depth === 0 ? 'w-9 h-9' : 'w-8 h-8'} rounded-full shrink-0`} />
         ) : (
-          <div className="w-8 h-8 rounded-full bg-muted shrink-0 flex items-center justify-center text-xs">
+          <div className={`${depth === 0 ? 'w-9 h-9' : 'w-8 h-8'} rounded-full bg-muted shrink-0 flex items-center justify-center text-xs`}>
             {c.user_name?.[0]?.toUpperCase() || '?'}
           </div>
         )}
@@ -78,7 +78,7 @@ export function CommentSection({ slug }: { slug: string }) {
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-medium">{c.user_name}</span>
             {c.agent_id && (
-              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 uppercase tracking-wide">
+              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary uppercase tracking-wider">
                 AI Agent
               </span>
             )}
@@ -88,7 +88,7 @@ export function CommentSection({ slug }: { slug: string }) {
           {depth === 0 && (
             <button
               onClick={() => setReplyTo({ id: c.id, name: c.user_name })}
-              className="flex items-center gap-1 mt-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground hover:text-primary transition-colors"
             >
               <Reply size={12} />
               Reply
@@ -125,7 +125,7 @@ export function CommentSection({ slug }: { slug: string }) {
                 <div className="flex items-center gap-2 mb-2 text-xs text-muted-foreground">
                   <Reply size={12} />
                   <span>Replying to <strong>{replyTo.name}</strong></span>
-                  <button onClick={() => setReplyTo(null)} className="text-red-400 hover:text-red-300">✕</button>
+                  <button onClick={() => setReplyTo(null)} className="text-red-400 hover:text-red-300"><X size={12} /></button>
                 </div>
               )}
               <div className="flex gap-3">
@@ -139,7 +139,7 @@ export function CommentSection({ slug }: { slug: string }) {
                     onChange={e => setText(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && submit()}
                     placeholder={replyTo ? `Reply to ${replyTo.name}...` : 'Write a comment...'}
-                    className="flex-1 bg-muted rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 ring-primary/30"
+                    className="flex-1 bg-muted border border-border rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 ring-primary/30"
                   />
                   <button
                     onClick={submit}
@@ -161,7 +161,10 @@ export function CommentSection({ slug }: { slug: string }) {
           ))}
 
           {comments.length === 0 && (
-            <p className="text-xs text-muted-foreground text-center py-4">No comments yet</p>
+            <div className="text-center py-8">
+              <MessageCircle size={24} className="mx-auto mb-2 text-muted-foreground" />
+              <p className="text-xs text-muted-foreground">No comments yet</p>
+            </div>
           )}
         </div>
       )}

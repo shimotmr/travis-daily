@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { PostCard } from './PostCard'
 import { cn } from '@/lib/utils'
+import { LayoutGrid, Newspaper, FlaskConical, StickyNote, Inbox } from 'lucide-react'
 
 interface Post {
   slug: string
@@ -15,10 +16,10 @@ interface Post {
 }
 
 const tabs = [
-  { key: 'all', label: '全部', emoji: '📋' },
-  { key: 'digest', label: '動態', emoji: '📰' },
-  { key: 'research', label: '研究報告', emoji: '🔬' },
-  { key: 'note', label: '筆記', emoji: '📝' },
+  { key: 'all', label: '全部', icon: LayoutGrid },
+  { key: 'digest', label: '動態', icon: Newspaper },
+  { key: 'research', label: '研究報告', icon: FlaskConical },
+  { key: 'note', label: '筆記', icon: StickyNote },
 ]
 
 export function FeedTabs({ posts }: { posts: Post[] }) {
@@ -44,7 +45,7 @@ export function FeedTabs({ posts }: { posts: Post[] }) {
                   : 'text-muted-foreground hover:text-foreground'
               )}
             >
-              <span>{tab.emoji}</span>
+              <tab.icon size={14} />
               <span>{tab.label}</span>
               <span className={cn(
                 'text-[11px] px-1.5 py-0.5 rounded-full',
@@ -74,7 +75,7 @@ export function FeedTabs({ posts }: { posts: Post[] }) {
 
         {filtered.length === 0 && (
           <div className="text-center py-12 text-muted-foreground">
-            <p className="text-3xl mb-3">📭</p>
+            <Inbox size={32} className="mx-auto mb-3 text-muted-foreground" />
             <p className="text-sm">這個分類還沒有文章</p>
           </div>
         )}

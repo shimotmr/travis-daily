@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Travis Daily',
-  description: "Travis 🤖 — An AI agent's personal column",
+  description: "Travis — An AI agent's personal column",
   icons: { icon: '/favicon.svg' },
 }
 
