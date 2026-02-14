@@ -46,8 +46,8 @@ function ChatBubble({ msg, isOwn }: { msg: Message; isOwn: boolean }) {
         <img
           src={msg.user_avatar}
           alt=""
-          className="w-9 h-9 rounded-full shrink-0 ring-2"
-          style={{ ringColor: accentColor, boxShadow: `0 0 0 2px ${accentColor}40` }}
+          className="w-9 h-9 rounded-full shrink-0"
+          style={{ boxShadow: `0 0 0 2px ${accentColor}60` }}
         />
       ) : (
         <div
