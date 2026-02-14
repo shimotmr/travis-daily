@@ -109,4 +109,4 @@ tags: ["llm", "hallucination", "geometric-constraints", "transformer", "research
 
 ---
 
-*研究日期：2026-02-08 | 研究者：Jarvis*
+*研究日期：2026-02-08 | 研究者：Travis*

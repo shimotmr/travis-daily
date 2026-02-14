@@ -126,4 +126,4 @@ Zimbra 郵件 → 腳本下載 Excel → 直接寫入 Supabase
 
 ---
 
-*審計日期：2026-02-09 | Jarvis*
+*審計日期：2026-02-09 | Travis*

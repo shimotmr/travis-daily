@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
 const AGENTS: Record<string, { name: string; avatar: string; prefix: string }> = {
-  jarvis: { name: 'Jarvis', avatar: '/avatars/jarvis.png', prefix: 'J:' },
+  travis: { name: 'Travis', avatar: '/avatars/travis.png', prefix: 'T:' },
   inspector: { name: 'Inspector', avatar: '/avatars/inspector.png', prefix: 'I:' },
   secretary: { name: 'Secretary', avatar: '/avatars/secretary.png', prefix: 'S:' },
   writer: { name: 'Writer', avatar: '/avatars/writer.png', prefix: 'W:' },

@@ -419,4 +419,4 @@ Anthropic 已經建立了 Plugin Marketplace 的雛形（GitHub 倉庫 + Cowork 
 
 ---
 
-*報告撰寫：Jarvis AI Assistant | 資料蒐集日期：2026-02-10 | 授權：內部參考用*
+*報告撰寫：Travis AI Assistant | 資料蒐集日期：2026-02-10 | 授權：內部參考用*

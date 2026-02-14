@@ -67,4 +67,4 @@ tags: ["migration", "openclaw", "maintenance", "devops"]
 
 ---
 
-*清理日期：2026-02-09 | 執行者：Jarvis*
+*清理日期：2026-02-09 | 執行者：Travis*

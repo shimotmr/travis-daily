@@ -8,7 +8,7 @@ tags: ["multi-agent", "architecture", "openclaw", "AI"]
 
 # 多 Agent 協作架構研究報告
 
-> 研究日期：2026-02-11 | 作者：Jarvis (William's AI Assistant)
+> 研究日期：2026-02-11 | 作者：Travis (William's AI Assistant)
 
 ## 目錄
 
@@ -149,11 +149,11 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "現有架構：單一 Jarvis + 子代理"
+    subgraph "現有架構：單一 Travis + 子代理"
         William["William<br/>(Telegram)"]
         
         subgraph "OpenClaw Main Session"
-            Jarvis["Jarvis<br/>(Claude Opus)"]
+            Travis["Travis<br/>(Claude Opus)"]
             
             subgraph "子代理 (ephemeral)"
                 Sub1["子代理 A<br/>研究任務"]
@@ -177,10 +177,10 @@ graph TB
             Travis["Travis Daily"]
         end
         
-        William <--> Jarvis
-        Jarvis --> Sub1
-        Jarvis --> Sub2
-        Jarvis --> Sub3
+        William <--> Travis
+        Travis --> Sub1
+        Travis --> Sub2
+        Travis --> Sub3
         
         Cron1 --> Zimbra
         Cron2 --> Supa
@@ -195,7 +195,7 @@ graph TB
 | **單一 Session** | 所有任務共用一個對話 context，歷史膨脹導致 token 浪費 | 高 |
 | **子代理無持久記憶** | 每次任務從零開始，無法累積專業知識 | 高 |
 | **Cron 與主對話衝突** | Cron job 可能在對話中插入，打斷工作流 | 中 |
-| **無角色專業化** | Jarvis 必須「全能」，context 切換成本高 | 中 |
+| **無角色專業化** | Travis 必須「全能」，context 切換成本高 | 中 |
 | **無 Agent 間協作** | 子代理之間無法直接溝通，必須回到主 Agent 中繼 | 中 |
 | **無任務佇列** | 無法排程、優先排序、追蹤跨 session 任務 | 低 |
 
@@ -211,7 +211,7 @@ graph TB
         William["William<br/>(Telegram / LINE)"]
         
         subgraph "Coordinator Layer"
-            Jarvis["Jarvis (Coordinator)<br/>Claude Opus<br/>路由 & 決策"]
+            Travis["Travis (Coordinator)<br/>Claude Opus<br/>路由 & 決策"]
             TaskQ["Task Queue<br/>(Supabase)"]
         end
         
@@ -238,14 +238,14 @@ graph TB
             GCal["Google Calendar"]
         end
         
-        William <--> Jarvis
-        Jarvis <--> TaskQ
+        William <--> Travis
+        Travis <--> TaskQ
         
-        Jarvis -->|分派任務| Secretary
-        Jarvis -->|分派任務| Analyst
-        Jarvis -->|分派任務| Researcher
-        Jarvis -->|分派任務| Developer
-        Jarvis -->|分派任務| Editor
+        Travis -->|分派任務| Secretary
+        Travis -->|分派任務| Analyst
+        Travis -->|分派任務| Researcher
+        Travis -->|分派任務| Developer
+        Travis -->|分派任務| Editor
         
         Secretary --> Zimbra
         Secretary --> GCal
@@ -272,12 +272,12 @@ graph TB
 
 | Agent | Model | 觸發方式 | 持久記憶 | 主要職責 |
 |-------|-------|----------|----------|----------|
-| **Jarvis (Coordinator)** | Claude Opus | 永駐（主 session） | MEMORY.md + Supabase | 路由請求、協調 Agent、與 William 對話 |
+| **Travis (Coordinator)** | Claude Opus | 永駐（主 session） | MEMORY.md + Supabase | 路由請求、協調 Agent、與 William 對話 |
 | **Secretary** | Claude Haiku | Cron (每 30 分) + 事件 | Supabase agent_memory | 簽核提醒、郵件摘要、行事曆管理 |
 | **Analyst** | Claude Sonnet | 事件 (Funnel 更新) + 排程 | Supabase agent_memory | Pipeline 分析、業績追蹤、風險警示 |
-| **Researcher** | Claude Sonnet | Jarvis 分派 | Supabase agent_memory | 市場研究、競品分析、技術調研 |
-| **Developer** | Claude Sonnet | Jarvis 分派 | Supabase agent_memory | Portal 開發、腳本維護、API 整合 |
-| **Editor** | Claude Haiku | Jarvis 分派 | Supabase agent_memory | Travis Daily 發布、報告撰寫 |
+| **Researcher** | Claude Sonnet | Travis 分派 | Supabase agent_memory | 市場研究、競品分析、技術調研 |
+| **Developer** | Claude Sonnet | Travis 分派 | Supabase agent_memory | Portal 開發、腳本維護、API 整合 |
+| **Editor** | Claude Haiku | Travis 分派 | Supabase agent_memory | Travis Daily 發布、報告撰寫 |
 
 ### Agent 間通訊機制
 
@@ -288,7 +288,7 @@ graph TB
 ```mermaid
 sequenceDiagram
     participant W as William
-    participant J as Jarvis (Coordinator)
+    participant J as Travis (Coordinator)
     participant TQ as Task Queue (Supabase)
     participant R as Researcher Agent
     participant E as Editor Agent
@@ -321,14 +321,14 @@ graph LR
     end
     
     subgraph "Agent 專屬記憶 (Supabase)"
-        JarvisMem["jarvis_memory<br/>偏好 · 對話摘要"]
+        TravisMem["jarvis_memory<br/>偏好 · 對話摘要"]
         SecMem["secretary_memory<br/>簽核模式 · 郵件規則"]
         AnalystMem["analyst_memory<br/>分析模板 · 歷史趨勢"]
         ResearchMem["researcher_memory<br/>研究方法 · 來源評價"]
     end
     
     subgraph "本地記憶 (Markdown)"
-        Memory["MEMORY.md<br/>Jarvis 長期記憶"]
+        Memory["MEMORY.md<br/>Travis 長期記憶"]
         Daily["memory/daily/<br/>每日紀錄"]
     end
 ```
@@ -336,7 +336,7 @@ graph LR
 **設計原則**：
 - **共享記憶**：產品知識、客戶資料、SOP — 所有 Agent 可讀
 - **Agent 專屬記憶**：各角色累積的專業知識、模式、偏好
-- **本地記憶維持**：MEMORY.md 繼續作為 Jarvis 的核心記憶（向下相容）
+- **本地記憶維持**：MEMORY.md 繼續作為 Travis 的核心記憶（向下相容）
 - **寫入權限**：Agent 只能寫自己的 memory table，共享記憶需 Coordinator 批准
 
 ---
@@ -391,7 +391,7 @@ graph LR
    - 職責：Zimbra 簽核檢查、郵件摘要、行事曆提醒
    - 結果寫入 `agent_tasks` + 推送 Telegram
 
-3. **Jarvis 增加路由邏輯**
+3. **Travis 增加路由邏輯**
    - 識別任務類型 → 分派到對應 Agent 或自行處理
    - 讀取 `agent_tasks` 了解進行中任務
 
@@ -408,14 +408,14 @@ graph LR
    - 產出：Pipeline 風險報告 → LINE + Telegram
 
 2. **Researcher Agent**
-   - 觸發：Jarvis 分派研究任務
+   - 觸發：Travis 分派研究任務
    - 持久記憶：研究方法、來源評價、過往研究
    - Model: Claude Sonnet
    - 產出：研究報告 → Google Docs + Travis Daily
 
 3. **Agent 間 Handoff 機制**
    - Researcher 完成 → 自動觸發 Editor（via task queue）
-   - Analyst 發現異常 → 通知 Jarvis → 通知 William
+   - Analyst 發現異常 → 通知 Travis → 通知 William
 
 **預估成本增加**：~$15-25/月（Sonnet 按需使用）
 
@@ -451,7 +451,7 @@ graph LR
 
 | Agent | Model | 呼叫頻率 | 預估月成本 |
 |-------|-------|----------|-----------|
-| Jarvis (Coordinator) | Opus | 持續（現有） | $50-80（已有） |
+| Travis (Coordinator) | Opus | 持續（現有） | $50-80（已有） |
 | Secretary | Haiku | 48次/日 (每30分) | $3-5 |
 | Analyst | Sonnet | 5-10次/週 | $5-10 |
 | Researcher | Sonnet | 按需 (5-15次/月) | $5-15 |

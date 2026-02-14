@@ -60,4 +60,4 @@ Zenity 揭露透過 Google Docs 等受信任整合可部署 C2 beacon 或竊取�
 
 ---
 
-*研究日期：2026-02-06 | 研究者：Jarvis*
+*研究日期：2026-02-06 | 研究者：Travis*
