@@ -16,6 +16,33 @@ interface Comment {
   replies?: Comment[]
 }
 
+// Flatten nested comments into a single list with parent reference
+function flattenComments(comments: Comment[]): (Comment & { replyToName?: string })[] {
+  const flat: (Comment & { replyToName?: string })[] = []
+  const nameById: Record<string, string> = {}
+
+  // First pass: build name map from top-level
+  function collectNames(list: Comment[]) {
+    for (const c of list) {
+      nameById[c.id] = c.user_name
+      if (c.replies) collectNames(c.replies)
+    }
+  }
+  collectNames(comments)
+
+  // Second pass: flatten
+  function walk(list: Comment[], parentName?: string) {
+    for (const c of list) {
+      flat.push({ ...c, replyToName: parentName })
+      if (c.replies && c.replies.length > 0) {
+        walk(c.replies, c.user_name)
+      }
+    }
+  }
+  walk(comments)
+  return flat
+}
+
 export function CommentSection({ slug }: { slug: string }) {
   const { user } = useAuth()
   const [comments, setComments] = useState<Comment[]>([])
@@ -64,47 +91,7 @@ export function CommentSection({ slug }: { slug: string }) {
     return `${Math.floor(hrs / 24)}d ago`
   }
 
-  const CommentItem = ({ c, depth = 0 }: { c: Comment; depth?: number }) => (
-    <div className={depth > 0 ? 'ml-10 mt-3 border-l-2 border-primary/20 pl-4' : ''}>
-      <div className="flex gap-3">
-        {c.user_avatar ? (
-          <img src={c.user_avatar} alt="" className={`${depth === 0 ? 'w-9 h-9' : 'w-8 h-8'} rounded-full shrink-0`} />
-        ) : (
-          <div className={`${depth === 0 ? 'w-9 h-9' : 'w-8 h-8'} rounded-full bg-muted shrink-0 flex items-center justify-center text-xs`}>
-            {c.user_name?.[0]?.toUpperCase() || '?'}
-          </div>
-        )}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-medium">{c.user_name}</span>
-            {c.agent_id && (
-              <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary uppercase tracking-wider">
-                AI Agent
-              </span>
-            )}
-            <span className="text-xs text-muted-foreground">{relTime(c.created_at)}</span>
-          </div>
-          <p className="text-sm text-foreground/90 mt-0.5">{c.content}</p>
-          {depth === 0 && (
-            <button
-              onClick={() => setReplyTo({ id: c.id, name: c.user_name })}
-              className="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Reply size={12} />
-              Reply
-            </button>
-          )}
-        </div>
-      </div>
-      {c.replies && c.replies.length > 0 && (
-        <div className="mt-3 space-y-3">
-          {c.replies.map(r => (
-            <CommentItem key={r.id} c={r} depth={depth + 1} />
-          ))}
-        </div>
-      )}
-    </div>
-  )
+  const flat = flattenComments(comments)
 
   return (
     <div className="mt-6">
@@ -113,14 +100,14 @@ export function CommentSection({ slug }: { slug: string }) {
         className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
         <MessageCircle size={16} />
-        <span>{show ? 'Hide' : 'Show'} comments</span>
+        <span>{show ? 'Hide' : 'Show'} comments ({flat.length})</span>
       </button>
 
       {show && (
-        <div className="mt-4 space-y-4">
+        <div className="mt-4 space-y-1">
           {/* Comment input */}
           {user ? (
-            <div>
+            <div className="mb-4">
               {replyTo && (
                 <div className="flex items-center gap-2 mb-2 text-xs text-muted-foreground">
                   <Reply size={12} />
@@ -137,7 +124,6 @@ export function CommentSection({ slug }: { slug: string }) {
                     value={text}
                     onChange={e => {
                       setText(e.target.value)
-                      // Auto-resize
                       e.target.style.height = 'auto'
                       e.target.style.height = Math.min(e.target.scrollHeight, 160) + 'px'
                     }}
@@ -162,15 +148,49 @@ export function CommentSection({ slug }: { slug: string }) {
               </div>
             </div>
           ) : (
-            <p className="text-xs text-muted-foreground">Login to leave a comment</p>
+            <p className="text-xs text-muted-foreground mb-4">Login to leave a comment</p>
           )}
 
-          {/* Comments list */}
-          {comments.map(c => (
-            <CommentItem key={c.id} c={c} />
+          {/* Flat comments list — X/Threads style */}
+          {flat.map(c => (
+            <div key={c.id} className="py-3 border-b border-border/50 last:border-0">
+              <div className="flex gap-3">
+                {c.user_avatar ? (
+                  <img src={c.user_avatar} alt="" className="w-9 h-9 rounded-full shrink-0" />
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-muted shrink-0 flex items-center justify-center text-xs font-medium">
+                    {c.user_name?.[0]?.toUpperCase() || '?'}
+                  </div>
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-sm font-medium">{c.user_name}</span>
+                    {c.agent_id && (
+                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary uppercase tracking-wider">
+                        AI Agent
+                      </span>
+                    )}
+                    <span className="text-xs text-muted-foreground">{relTime(c.created_at)}</span>
+                  </div>
+                  {c.replyToName && (
+                    <p className="text-xs text-muted-foreground mt-0.5">
+                      <span className="text-primary/70">↩ {c.replyToName}</span>
+                    </p>
+                  )}
+                  <p className="text-sm text-foreground/90 mt-1 whitespace-pre-wrap break-words">{c.content}</p>
+                  <button
+                    onClick={() => setReplyTo({ id: c.id, name: c.user_name })}
+                    className="flex items-center gap-1.5 mt-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Reply size={12} />
+                    Reply
+                  </button>
+                </div>
+              </div>
+            </div>
           ))}
 
-          {comments.length === 0 && (
+          {flat.length === 0 && (
             <div className="text-center py-8">
               <MessageCircle size={24} className="mx-auto mb-2 text-muted-foreground" />
               <p className="text-xs text-muted-foreground">No comments yet</p>
