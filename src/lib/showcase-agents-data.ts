@@ -40,8 +40,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#3B82F6',
     gradient: 'from-blue-400 to-blue-600',
-    maleImage: generateAvatar('Travis', '#3B82F6', 'male'),
-    femaleImage: generateAvatar('Travis', '#3B82F6', 'female')
+    maleImage: '/agents/showcase/travis-male.jpg',
+    femaleImage: '/agents/showcase/travis-female.jpg'
   },
   {
     id: 'coder',
@@ -58,8 +58,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#10B981',
     gradient: 'from-green-400 to-green-600',
-    maleImage: generateAvatar('Coder', '#10B981', 'male'),
-    femaleImage: generateAvatar('Coder', '#10B981', 'female')
+    maleImage: '/agents/showcase/coder-male.jpg',
+    femaleImage: '/agents/showcase/coder-female.jpg'
   },
   {
     id: 'analyst',
@@ -76,8 +76,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#F59E0B',
     gradient: 'from-amber-400 to-amber-600',
-    maleImage: generateAvatar('Analyst', '#F59E0B', 'male'),
-    femaleImage: generateAvatar('Analyst', '#F59E0B', 'female')
+    maleImage: '/agents/showcase/analyst-male.jpg',
+    femaleImage: '/agents/showcase/analyst-female.jpg'
   },
   {
     id: 'researcher',
@@ -94,8 +94,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#8B5CF6',
     gradient: 'from-purple-400 to-purple-600',
-    maleImage: generateAvatar('Researcher', '#8B5CF6', 'male'),
-    femaleImage: generateAvatar('Researcher', '#8B5CF6', 'female')
+    maleImage: '/agents/showcase/researcher-male.jpg',
+    femaleImage: '/agents/showcase/researcher-female.jpg'
   },
   {
     id: 'secretary',
@@ -112,8 +112,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#EC4899',
     gradient: 'from-pink-400 to-pink-600',
-    maleImage: generateAvatar('Secretary', '#EC4899', 'male'),
-    femaleImage: generateAvatar('Secretary', '#EC4899', 'female')
+    maleImage: '/agents/showcase/secretary-male.jpg',
+    femaleImage: '/agents/showcase/secretary-female.jpg'
   },
   {
     id: 'inspector',
@@ -130,8 +130,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#EF4444',
     gradient: 'from-red-400 to-red-600',
-    maleImage: generateAvatar('Inspector', '#EF4444', 'male'),
-    femaleImage: generateAvatar('Inspector', '#EF4444', 'female')
+    maleImage: '/agents/showcase/inspector-male.jpg',
+    femaleImage: '/agents/showcase/inspector-female.jpg'
   },
   {
     id: 'designer',
@@ -148,8 +148,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#06B6D4',
     gradient: 'from-cyan-400 to-cyan-600',
-    maleImage: generateAvatar('Designer', '#06B6D4', 'male'),
-    femaleImage: generateAvatar('Designer', '#06B6D4', 'female')
+    maleImage: '/agents/showcase/designer-male.jpg',
+    femaleImage: '/agents/showcase/designer-female.jpg'
   },
   {
     id: 'writer',
@@ -166,8 +166,8 @@ export const showcaseAgents: ShowcaseAgent[] = [
     ],
     color: '#F97316',
     gradient: 'from-orange-400 to-orange-600',
-    maleImage: generateAvatar('Writer', '#F97316', 'male'),
-    femaleImage: generateAvatar('Writer', '#F97316', 'female')
+    maleImage: '/agents/showcase/writer-male.jpg',
+    femaleImage: '/agents/showcase/writer-female.jpg'
   }
 ]
 
