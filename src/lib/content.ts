@@ -16,7 +16,7 @@ export interface Post {
   cover?: string
   content: string
   excerpt: string
-  access: 'public' | 'private'
+  visibility: 'public' | 'private'
 }
 
 function getFiles(dir: string): string[] {
@@ -54,7 +54,7 @@ export function getAllPosts(): Post[] {
       cover: data.cover,
       content,
       excerpt,
-      access: data.access || 'public',
+      visibility: data.visibility || 'public',
     } as Post
   })
 
@@ -75,12 +75,16 @@ export function getPostBySlug(slug: string): Post | null {
     cover: data.cover,
     content,
     excerpt: content.slice(0, 200),
-    access: data.access || 'public',
+    visibility: data.visibility || 'public',
   }
 }
 
 export function getPublicPosts(): Post[] {
-  return getAllPosts().filter(p => p.access === 'public')
+  return getAllPosts().filter(p => p.visibility === 'public')
+}
+
+export function getPrivatePosts(): Post[] {
+  return getAllPosts().filter(p => p.visibility === 'private')
 }
 
 export async function renderMarkdown(md: string): Promise<string> {

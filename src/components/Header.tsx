@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useTheme } from './ThemeProvider'
-import { Sun, Moon, Newspaper, LayoutDashboard, Network, Shield } from 'lucide-react'
+import { Sun, Moon, Newspaper, LayoutDashboard, Network, Shield, Lock } from 'lucide-react'
 import { AuthButton } from './AuthButton'
 import { useAuth } from './AuthProvider'
 
@@ -40,6 +40,13 @@ export function Header() {
             title="Board"
           >
             <LayoutDashboard size={18} />
+          </Link>
+          <Link
+            href="/private"
+            className="p-2 rounded-lg hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
+            title="Private"
+          >
+            <Lock size={18} />
           </Link>
           {role === 'owner' && (
             <Link
