@@ -1,3 +1,5 @@
+import { ArrowRight } from 'lucide-react'
+
 export default function ShowcasePage() {
   const agents = [
     {
@@ -128,9 +130,7 @@ export default function ShowcasePage() {
             className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white text-lg font-bold rounded-full shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
           >
             <span>體驗互動版</span>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
+            <ArrowRight className="w-6 h-6" />
           </a>
         </div>
       </div>
