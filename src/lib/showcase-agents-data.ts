@@ -13,6 +13,15 @@ export interface ShowcaseAgent {
   }[]
   color: string // 主題色
   gradient: string // 漸層色（placeholder 用）
+  maleImage?: string // 男版圖片
+  femaleImage?: string // 女版圖片
+}
+
+// 輔助函數：生成 UI Avatars URL（臨時方案，建議替換為真實角色立繪）
+function generateAvatar(name: string, color: string, gender: 'male' | 'female' = 'male'): string {
+  const genderSuffix = gender === 'male' ? '♂' : '♀'
+  const bgColor = color.replace('#', '')
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name + genderSuffix)}&size=512&background=${bgColor}&color=fff&bold=true&font-size=0.4`
 }
 
 export const showcaseAgents: ShowcaseAgent[] = [
@@ -30,7 +39,9 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: '判斷', value: 92 }
     ],
     color: '#3B82F6',
-    gradient: 'from-blue-400 to-blue-600'
+    gradient: 'from-blue-400 to-blue-600',
+    maleImage: generateAvatar('Travis', '#3B82F6', 'male'),
+    femaleImage: generateAvatar('Travis', '#3B82F6', 'female')
   },
   {
     id: 'coder',
@@ -46,7 +57,9 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: '效率', value: 88 }
     ],
     color: '#10B981',
-    gradient: 'from-green-400 to-green-600'
+    gradient: 'from-green-400 to-green-600',
+    maleImage: generateAvatar('Coder', '#10B981', 'male'),
+    femaleImage: generateAvatar('Coder', '#10B981', 'female')
   },
   {
     id: 'analyst',
@@ -62,7 +75,9 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: '視覺化', value: 88 }
     ],
     color: '#F59E0B',
-    gradient: 'from-amber-400 to-amber-600'
+    gradient: 'from-amber-400 to-amber-600',
+    maleImage: generateAvatar('Analyst', '#F59E0B', 'male'),
+    femaleImage: generateAvatar('Analyst', '#F59E0B', 'female')
   },
   {
     id: 'researcher',
@@ -78,7 +93,9 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: '廣度', value: 93 }
     ],
     color: '#8B5CF6',
-    gradient: 'from-purple-400 to-purple-600'
+    gradient: 'from-purple-400 to-purple-600',
+    maleImage: generateAvatar('Researcher', '#8B5CF6', 'male'),
+    femaleImage: generateAvatar('Researcher', '#8B5CF6', 'female')
   },
   {
     id: 'secretary',
@@ -94,7 +111,9 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: '效率', value: 90 }
     ],
     color: '#EC4899',
-    gradient: 'from-pink-400 to-pink-600'
+    gradient: 'from-pink-400 to-pink-600',
+    maleImage: generateAvatar('Secretary', '#EC4899', 'male'),
+    femaleImage: generateAvatar('Secretary', '#EC4899', 'female')
   },
   {
     id: 'inspector',
@@ -110,7 +129,9 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: '標準', value: 94 }
     ],
     color: '#EF4444',
-    gradient: 'from-red-400 to-red-600'
+    gradient: 'from-red-400 to-red-600',
+    maleImage: generateAvatar('Inspector', '#EF4444', 'male'),
+    femaleImage: generateAvatar('Inspector', '#EF4444', 'female')
   },
   {
     id: 'designer',
@@ -126,7 +147,9 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: 'UX', value: 90 }
     ],
     color: '#06B6D4',
-    gradient: 'from-cyan-400 to-cyan-600'
+    gradient: 'from-cyan-400 to-cyan-600',
+    maleImage: generateAvatar('Designer', '#06B6D4', 'male'),
+    femaleImage: generateAvatar('Designer', '#06B6D4', 'female')
   },
   {
     id: 'writer',
@@ -142,10 +165,20 @@ export const showcaseAgents: ShowcaseAgent[] = [
       { name: '風格', value: 93 }
     ],
     color: '#F97316',
-    gradient: 'from-orange-400 to-orange-600'
+    gradient: 'from-orange-400 to-orange-600',
+    maleImage: generateAvatar('Writer', '#F97316', 'male'),
+    femaleImage: generateAvatar('Writer', '#F97316', 'female')
   }
 ]
 
 export function getShowcaseAgent(id: string): ShowcaseAgent | undefined {
   return showcaseAgents.find(a => a.id === id)
+}
+
+// 根據性別設定取得對應圖片URL
+export function getAgentImage(agentId: string, gender: 'male' | 'female' = 'male'): string | undefined {
+  const agent = getShowcaseAgent(agentId)
+  if (!agent) return undefined
+  
+  return gender === 'male' ? agent.maleImage : agent.femaleImage
 }
