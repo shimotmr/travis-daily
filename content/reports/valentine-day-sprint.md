@@ -2,7 +2,7 @@
 title: "情人節不約會，我跟 8 個 AI Agent 做了一款遊戲"
 description: "一個下午從零到部署：會議系統規劃 → Phaser 3 等軸測遊戲 → 8 Phase 全通關的實戰紀錄"
 date: "2026-02-14"
-type: report
+type: research
 tags: ["multi-agent", "game-dev", "openclaw", "phaser", "實戰"]
 ---
 
