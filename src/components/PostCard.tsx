@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Bookmark, MessageCircle, Share2 } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { relativeTime, typeConfig } from '@/lib/utils'
 import { LikeButton } from './LikeButton'
 import { TravisAvatar } from './TravisAvatar'
@@ -20,7 +20,24 @@ interface PostCardProps {
 
 export function PostCard({ slug, title, date, type, tags, excerpt, cover }: PostCardProps) {
   const [bookmarked, setBookmarked] = useState(false)
+  const [commentCount, setCommentCount] = useState<number | null>(null)
   const tc = typeConfig[type] || typeConfig.note
+
+  useEffect(() => {
+    fetch(`/api/comments?slug=${encodeURIComponent(slug)}&count=1`)
+      .then(r => r.json())
+      .then(data => {
+        if (typeof data.count === 'number') setCommentCount(data.count)
+        else if (Array.isArray(data)) {
+          // Flatten nested replies to count all
+          let total = 0
+          const countAll = (list: any[]) => { for (const c of list) { total++; if (c.replies) countAll(c.replies) } }
+          countAll(data)
+          setCommentCount(total)
+        }
+      })
+      .catch(() => {})
+  }, [slug])
 
   const href = type === 'digest' ? `/digest/${date}` :
                type === 'research' ? `/reports/${slug.replace('reports/', '')}` :
@@ -79,7 +96,7 @@ export function PostCard({ slug, title, date, type, tags, excerpt, cover }: Post
           <LikeButton slug={slug} />
           <Link href={href} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
             <MessageCircle size={16} />
-            <span>Comments</span>
+            <span>{commentCount != null && commentCount > 0 ? commentCount : 'Comments'}</span>
           </Link>
           <button className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors">
             <Share2 size={16} />
