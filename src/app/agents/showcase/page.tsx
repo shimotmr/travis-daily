@@ -1,12 +1,40 @@
 'use client'
 
-import { useState } from 'react'
-import { showcaseAgents, type ShowcaseAgent } from '@/lib/showcase-agents-data'
+import { useState, useEffect } from 'react'
+import { showcaseAgents, type ShowcaseAgent, getAgentImage } from '@/lib/showcase-agents-data'
 import Link from 'next/link'
 import { ChevronLeft, Sparkles, X } from 'lucide-react'
+import Image from 'next/image'
+
+type Gender = 'male' | 'female'
+
+interface GenderConfig {
+  [agentId: string]: Gender
+}
 
 export default function AgentShowcasePage() {
   const [selectedAgent, setSelectedAgent] = useState<ShowcaseAgent | null>(null)
+  const [genderConfig, setGenderConfig] = useState<GenderConfig>({})
+
+  // 從 localStorage 載入性別設定
+  useEffect(() => {
+    const savedConfig = localStorage.getItem('agent-gender-config')
+    if (savedConfig) {
+      setGenderConfig(JSON.parse(savedConfig))
+    } else {
+      // 預設全部為男性
+      const defaultConfig: GenderConfig = {}
+      showcaseAgents.forEach(agent => {
+        defaultConfig[agent.id] = 'male'
+      })
+      setGenderConfig(defaultConfig)
+    }
+  }, [])
+
+  const getAgentImageUrl = (agent: ShowcaseAgent) => {
+    const gender = genderConfig[agent.id] || 'male'
+    return getAgentImage(agent.id, gender) || agent.maleImage
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 dark:from-gray-900 dark:via-purple-950 dark:to-blue-950">
@@ -40,6 +68,7 @@ export default function AgentShowcasePage() {
             <AgentCard
               key={agent.id}
               agent={agent}
+              imageUrl={getAgentImageUrl(agent)}
               onClick={() => setSelectedAgent(agent)}
             />
           ))}
@@ -50,6 +79,7 @@ export default function AgentShowcasePage() {
       {selectedAgent && (
         <AgentDetailModal
           agent={selectedAgent}
+          imageUrl={getAgentImageUrl(selectedAgent)}
           onClose={() => setSelectedAgent(null)}
         />
       )}
@@ -58,7 +88,15 @@ export default function AgentShowcasePage() {
 }
 
 // 角色卡片組件
-function AgentCard({ agent, onClick }: { agent: ShowcaseAgent; onClick: () => void }) {
+function AgentCard({ 
+  agent, 
+  imageUrl, 
+  onClick 
+}: { 
+  agent: ShowcaseAgent
+  imageUrl?: string
+  onClick: () => void 
+}) {
   return (
     <div
       onClick={onClick}
@@ -66,14 +104,26 @@ function AgentCard({ agent, onClick }: { agent: ShowcaseAgent; onClick: () => vo
                  hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20
                  transition-all duration-300 border-2 border-transparent hover:border-purple-400"
     >
-      {/* 角色立繪 placeholder（漸層色塊 + 首字母） */}
-      <div className={`w-full aspect-[3/4] rounded-xl bg-gradient-to-br ${agent.gradient} 
-                       flex items-center justify-center mb-4 overflow-hidden
-                       group-hover:shadow-lg group-hover:shadow-${agent.color}/50 transition-shadow`}>
-        <div className="text-white text-6xl font-black opacity-30">
-          {agent.name[0]}
-        </div>
-        {/* 未來替換為 <img src={agent.imageUrl} /> */}
+      {/* 角色立繪 */}
+      <div className={`w-full aspect-[3/4] rounded-xl overflow-hidden mb-4
+                       group-hover:shadow-lg transition-shadow relative`}
+           style={{ boxShadow: `0 8px 24px ${agent.color}20` }}>
+        {imageUrl ? (
+          <Image 
+            src={imageUrl}
+            alt={agent.name}
+            fill
+            className="object-cover"
+            unoptimized
+          />
+        ) : (
+          <div className={`w-full h-full bg-gradient-to-br ${agent.gradient} 
+                         flex items-center justify-center`}>
+            <div className="text-white text-6xl font-black opacity-30">
+              {agent.name[0]}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 角色資訊 */}
@@ -97,7 +147,15 @@ function AgentCard({ agent, onClick }: { agent: ShowcaseAgent; onClick: () => vo
 }
 
 // 角色詳情 Modal
-function AgentDetailModal({ agent, onClose }: { agent: ShowcaseAgent; onClose: () => void }) {
+function AgentDetailModal({ 
+  agent, 
+  imageUrl, 
+  onClose 
+}: { 
+  agent: ShowcaseAgent
+  imageUrl?: string
+  onClose: () => void 
+}) {
   return (
     <div 
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
@@ -118,12 +176,23 @@ function AgentDetailModal({ agent, onClose }: { agent: ShowcaseAgent; onClose: (
 
         <div className="grid md:grid-cols-2 gap-6 p-8">
           {/* 左側：角色立繪 */}
-          <div className={`rounded-2xl bg-gradient-to-br ${agent.gradient} 
-                          flex items-center justify-center aspect-[3/4]`}>
-            <div className="text-white text-9xl font-black opacity-20">
-              {agent.name[0]}
-            </div>
-            {/* 未來替換為 <img src={agent.imageUrl} className="w-full h-full object-cover" /> */}
+          <div className="rounded-2xl overflow-hidden aspect-[3/4] relative">
+            {imageUrl ? (
+              <Image 
+                src={imageUrl}
+                alt={agent.name}
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            ) : (
+              <div className={`w-full h-full bg-gradient-to-br ${agent.gradient} 
+                              flex items-center justify-center`}>
+                <div className="text-white text-9xl font-black opacity-20">
+                  {agent.name[0]}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* 右側：詳細資訊 */}
