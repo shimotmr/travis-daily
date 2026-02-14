@@ -9,7 +9,7 @@ const AGENTS: Record<string, { name: string; avatar: string; prefix: string }> =
   researcher: { name: 'Researcher', avatar: '/avatars/researcher.png', prefix: 'R:' },
   coder: { name: 'Coder', avatar: '/avatars/coder.png', prefix: 'C:' },
   designer: { name: 'Designer', avatar: '/avatars/designer.png', prefix: 'D:' },
-  analyst: { name: 'Analyst', avatar: '/avatars/trader.png', prefix: 'A:' },
+  analyst: { name: 'Analyst', avatar: '/avatars/analyst.png', prefix: 'A:' },
 }
 
 function getSupabase() {
