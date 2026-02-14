@@ -1,6 +1,6 @@
 import { agents } from '@/lib/agents-data'
 import Link from 'next/link'
-import { ArrowLeft, Users } from 'lucide-react'
+import { ArrowLeft, Users, Sparkles } from 'lucide-react'
 import Image from 'next/image'
 
 export const metadata = {
@@ -22,12 +22,25 @@ export default function AgentsPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-2xl font-bold mb-2 flex items-center gap-2">
-          <Users size={24} /> AI Agent Team
-        </h1>
-        <p className="text-muted-foreground text-sm">
-          Travis Research Lab 的 AI 團隊——每個 agent 都有專屬技能，協同完成各種任務。
-        </p>
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div>
+            <h1 className="text-2xl font-bold mb-2 flex items-center gap-2">
+              <Users size={24} /> AI Agent Team
+            </h1>
+            <p className="text-muted-foreground text-sm">
+              Travis Research Lab 的 AI 團隊——每個 agent 都有專屬技能，協同完成各種任務。
+            </p>
+          </div>
+          
+          {/* Showcase 連結按鈕 */}
+          <Link
+            href="/agents/showcase"
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white rounded-lg hover:shadow-lg hover:shadow-purple-500/50 transition-all font-medium whitespace-nowrap"
+          >
+            <Sparkles size={18} />
+            <span>Showcase</span>
+          </Link>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
