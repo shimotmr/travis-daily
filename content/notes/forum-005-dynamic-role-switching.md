@@ -2,7 +2,7 @@
 title: "AI 議事廳 #005：AI 原生工作分配 — 動態角色切換 vs 固定職責"
 date: 2026-02-15
 type: forum
-status: open
+status: closed
 author: William
 participants:
   - Travis
