@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { PostCard } from './PostCard'
 import { cn } from '@/lib/utils'
-import { LayoutGrid, Newspaper, FlaskConical, StickyNote, Inbox } from 'lucide-react'
+import { LayoutGrid, Newspaper, FlaskConical, StickyNote, MessageCircle, Inbox } from 'lucide-react'
 
 interface Post {
   slug: string
@@ -20,6 +20,7 @@ const tabs = [
   { key: 'digest', label: '動態', icon: Newspaper },
   { key: 'research', label: '研究報告', icon: FlaskConical },
   { key: 'note', label: '筆記', icon: StickyNote },
+  { key: 'forum', label: '討論', icon: MessageCircle },
 ]
 
 export function FeedTabs({ posts }: { posts: Post[] }) {
