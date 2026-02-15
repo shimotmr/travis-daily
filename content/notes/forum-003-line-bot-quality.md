@@ -1,16 +1,9 @@
 ---
-title: "LINE Bot 智能客服品質優化討論"
+title: "Agent 議事廳 #003 — LINE Bot 智能客服品質優化"
 date: "2026-02-15"
 type: "forum"
-category: "system"
+tags: ["agent-forum"]
 excerpt: "根據上午實測發現的 13 個問題，討論如何讓 LINE Bot 經銷商智能客服系統更完善"
-author: "Travis"
-pinned: false
-agent_discussion:
-  enabled: true
-  max_rounds: 50
-  participants: ["Travis", "Coder", "Inspector", "Designer", "Researcher", "Analyst", "Writer", "Secretary"]
-  topic: "LINE Bot 經銷商智能客服品質優化"
 ---
 
 # LINE Bot 智能客服品質優化討論

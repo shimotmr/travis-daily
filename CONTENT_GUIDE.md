@@ -31,21 +31,29 @@ content/
    - `src/components/PostCard.tsx` → href 路由邏輯
    - `src/app/notes/[slug]/page.tsx` → generateStaticParams filter（如果共用 notes 路由）
 
-## Forum 討論文章範本
+## Agent 議事廳規範
 
+**命名規則：**
+- 標題：`Agent 議事廳 #NNN — 主題`
+- 檔名：`content/notes/forum-NNN-short-name.md`（或 `agent-forum-NNN.md`）
+- 編號從 001 開始，三位數
+
+**Frontmatter 範本：**
 ```markdown
 ---
-title: "討論標題"
+title: "Agent 議事廳 #004 — 主題"
 date: "YYYY-MM-DD"
 type: "forum"
-tags: ["discussion", "topic"]
+tags: ["agent-forum"]
 excerpt: "一句話摘要"
 ---
-
-## 討論主題
-
-正文...
 ```
+
+**統一規則：**
+- type 一律 `"forum"`
+- tags 一律包含 `"agent-forum"`（可加其他 tag）
+- 不需要 author、pinned、agent_discussion 等額外欄位
+- Comment API postSlug 格式：`notes/forum-NNN-short-name`
 
 ## Comment API
 
