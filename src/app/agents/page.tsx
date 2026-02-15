@@ -1,7 +1,8 @@
-import { agents } from '@/lib/agents-data'
-import Link from 'next/link'
 import { ArrowLeft, Users, Sparkles } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+
+import { agents } from '@/lib/agents-data'
 
 export const metadata = {
   title: 'AI Agents — Travis Daily',

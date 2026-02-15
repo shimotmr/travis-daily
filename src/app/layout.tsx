@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
-import './globals.css'
-import { Header } from '@/components/Header'
-import { ThemeProvider } from '@/components/ThemeProvider'
-import { AuthProvider } from '@/components/AuthProvider'
-import { LoginPrompt } from '@/components/LoginPrompt'
 import { Suspense } from 'react'
+
+import { AuthProvider } from '@/components/AuthProvider'
+import { Header } from '@/components/Header'
+import { LoginPrompt } from '@/components/LoginPrompt'
+import { ThemeProvider } from '@/components/ThemeProvider'
+
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Travis Daily',

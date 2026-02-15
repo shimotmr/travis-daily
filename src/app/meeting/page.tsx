@@ -1,10 +1,11 @@
 'use client'
 
-import { useAuth } from '@/components/AuthProvider'
-import { createClient } from '@/lib/supabase-client'
-import { useEffect, useState, useRef, useCallback } from 'react'
 import { ArrowLeft, Send, Users, Radio } from 'lucide-react'
 import Link from 'next/link'
+import { useEffect, useState, useRef, useCallback } from 'react'
+
+import { useAuth } from '@/components/AuthProvider'
+import { createClient } from '@/lib/supabase-client'
 
 interface Message {
   id: string

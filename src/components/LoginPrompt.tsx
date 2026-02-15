@@ -1,9 +1,10 @@
 'use client'
 
-import { useSearchParams, useRouter } from 'next/navigation'
-import { useAuth } from './AuthProvider'
-import { useEffect, useState } from 'react'
 import { Lock, Clock, ShieldX } from 'lucide-react'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+import { useAuth } from './AuthProvider'
 
 type PromptType = 'login' | 'pending' | 'denied' | null
 

@@ -1,8 +1,9 @@
-import { getAgent, agents } from '@/lib/agents-data'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { ArrowLeft, Cpu, CheckCircle2, Clock } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+
+import { getAgent, agents } from '@/lib/agents-data'
 
 interface Props {
   params: Promise<{ id: string }>

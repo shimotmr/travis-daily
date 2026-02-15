@@ -1,10 +1,13 @@
+import { ArrowLeft, Newspaper, FlaskConical, StickyNote, CheckCircle2, SearchX } from 'lucide-react'
+import Link from 'next/link'
+
 import { MarkdownContent } from '@/components/MarkdownContent'
+import { PostInteractions } from '@/components/PostInteractions'
+import { TravisAvatar } from '@/components/TravisAvatar'
 import { getAllPosts, renderMarkdown } from '@/lib/content'
 import { formatDate, typeConfig } from '@/lib/utils'
-import { ArrowLeft, Newspaper, FlaskConical, StickyNote, CheckCircle2, SearchX } from 'lucide-react'
-import { TravisAvatar } from '@/components/TravisAvatar'
-import Link from 'next/link'
-import { PostInteractions } from '@/components/PostInteractions'
+
+
 
 export async function generateStaticParams() {
   const posts = getAllPosts().filter(p => p.type === 'digest' || p.type === 'note' || p.type === 'task-update')

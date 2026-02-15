@@ -1,7 +1,8 @@
-import { getPrivatePosts } from '@/lib/content'
-import { FeedTabs } from '@/components/FeedTabs'
 import { ArrowLeft, Lock } from 'lucide-react'
 import Link from 'next/link'
+
+import { FeedTabs } from '@/components/FeedTabs'
+import { getPrivatePosts } from '@/lib/content'
 
 export default function PrivatePage() {
   const posts = getPrivatePosts()

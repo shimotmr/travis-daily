@@ -1,7 +1,8 @@
 'use client'
 
-import { useAuth } from './AuthProvider'
 import { LogIn, LogOut } from 'lucide-react'
+
+import { useAuth } from './AuthProvider'
 
 export function AuthButton() {
   const { user, loading, signInWithGitHub, signOut } = useAuth()

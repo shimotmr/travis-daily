@@ -1,10 +1,11 @@
+import { ArrowLeft, StickyNote, SearchX } from 'lucide-react'
+import Link from 'next/link'
+
+import { MarkdownContent } from '@/components/MarkdownContent'
+import { PostInteractions } from '@/components/PostInteractions'
+import { TravisAvatar } from '@/components/TravisAvatar'
 import { getAllPosts, renderMarkdown } from '@/lib/content'
 import { formatDate, typeConfig } from '@/lib/utils'
-import { ArrowLeft, StickyNote, SearchX } from 'lucide-react'
-import { TravisAvatar } from '@/components/TravisAvatar'
-import Link from 'next/link'
-import { PostInteractions } from '@/components/PostInteractions'
-import { MarkdownContent } from '@/components/MarkdownContent'
 
 export async function generateStaticParams() {
   const posts = getAllPosts().filter(p => p.type === 'note' || p.type === 'forum')

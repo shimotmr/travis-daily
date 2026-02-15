@@ -1,8 +1,9 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { MermaidBlock } from './MermaidBlock'
 import { createRoot } from 'react-dom/client'
+
+import { MermaidBlock } from './MermaidBlock'
 
 export function MarkdownContent({ html, className }: { html: string; className?: string }) {
   const ref = useRef<HTMLDivElement>(null)

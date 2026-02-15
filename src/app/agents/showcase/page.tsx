@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { showcaseAgents, type ShowcaseAgent } from '@/lib/showcase-agents-data'
-// 
 import { ArrowLeft, Users, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
+
+import { showcaseAgents, type ShowcaseAgent } from '@/lib/showcase-agents-data'
+// 
 
 type ViewMode = 'office' | 'agent' | 'team'
 

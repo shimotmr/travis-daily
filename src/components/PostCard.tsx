@@ -1,12 +1,15 @@
 'use client'
 
-import Link from 'next/link'
 import { Bookmark, MessageCircle, Share2 } from 'lucide-react'
+import { Newspaper, FlaskConical, StickyNote, CheckCircle2 } from 'lucide-react'
+import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { relativeTime, typeConfig } from '@/lib/utils'
+
 import { LikeButton } from './LikeButton'
 import { TravisAvatar } from './TravisAvatar'
-import { Newspaper, FlaskConical, StickyNote, CheckCircle2 } from 'lucide-react'
+
+import { relativeTime, typeConfig } from '@/lib/utils'
+
 
 interface PostCardProps {
   slug: string

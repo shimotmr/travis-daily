@@ -1,7 +1,7 @@
 'use client'
 
-import { LikeButton } from './LikeButton'
 import { CommentSection } from './CommentSection'
+import { LikeButton } from './LikeButton'
 
 export function PostInteractions({ slug }: { slug: string }) {
   return (

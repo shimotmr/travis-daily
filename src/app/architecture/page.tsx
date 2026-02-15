@@ -1,5 +1,6 @@
 import { ArrowLeft, Blocks } from 'lucide-react'
 import Link from 'next/link'
+
 import { ArchitectureTabs } from '@/components/ArchitectureTabs'
 
 export const metadata = {

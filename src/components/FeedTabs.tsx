@@ -1,9 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { PostCard } from './PostCard'
-import { cn } from '@/lib/utils'
 import { LayoutGrid, Newspaper, FlaskConical, StickyNote, MessageCircle, Inbox } from 'lucide-react'
+import { useState } from 'react'
+
+import { PostCard } from './PostCard'
+
+import { cn } from '@/lib/utils'
 
 interface Post {
   slug: string

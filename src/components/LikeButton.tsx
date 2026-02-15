@@ -1,9 +1,11 @@
 'use client'
 
 import { Heart } from 'lucide-react'
-import { useAuth } from './AuthProvider'
-import { createClient } from '@/lib/supabase-client'
 import { useEffect, useState } from 'react'
+
+import { useAuth } from './AuthProvider'
+
+import { createClient } from '@/lib/supabase-client'
 
 export function LikeButton({ slug }: { slug: string }) {
   const { user } = useAuth()

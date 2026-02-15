@@ -1,8 +1,10 @@
-import { getPublicPosts } from '@/lib/content'
+import { Users, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+
 import { FeedTabs } from '@/components/FeedTabs'
 import { TravisAvatar } from '@/components/TravisAvatar'
-import Link from 'next/link'
-import { Users, ArrowRight } from 'lucide-react'
+import { getPublicPosts } from '@/lib/content'
+
 
 export default function Home() {
   const posts = getPublicPosts()

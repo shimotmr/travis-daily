@@ -1,11 +1,12 @@
 'use client'
 
+import { Sun, Moon, Newspaper, LayoutDashboard, Network, Shield, Lock, Users } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useTheme } from './ThemeProvider'
-import { Sun, Moon, Newspaper, LayoutDashboard, Network, Shield, Lock, Users } from 'lucide-react'
+
 import { AuthButton } from './AuthButton'
 import { useAuth } from './AuthProvider'
+import { useTheme } from './ThemeProvider'
 import { TravisAvatar } from './TravisAvatar'
 
 const navItems = [

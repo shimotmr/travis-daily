@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { showcaseAgents } from '@/lib/showcase-agents-data'
-import Link from 'next/link'
 import { ChevronLeft, Save, Upload } from 'lucide-react'
+import Link from 'next/link'
+import { useState, useEffect } from 'react'
+
+import { showcaseAgents } from '@/lib/showcase-agents-data'
 
 type Gender = 'male' | 'female'
 

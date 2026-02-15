@@ -1,9 +1,11 @@
 'use client'
 
-import { useAuth } from './AuthProvider'
-import { createClient } from '@/lib/supabase-client'
-import { useEffect, useState } from 'react'
 import { MessageCircle, Send, Reply, X, CornerDownRight } from 'lucide-react'
+import { useEffect, useState } from 'react'
+
+import { useAuth } from './AuthProvider'
+
+import { createClient } from '@/lib/supabase-client'
 
 interface Comment {
   id: string
