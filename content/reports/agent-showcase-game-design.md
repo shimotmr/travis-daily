@@ -31,7 +31,7 @@ visibility: "private"
 ## 🎯 專案概述
 
 ### 設計目標
-為 Jarvis 多 Agent 系統創建一個融合日式 Galgame 視覺小說風格與 RPG 等軸測地圖的 Web 互動展示頁面，讓使用者能夠直觀地看到各個 AI Agent 的工作狀態、聆聽他們的「心聲」，並透過精美的動畫與對話系統感受 AI 團隊的協作。
+為 Travis 多 Agent 系統創建一個融合日式 Galgame 視覺小說風格與 RPG 等軸測地圖的 Web 互動展示頁面，讓使用者能夠直觀地看到各個 AI Agent 的工作狀態、聆聽他們的「心聲」，並透過精美的動畫與對話系統感受 AI 團隊的協作。
 
 ### 核心需求
 1. **高畫質 Galgame 對話系統**：角色立繪 + 對話框 + 選項系統
@@ -42,7 +42,7 @@ visibility: "private"
 6. **聲音設計**：TTS 語音合成或音效
 
 ### 八位 Agent 角色與場景
-- **Jarvis**：指揮中心（多螢幕監控、全局地圖）
+- **Travis**：指揮中心（多螢幕監控、全局地圖）
 - **Secretary**：前台接待區（數位行事曆、文件堆疊）
 - **Inspector**：品管室（代碼掃描螢幕、紅色警報燈）
 - **Designer**：設計工作室（色彩面板、數位畫板）
@@ -216,7 +216,7 @@ visibility: "private"
 
 ### 各場景詳細設計
 
-#### 1. Jarvis - 指揮中心（Command Center）
+#### 1. Travis - 指揮中心（Command Center）
 **視覺風格**：高科技、指揮官氛圍、藍色調
 
 **場景元素**：
@@ -228,7 +228,7 @@ visibility: "private"
 
 **互動物件**：
 - 點擊螢幕 → 顯示其他 Agent 狀態
-- 點擊 Jarvis → 聽取當日總結
+- 點擊 Travis → 聽取當日總結
 
 **狀態對白範例**：
 ```yaml
@@ -345,7 +345,7 @@ complete: "文章完成！標題就叫《AI 的詩與遠方》。"
 idle: "整理昨日收集的 AI 動態...共 12 則值得關注。"
 working: "這個趨勢很有意思...交叉驗證三個來源中..."
 error: "數據來源矛盾！需要找更權威的資料。"
-complete: "深度研究報告完成，已發送給 Jarvis。"
+complete: "深度研究報告完成，已發送給 Travis。"
 ```
 
 #### 7. Coder - 工程實驗室（Engineering Lab）
@@ -429,10 +429,10 @@ complete: "今日交易完成，收益率 +3.2%。"
 ### 對白數據結構
 
 ```yaml
-# dialogues/jarvis.yml
+# dialogues/travis.yml
 character:
-  id: "jarvis"
-  name: "Jarvis"
+  id: "travis"
+  name: "Travis"
   voice_id: "elevenlabs_british_male_01"
   
 dialogues:
@@ -478,7 +478,7 @@ dialogues:
   
   <!-- 角色立繪區（左） -->
   <div class="character-sprite left">
-    <img src="jarvis_neutral.png" id="live2d-canvas">
+    <img src="travis_neutral.png" id="live2d-canvas">
   </div>
   
   <!-- 對話框（底部） -->
@@ -578,7 +578,7 @@ dialogues:
 
 ### 八位角色視覺設計
 
-#### 1. Jarvis - 指揮官型
+#### 1. Travis - 指揮官型
 **外貌**：
 - 髮型：銀白色短髮，側分
 - 眼睛：深藍色，銳利眼神
@@ -733,7 +733,7 @@ commander aura, professional, high quality, visual novel style
 ┌───────────────────────────────────┐
 │ 分支 C：全局事件                   │
 │   ↓                                │
-│ Jarvis 召集全員（如每日總結）      │
+│ Travis 召集全員（如每日總結）      │
 │   ↓                                │
 │ 所有 Agent 移動到指揮中心          │
 │   ↓                                │
@@ -764,7 +764,7 @@ commander aura, professional, high quality, visual novel style
 **移動場景範例**：
 1. **Coder → Inspector**：代碼審查
 2. **Researcher → Writer**：提供數據支援
-3. **Designer → Jarvis**：設計稿審批
+3. **Designer → Travis**：設計稿審批
 4. **所有人 → 指揮中心**：每日總結會議
 
 ### 狀態同步系統
@@ -1109,7 +1109,7 @@ WebSocket / 輪詢更新前端
 3. **性能優化**：Live2D + Phaser 同時運行需注意性能
 
 ### 降低風險的建議
-1. **MVP 策略**：先完成 3 位角色（Jarvis, Coder, Researcher）驗證技術
+1. **MVP 策略**：先完成 3 位角色（Travis, Coder, Researcher）驗證技術
 2. **分階段上線**：
    - v1.0：靜態立繪 + 對話系統
    - v2.0：加入 Live2D 動畫

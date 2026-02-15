@@ -321,7 +321,7 @@ graph LR
     end
     
     subgraph "Agent 專屬記憶 (Supabase)"
-        TravisMem["jarvis_memory<br/>偏好 · 對話摘要"]
+        TravisMem["travis_memory<br/>偏好 · 對話摘要"]
         SecMem["secretary_memory<br/>簽核模式 · 郵件規則"]
         AnalystMem["analyst_memory<br/>分析模板 · 歷史趨勢"]
         ResearchMem["researcher_memory<br/>研究方法 · 來源評價"]
