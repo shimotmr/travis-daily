@@ -7,13 +7,13 @@ import { PostInteractions } from '@/components/PostInteractions'
 import { MarkdownContent } from '@/components/MarkdownContent'
 
 export async function generateStaticParams() {
-  const posts = getAllPosts().filter(p => p.type === 'note')
+  const posts = getAllPosts().filter(p => p.type === 'note' || p.type === 'forum')
   return posts.map(p => ({ slug: p.slug.replace('notes/', '') }))
 }
 
 export default async function NotePage({ params }: { params: { slug: string } }) {
   const posts = getAllPosts()
-  const post = posts.find(p => p.slug === `notes/${params.slug}`)
+  const post = posts.find(p => p.slug === `notes/${params.slug}` || p.slug === params.slug)
 
   if (!post) {
     return (
@@ -26,7 +26,7 @@ export default async function NotePage({ params }: { params: { slug: string } })
   }
 
   const html = await renderMarkdown(post.content)
-  const tc = typeConfig.note || { color: 'text-yellow-500', label: 'Note' }
+  const tc = typeConfig[post.type] || typeConfig.note || { color: 'text-yellow-500', label: 'Note' }
 
   return (
     <article className="py-6">
