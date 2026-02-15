@@ -25,9 +25,10 @@ content/
 1. **forum 和 note 都放在 `content/notes/` 目錄** — 共用同一個路由
 2. **不要在 content/ 根目錄放 note/forum 文件** — 會導致 slug 不含 `notes/` 前綴
 3. **slug 自動從檔案路徑產生** — `content/notes/my-post.md` → slug = `notes/my-post`
-4. **新增 type 時必須同時修改：**
-   - `src/lib/utils.ts` → typeConfig
-   - `src/components/PostCard.tsx` → href 邏輯
+4. **新增 type 時必須同時修改（共 4 處）：**
+   - `src/lib/content.ts` → Post interface type 聯合類型 ← **最重要！漏了會導致頁面生不出來**
+   - `src/lib/utils.ts` → typeConfig（標籤、顏色）
+   - `src/components/PostCard.tsx` → href 路由邏輯
    - `src/app/notes/[slug]/page.tsx` → generateStaticParams filter（如果共用 notes 路由）
 
 ## Forum 討論文章範本
