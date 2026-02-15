@@ -85,33 +85,61 @@ const tabs = [
     id: 'webdev',
     label: '開發生態',
     icon: Globe,
-    title: '網頁開發周邊工具架構',
-    description: '完整的網頁開發與自動化生態系——從 Portal 到通知推送，所有工具如何協同運作。',
+    title: '系統全覽架構',
+    description: '完整的系統架構——Mac mini 為核心，OpenClaw Gateway 管理多 Agent，連結 Supabase、Vercel 網站、LINE Bot、Telegram，以及 Zimbra 郵件資料流。',
     details: [
-      { title: 'Mac mini', icon: Server, desc: 'OpenClaw Gateway 主機，運行 Scripts + Cron Jobs' },
-      { title: 'Aurotek Portal', icon: Globe, desc: 'Sales Portal（Next.js on Vercel），連接 Supabase PostgreSQL' },
-      { title: 'Travis Daily', icon: FileText, desc: 'AI 專欄網站（Next.js on Vercel），透過 GitHub 自動部署' },
-      { title: 'Google APIs', icon: Mail, desc: 'Calendar, Docs, Sheets, Drive 整合' },
-      { title: 'Zimbra', icon: Inbox, desc: 'Email + Calendar Sync（Aurotek 內部郵件）' },
-      { title: 'LINE Push API', icon: Smartphone, desc: '業績通知推送' },
+      { title: 'Mac mini (Travis AI)', icon: Server, desc: 'OpenClaw Gateway 主機，運行 Scripts、Cron Jobs，所有 Agent 的執行環境' },
+      { title: 'OpenClaw Gateway', icon: Workflow, desc: '管理多 Agent 派遣：Travis（主）、Coder（開發）、Inspector（監控）等' },
+      { title: 'Supabase', icon: Database, desc: 'PostgreSQL 資料庫，儲存 Portal 業績、看板任務、使用者資料' },
+      { title: 'Travis Daily + William Hub', icon: Globe, desc: '兩個 Next.js 網站，部署於 Vercel，透過 GitHub 自動 CI/CD' },
+      { title: 'LINE Bot + Telegram', icon: Smartphone, desc: 'LINE：業績通知推送；Telegram：Travis AI 主要對話介面' },
+      { title: 'Zimbra → Supabase 資料流', icon: Mail, desc: 'Zimbra 郵件 → Scripts 解析 → Supabase 儲存 → Portal 呈現' },
     ],
     diagram: `graph TD
-    Mac["Mac mini\nOpenClaw Gateway"] --> Scripts["Scripts + Cron Jobs"]
+    subgraph MacMini["🖥 Mac mini — Travis AI"]
+      Gateway["OpenClaw Gateway"]
+      Scripts["Scripts + Cron Jobs"]
+      Gateway --> Travis_Agent["Travis\nMain Agent"]
+      Gateway --> Coder["Coder\nDev Agent"]
+      Gateway --> Inspector["Inspector\nMonitor Agent"]
+    end
 
-    Portal["Aurotek Portal\nvercel.app"] --> Supabase[("Supabase\nPostgreSQL")]
-    Travis["Travis Daily\nvercel.app"] --> GitHub["GitHub\nshimotmr"]
+    subgraph Cloud["☁️ Cloud Services"]
+      Supabase[("Supabase\nPostgreSQL")]
+      Vercel["Vercel\nHosting"]
+      GitHub["GitHub\nshimotmr"]
+    end
 
-    Mac --> Google["Google APIs\nCalendar, Docs, Sheets, Drive"]
-    Mac --> Zimbra["Zimbra\nEmail + Calendar Sync"]
-    Mac --> LINE["LINE Push API\n業績通知"]
+    subgraph Sites["🌐 Websites"]
+      TravisDaily["Travis Daily\nAI 專欄"]
+      WilliamHub["William Hub\nPersonal Portal"]
+      Portal["Aurotek Portal\nSales Dashboard"]
+    end
 
-    GitHub --> Portal
-    GitHub --> Travis
+    subgraph Messaging["💬 Messaging"]
+      Telegram["Telegram\nAI 對話介面"]
+      LINE["LINE Bot\n業績通知"]
+    end
 
-    Scripts --> Google
+    subgraph Internal["🏢 Aurotek Internal"]
+      Zimbra["Zimbra\nEmail + Calendar"]
+      Google["Google APIs\nCalendar, Docs, Drive"]
+    end
+
+    Gateway --> Telegram
+    Gateway --> LINE
+    Travis_Agent --> Supabase
+    Scripts --> Supabase
+    GitHub --> Vercel
+    Vercel --> TravisDaily
+    Vercel --> WilliamHub
+    Vercel --> Portal
+    Portal --> Supabase
     Scripts --> Zimbra
-    Scripts --> LINE
-    Scripts --> Supabase`,
+    Scripts --> Google
+    Zimbra -->|"郵件解析"| Scripts
+    Scripts -->|"資料寫入"| Supabase
+    Supabase -->|"業績資料"| Portal`,
   },
 ]
 
