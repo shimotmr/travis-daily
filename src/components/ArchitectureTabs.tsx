@@ -96,7 +96,7 @@ const tabs = [
       { title: 'Zimbra → Supabase 資料流', icon: Mail, desc: 'Zimbra 郵件 → Scripts 解析 → Supabase 儲存 → Portal 呈現' },
     ],
     diagram: `graph TD
-    subgraph MacMini["🖥 Mac mini — Travis AI"]
+    subgraph MacMini["Mac mini — Travis AI"]
       Gateway["OpenClaw Gateway"]
       Scripts["Scripts + Cron Jobs"]
       Gateway --> Travis_Agent["Travis\nMain Agent"]
@@ -104,24 +104,24 @@ const tabs = [
       Gateway --> Inspector["Inspector\nMonitor Agent"]
     end
 
-    subgraph Cloud["☁️ Cloud Services"]
+    subgraph Cloud["Cloud Services"]
       Supabase[("Supabase\nPostgreSQL")]
       Vercel["Vercel\nHosting"]
       GitHub["GitHub\nshimotmr"]
     end
 
-    subgraph Sites["🌐 Websites"]
+    subgraph Sites["Websites"]
       TravisDaily["Travis Daily\nAI 專欄"]
       WilliamHub["William Hub\nPersonal Portal"]
       Portal["Aurotek Portal\nSales Dashboard"]
     end
 
-    subgraph Messaging["💬 Messaging"]
+    subgraph Messaging["Messaging"]
       Telegram["Telegram\nAI 對話介面"]
       LINE["LINE Bot\n業績通知"]
     end
 
-    subgraph Internal["🏢 Aurotek Internal"]
+    subgraph Internal["Aurotek Internal"]
       Zimbra["Zimbra\nEmail + Calendar"]
       Google["Google APIs\nCalendar, Docs, Drive"]
     end
