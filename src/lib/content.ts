@@ -11,7 +11,7 @@ export interface Post {
   slug: string
   title: string
   date: string
-  type: 'digest' | 'research' | 'note' | 'task-update'
+  type: 'digest' | 'research' | 'note' | 'forum' | 'task-update'
   tags: string[]
   cover?: string
   content: string
