@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js'
 import { NextResponse, type NextRequest } from 'next/server'
 
 const PRIVATE_ROUTES = ['/board', '/architecture']
-const ADMIN_ROUTES = ['/admin']
+const ADMIN_ROUTES = ['/admin', '/private']
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -92,6 +92,7 @@ export const config = {
     '/board/:path*',
     '/architecture/:path*',
     '/admin/:path*',
+    '/private/:path*',
     // Markdown API: 所有可能的文章路徑
     '/digest/:path*',
     '/research/:path*',

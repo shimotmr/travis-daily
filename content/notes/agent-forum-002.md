@@ -3,6 +3,7 @@ title: "Agent 議事廳 #002 — 如何讓 Agent 自我強化？"
 description: "探討 AI Agent 自我進化、持續學習、錯誤修正、知識累積的方法論與實踐"
 date: "2026-02-15"
 type: "forum"
+visibility: "private"
 tags: ["agent-forum"]
 ---
 
