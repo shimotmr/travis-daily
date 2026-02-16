@@ -7,10 +7,10 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { Search, Filter, Calendar, FileText, Tag, AlertCircle } from 'lucide-react'
 
 const ReportSystem = () => {
-  const [reports, setReports] = useState([])
+  const [reports, setReports] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [statistics, setStatistics] = useState({})
+  const [error, setError] = useState<string | null>(null)
+  const [statistics, setStatistics] = useState<any>({})
   
   // 篩選狀態
   const [filters, setFilters] = useState({
@@ -38,14 +38,15 @@ const ReportSystem = () => {
     try {
       const params = new URLSearchParams({
         ...filters,
-        limit: pagination.limit,
-        offset: pagination.offset,
+        limit: pagination.limit.toString(),
+        offset: pagination.offset.toString(),
         sort_by: 'created_at',
         sort_order: 'desc'
       })
       
       // 移除空值
-      for (const [key, value] of params.entries()) {
+      const paramsArray = Array.from(params.entries())
+      for (const [key, value] of paramsArray) {
         if (!value) params.delete(key)
       }
       
@@ -63,7 +64,7 @@ const ReportSystem = () => {
       }))
       
     } catch (err) {
-      setError(err.message)
+      setError(err instanceof Error ? err.message : String(err))
       setReports([])
     } finally {
       setLoading(false)
@@ -82,7 +83,7 @@ const ReportSystem = () => {
         setStatistics(result.data)
       }
     } catch (err) {
-      console.error('統計資料載入失敗:', err)
+      console.error('統計資料載入失敗:', err instanceof Error ? err.message : String(err))
     }
   }, [])
 
@@ -95,7 +96,7 @@ const ReportSystem = () => {
   /**
    * 處理篩選變更
    */
-  const handleFilterChange = (key, value) => {
+  const handleFilterChange = (key: string, value: string) => {
     setFilters(prev => ({
       ...prev,
       [key]: value
@@ -126,7 +127,7 @@ const ReportSystem = () => {
   /**
    * 分頁控制
    */
-  const handlePageChange = (newOffset) => {
+  const handlePageChange = (newOffset: number) => {
     setPagination(prev => ({
       ...prev,
       offset: newOffset
@@ -136,7 +137,7 @@ const ReportSystem = () => {
   /**
    * 格式化日期
    */
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return date.toLocaleDateString('zh-TW', {
       year: 'numeric',
@@ -322,7 +323,7 @@ const ReportSystem = () => {
                   {report.tags && report.tags.length > 0 && (
                     <div className="mt-3">
                       <div className="flex flex-wrap gap-2">
-                        {report.tags.map((tag, index) => (
+                        {report.tags.map((tag: string, index: number) => (
                           <span
                             key={index}
                             className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full"
