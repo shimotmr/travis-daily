@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1400" height="1000" viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font: bold 20px sans-serif; fill: #2d3748; }
+      .subtitle { font: bold 16px sans-serif; fill: #4a5568; }
+      .page-name { font: 12px sans-serif; fill: #2d3748; }
+      .api-name { font: 10px sans-serif; fill: #718096; }
+      .fake-data { fill: #feb2b2; stroke: #f56565; }
+      .real-data { fill: #c6f6d5; stroke: #48bb78; }
+      .partial-data { fill: #faf089; stroke: #ecc94b; }
+      .unknown-data { fill: #e2e8f0; stroke: #a0aec0; }
+      .link { stroke: #4299e1; stroke-width: 2; fill: none; opacity: 0.7; }
+      .heavy-link { stroke: #2b6cb0; stroke-width: 3; fill: none; opacity: 0.9; }
+      .hub-area { fill: #ebf8ff; stroke: #4299e1; stroke-width: 2; stroke-dasharray: 5,5; }
+      .portal-area { fill: #f0fff4; stroke: #48bb78; stroke-width: 2; stroke-dasharray: 5,5; }
+      .legend-box { fill: #f7fafc; stroke: #e2e8f0; }
+      .legend-text { font: 12px sans-serif; fill: #4a5568; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4299e1" />
+    </marker>
+    <marker id="heavy-arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#2b6cb0" />
+    </marker>
+  </defs>
+  
+  <!-- 背景標題 -->
+  <text x="700" y="30" class="title" text-anchor="middle">William Hub + Aurotek Portal 頁面關係圖</text>
+  <text x="700" y="55" class="subtitle" text-anchor="middle">任務 #460 審計結果 - 導航結構與資料來源分析</text>
+  
+  <!-- William Hub 區域 -->
+  <rect x="50" y="100" width="600" height="600" class="hub-area" rx="10"/>
+  <text x="350" y="125" class="subtitle" text-anchor="middle" fill="#2b6cb0">William Hub (~/projects/William-hub)</text>
+  
+  <!-- William Hub 主頁 -->
+  <rect x="280" y="150" width="140" height="40" class="fake-data" rx="5"/>
+  <text x="350" y="175" class="page-name" text-anchor="middle">首頁 (/)</text>
+  
+  <!-- William Hub 子頁面 - 左側 -->
+  <rect x="80" y="220" width="120" height="35" class="partial-data" rx="5"/>
+  <text x="140" y="242" class="page-name" text-anchor="middle">Dashboard</text>
+  
+  <rect x="80" y="270" width="120" height="35" class="real-data" rx="5"/>
+  <text x="140" y="292" class="page-name" text-anchor="middle">Task Board</text>
+  
+  <rect x="80" y="320" width="120" height="35" class="real-data" rx="5"/>
+  <text x="140" y="342" class="page-name" text-anchor="middle">Chat</text>
+  
+  <rect x="80" y="370" width="120" height="35" class="real-data" rx="5"/>
+  <text x="140" y="392" class="page-name" text-anchor="middle">Reports</text>
+  
+  <rect x="80" y="420" width="120" height="35" class="partial-data" rx="5"/>
+  <text x="140" y="442" class="page-name" text-anchor="middle">Growth</text>
+  
+  <!-- William Hub 子頁面 - 右側 -->
+  <rect x="480" y="220" width="120" height="35" class="unknown-data" rx="5"/>
+  <text x="540" y="242" class="page-name" text-anchor="middle">Agents</text>
+  
+  <rect x="480" y="270" width="120" height="35" class="fake-data" rx="5"/>
+  <text x="540" y="292" class="page-name" text-anchor="middle">Rules</text>
+  
+  <rect x="480" y="320" width="120" height="35" class="fake-data" rx="5"/>
+  <text x="540" y="342" class="page-name" text-anchor="middle">Trade</text>
+  
+  <rect x="480" y="370" width="120" height="35" class="unknown-data" rx="5"/>
+  <text x="540" y="392" class="page-name" text-anchor="middle">LineBot Training</text>
+  
+  <rect x="480" y="420" width="120" height="35" class="unknown-data" rx="5"/>
+  <text x="540" y="442" class="page-name" text-anchor="middle">Test Realtime</text>
+  
+  <!-- Reports 詳情頁 -->
+  <rect x="80" y="480" width="120" height="30" class="real-data" rx="5"/>
+  <text x="140" y="500" class="page-name" text-anchor="middle">Reports/[id]</text>
+  
+  <!-- William Hub API 層 -->
+  <text x="350" y="540" class="api-name" text-anchor="middle" fill="#718096">主要 API: token-stats, board, reports, agents</text>
+  
+  <!-- William Hub 資料表 -->
+  <text x="350" y="560" class="api-name" text-anchor="middle" fill="#2d3748">資料表: token_usage, board_tasks, reports, agent_messages</text>
+  
+  <!-- Aurotek Portal 區域 -->
+  <rect x="720" y="100" width="600" height="600" class="portal-area" rx="10"/>
+  <text x="1020" y="125" class="subtitle" text-anchor="middle" fill="#2f855a">Aurotek Sales Portal (~/projects/aurotek-sales-portal)</text>
+  
+  <!-- Portal 登入和首頁 -->
+  <rect x="880" y="150" width="100" height="35" class="real-data" rx="5"/>
+  <text x="930" y="172" class="page-name" text-anchor="middle">Login</text>
+  
+  <rect x="1020" y="150" width="100" height="35" class="unknown-data" rx="5"/>
+  <text x="1070" y="172" class="page-name" text-anchor="middle">首頁 (/)</text>
+  
+  <!-- Portal 業務功能 - 左側 -->
+  <rect x="750" y="220" width="100" height="30" class="unknown-data" rx="5"/>
+  <text x="800" y="240" class="page-name" text-anchor="middle">Performance</text>
+  
+  <rect x="750" y="260" width="100" height="30" class="unknown-data" rx="5"/>
+  <text x="800" y="280" class="page-name" text-anchor="middle">Cases</text>
+  
+  <rect x="750" y="300" width="100" height="30" class="unknown-data" rx="5"/>
+  <text x="800" y="320" class="page-name" text-anchor="middle">Products</text>
+  
+  <rect x="750" y="340" width="100" height="30" class="real-data" rx="5"/>
+  <text x="800" y="360" class="page-name" text-anchor="middle">Transcripts</text>
+  
+  <rect x="750" y="380" width="100" height="30" class="unknown-data" rx="5"/>
+  <text x="800" y="400" class="page-name" text-anchor="middle">Quotations</text>
+  
+  <!-- Portal Marketing 區域 -->
+  <rect x="880" y="220" width="100" height="30" class="unknown-data" rx="5"/>
+  <text x="930" y="240" class="page-name" text-anchor="middle">Marketing</text>
+  
+  <rect x="860" y="260" width="80" height="25" class="unknown-data" rx="3"/>
+  <text x="900" y="276" class="api-name" text-anchor="middle">Slides</text>
+  
+  <rect x="950" y="260" width="80" height="25" class="unknown-data" rx="3"/>
+  <text x="990" y="276" class="api-name" text-anchor="middle">Videos</text>
+  
+  <rect x="860" y="295" width="80" height="25" class="unknown-data" rx="3"/>
+  <text x="900" y="311" class="api-name" text-anchor="middle">Walker Docs</text>
+  
+  <!-- Portal Admin 區域 -->
+  <rect x="1150" y="220" width="100" height="30" class="unknown-data" rx="5"/>
+  <text x="1200" y="240" class="page-name" text-anchor="middle">Admin</text>
+  
+  <rect x="1120" y="260" width="70" height="22" class="real-data" rx="3"/>
+  <text x="1155" y="274" class="api-name" text-anchor="middle">Dealers</text>
+  
+  <rect x="1200" y="260" width="70" height="22" class="real-data" rx="3"/>
+  <text x="1235" y="274" class="api-name" text-anchor="middle">Logs</text>
+  
+  <rect x="1120" y="290" width="70" height="22" class="unknown-data" rx="3"/>
+  <text x="1155" y="304" class="api-name" text-anchor="middle">Team</text>
+  
+  <rect x="1200" y="290" width="70" height="22" class="unknown-data" rx="3"/>
+  <text x="1235" y="304" class="api-name" text-anchor="middle">Targets</text>
+  
+  <rect x="1120" y="320" width="70" height="22" class="unknown-data" rx="3"/>
+  <text x="1155" y="334" class="api-name" text-anchor="middle">Funnel</text>
+  
+  <rect x="1200" y="320" width="70" height="22" class="unknown-data" rx="3"/>
+  <text x="1235" y="334" class="api-name" text-anchor="middle">Sync</text>
+  
+  <!-- Portal 重複功能標記 -->
+  <rect x="1020" y="380" width="100" height="30" class="partial-data" rx="5"/>
+  <text x="1070" y="400" class="page-name" text-anchor="middle">Agents ⚠️</text>
+  
+  <!-- Portal 詳情頁面 -->
+  <rect x="750" y="420" width="90" height="25" class="real-data" rx="3"/>
+  <text x="795" y="437" class="api-name" text-anchor="middle">Transcripts/[id]</text>
+  
+  <rect x="850" y="420" width="90" height="25" class="unknown-data" rx="3"/>
+  <text x="895" y="437" class="api-name" text-anchor="middle">Quotations/[id]</text>
+  
+  <!-- Portal API 和資料表 -->
+  <text x="1020" y="480" class="api-name" text-anchor="middle" fill="#718096">主要 API: auth, dealers, logs, transcripts</text>
+  <text x="1020" y="500" class="api-name" text-anchor="middle" fill="#2d3748">資料表: logs, dealers, transcripts, transcript_segments</text>
+  
+  <!-- 導航連結 -->
+  <!-- Hub 首頁到各子頁面 -->
+  <line x1="320" y1="190" x2="160" y2="220" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="340" y1="190" x2="160" y2="270" class="heavy-link" marker-end="url(#heavy-arrowhead)"/>
+  <line x1="350" y1="190" x2="160" y2="320" class="heavy-link" marker-end="url(#heavy-arrowhead)"/>
+  <line x1="360" y1="190" x2="160" y2="370" class="heavy-link" marker-end="url(#heavy-arrowhead)"/>
+  <line x1="370" y1="190" x2="520" y2="220" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="380" y1="190" x2="520" y2="270" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="390" y1="190" x2="520" y2="320" class="link" marker-end="url(#arrowhead)"/>
+  
+  <!-- Reports 到詳情頁 -->
+  <line x1="140" y1="405" x2="140" y2="480" class="link" marker-end="url(#arrowhead)"/>
+  
+  <!-- Portal 登入到首頁 -->
+  <line x1="980" y1="167" x2="1020" y2="167" class="heavy-link" marker-end="url(#heavy-arrowhead)"/>
+  
+  <!-- Portal 首頁到各功能 -->
+  <line x1="1050" y1="185" x2="820" y2="220" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="1060" y1="185" x2="820" y2="260" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="1070" y1="185" x2="820" y2="340" class="heavy-link" marker-end="url(#heavy-arrowhead)"/>
+  <line x1="1080" y1="185" x2="950" y2="220" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="1090" y1="185" x2="1180" y2="220" class="link" marker-end="url(#arrowhead)"/>
+  
+  <!-- Marketing 子頁面 -->
+  <line x1="930" y1="250" x2="900" y2="260" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="930" y1="250" x2="990" y2="260" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="920" y1="250" x2="900" y2="295" class="link" marker-end="url(#arrowhead)"/>
+  
+  <!-- Admin 子頁面 -->
+  <line x1="1200" y1="250" x2="1155" y2="260" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="1200" y1="250" x2="1235" y2="260" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="1200" y1="250" x2="1155" y2="290" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="1200" y1="250" x2="1235" y2="290" class="link" marker-end="url(#arrowhead)"/>
+  
+  <!-- 詳情頁連結 -->
+  <line x1="800" y1="370" x2="795" y2="420" class="link" marker-end="url(#arrowhead)"/>
+  <line x1="850" y1="400" x2="895" y2="420" class="link" marker-end="url(#arrowhead)"/>
+  
+  <!-- 重複功能標記 -->
+  <ellipse cx="1070" cy="395" rx="15" ry="8" fill="none" stroke="#e53e3e" stroke-width="2" stroke-dasharray="3,3"/>
+  <text x="1095" y="400" class="api-name" fill="#e53e3e">重複</text>
+  
+  <!-- 連接兩個專案的虛線 (表示可能的整合) -->
+  <line x1="650" y1="240" x2="720" y2="395" stroke="#805ad5" stroke-width="2" stroke-dasharray="8,4" opacity="0.5"/>
+  <text x="685" y="315" class="api-name" text-anchor="middle" fill="#805ad5">Agent 整合機會</text>
+  
+  <!-- 圖例 -->
+  <rect x="50" y="750" width="300" height="180" class="legend-box" rx="5"/>
+  <text x="200" y="775" class="legend-text" text-anchor="middle" font-weight="bold">資料來源圖例</text>
+  
+  <rect x="70" y="790" width="20" height="15" class="real-data" rx="2"/>
+  <text x="100" y="802" class="legend-text">真實資料庫 (Supabase)</text>
+  
+  <rect x="70" y="815" width="20" height="15" class="partial-data" rx="2"/>
+  <text x="100" y="827" class="legend-text">部分假資料 (混合)</text>
+  
+  <rect x="70" y="840" width="20" height="15" class="fake-data" rx="2"/>
+  <text x="100" y="852" class="legend-text">假資料 (硬編碼)</text>
+  
+  <rect x="70" y="865" width="20" height="15" class="unknown-data" rx="2"/>
+  <text x="100" y="877" class="legend-text">待確認資料來源</text>
+  
+  <line x1="70" y1="895" x2="90" y2="895" class="heavy-link"/>
+  <text x="100" y="900" class="legend-text">核心功能導航</text>
+  
+  <line x1="70" y1="910" x2="90" y2="910" class="link"/>
+  <text x="100" y="915" class="legend-text">一般頁面連結</text>
+  
+  <!-- 瘦身建議摘要 -->
+  <rect x="400" y="750" width="350" height="180" class="legend-box" rx="5"/>
+  <text x="575" y="775" class="legend-text" text-anchor="middle" font-weight="bold">瘦身重點建議</text>
+  
+  <text x="420" y="800" class="legend-text" font-weight="bold" fill="#e53e3e">🔴 高優先級:</text>
+  <text x="430" y="815" class="legend-text">• Hub 首頁假資料 → board_tasks</text>
+  <text x="430" y="830" class="legend-text">• 統一 Agent 控制系統</text>
+  <text x="430" y="845" class="legend-text">• Trade/Rules 頁面動態化</text>
+  
+  <text x="420" y="865" class="legend-text" font-weight="bold" fill="#d69e2e">🟡 中優先級:</text>
+  <text x="430" y="880" class="legend-text">• Portal 業績數據真實化</text>
+  <text x="430" y="895" class="legend-text">• 整合認證系統</text>
+  <text x="430" y="910" class="legend-text">• 共用報告 API</text>
+  
+  <!-- 統計摘要 -->
+  <rect x="800" y="750" width="300" height="180" class="legend-box" rx="5"/>
+  <text x="950" y="775" class="legend-text" text-anchor="middle" font-weight="bold">專案統計</text>
+  
+  <text x="820" y="800" class="legend-text" font-weight="bold" fill="#2b6cb0">William Hub:</text>
+  <text x="830" y="815" class="legend-text">• 12 個頁面 + 12 個 API</text>
+  <text x="830" y="830" class="legend-text">• 4 個主要資料表</text>
+  <text x="830" y="845" class="legend-text">• ~30% 假資料需處理</text>
+  
+  <text x="820" y="870" class="legend-text" font-weight="bold" fill="#2f855a">Aurotek Portal:</text>
+  <text x="830" y="885" class="legend-text">• 24 個頁面 + 17 個 API</text>
+  <text x="830" y="900" class="legend-text">• 5+ 個主要資料表</text>
+  <text x="830" y="915" class="legend-text">• ~20% 假資料需處理</text>
+  
+  <!-- 時間戳 -->
+  <text x="1350" y="990" class="api-name" text-anchor="end" fill="#a0aec0">Generated: 2026-02-17 19:40</text>
+</svg>
