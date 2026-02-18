@@ -13,6 +13,7 @@
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.95.3",
     "clsx": "^2.1.1",
+    "recharts": "^2.15.0",
     "date-fns": "^3.6.0",
     "gray-matter": "^4.0.3",
     "html2canvas": "^1.4.1",
