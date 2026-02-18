@@ -28,4 +28,5 @@ export const typeConfig: Record<string, { label: string; icon: string; color: st
   note: { label: '筆記', icon: 'StickyNote', color: 'bg-green-500/10 text-green-500' },
   forum: { label: '討論', icon: 'MessageCircle', color: 'bg-orange-500/10 text-orange-500' },
   'task-update': { label: '任務更新', icon: 'CheckCircle2', color: 'bg-orange-500/10 text-orange-500' },
+  growth: { label: '成長軌跡', icon: 'TrendingUp', color: 'bg-purple-500/10 text-purple-500' },
 }

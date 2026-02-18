@@ -1,4 +1,4 @@
-import { Users, ArrowRight } from 'lucide-react'
+import { Users, ArrowRight, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 
 import { FeedTabs } from '@/components/FeedTabs'
@@ -64,6 +64,38 @@ export default function Home() {
               </div>
             </div>
             <ArrowRight size={16} className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+          </div>
+        </div>
+      </Link>
+
+      {/* Growth Timeline Card - Highlighting Today's Breakthrough */}
+      <Link 
+        href="/growth"
+        className="group relative rounded-xl overflow-hidden block hover:shadow-lg hover:shadow-purple-500/20 transition-all"
+      >
+        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-purple-500/10 via-transparent to-pink-500/10 group-hover:from-purple-500/20 group-hover:to-pink-500/20 pointer-events-none transition-all" />
+        <div className="relative border border-purple-500/30 group-hover:border-purple-500/50 rounded-xl bg-card p-4 transition-colors">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                <TrendingUp size={20} className="text-purple-500" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <h2 className="font-semibold text-sm">系統成長軌跡</h2>
+                  <div className="flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
+                    <span className="text-xs text-purple-600 dark:text-purple-400 font-medium">新突破</span>
+                  </div>
+                </div>
+                <p className="text-xs text-muted-foreground">記錄 AI 系統重大突破與發展里程碑</p>
+              </div>
+            </div>
+            <ArrowRight size={16} className="text-muted-foreground group-hover:text-purple-500 group-hover:translate-x-1 transition-all" />
+          </div>
+          {/* Today's breakthrough teaser */}
+          <div className="mt-3 pt-3 border-t border-border/30 text-xs text-muted-foreground">
+            <strong className="text-purple-600 dark:text-purple-400">2026-02-18:</strong> qmd 語義搜尋革命 + 完美平衡自動化系統
           </div>
         </div>
       </Link>
