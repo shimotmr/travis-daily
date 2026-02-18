@@ -31,7 +31,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="text-center">
+      <div className="text-center space-x-4">
+        <a 
+          href="/agents" 
+          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+        >
+          🤖 查看 AI 團隊
+        </a>
         <a 
           href="/reports" 
           className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"

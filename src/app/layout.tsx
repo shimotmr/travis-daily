@@ -24,6 +24,7 @@ export default function RootLayout({
                 <h1 className="text-xl font-bold text-gray-900">Travis Daily</h1>
                 <div className="hidden md:flex space-x-6">
                   <a href="/" className="text-gray-600 hover:text-gray-900">Feed</a>
+                  <a href="/agents" className="text-gray-600 hover:text-gray-900">Agents</a>
                   <a href="/reports" className="text-gray-600 hover:text-gray-900">Reports</a>
                   <a href="/architecture" className="text-gray-600 hover:text-gray-900">Architecture</a>
                   <a href="/meeting" className="text-gray-600 hover:text-gray-900">Meeting</a>
