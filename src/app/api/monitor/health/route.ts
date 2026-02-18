@@ -17,12 +17,10 @@ export async function GET() {
     ])
 
     return NextResponse.json({
-      health: {
-        current: healthState?.last_health || null,
-        previousLevel: healthState?.previous_level || null,
-        levelChanged: healthState?.level_changed || false,
-        history: healthHistory?.slice(-24) || [],
-      },
+      current: healthState?.last_health || null,
+      previousLevel: healthState?.previous_level || null,
+      levelChanged: healthState?.level_changed || false,
+      history: healthHistory?.slice(-24) || [],
       pipeline: pipelineState,
       lastUpdate: new Date().toISOString(),
     })
