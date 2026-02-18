@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    /* ----- Radius ----- */
+    --radius: 0.5rem;
+    
     /* ----- 背景色系 ----- */
     --background: 0 0% 100%;            /* #ffffff 純白 */
     --background-subtle: 220 14% 98%;   /* #f9fafb 微灰背景 */

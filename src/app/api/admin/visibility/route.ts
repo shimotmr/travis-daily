@@ -1,10 +1,12 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Initialize Supabase only if env vars are available
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+const supabase = supabaseUrl && supabaseKey 
+  ? createClient(supabaseUrl, supabaseKey)
+  : null
 
 function verifyAdminToken(request: NextRequest): boolean {
   const authHeader = request.headers.get('authorization')
@@ -16,6 +18,13 @@ function verifyAdminToken(request: NextRequest): boolean {
 
 // GET: 列出所有文章的 visibility 設定
 export async function GET(request: NextRequest) {
+  if (!supabase) {
+    return NextResponse.json(
+      { error: 'Supabase not configured' },
+      { status: 503 }
+    )
+  }
+  
   if (!verifyAdminToken(request)) {
     return NextResponse.json(
       { error: 'Unauthorized' },
@@ -40,6 +49,13 @@ export async function GET(request: NextRequest) {
 
 // PATCH: 更新文章 visibility
 export async function PATCH(request: NextRequest) {
+  if (!supabase) {
+    return NextResponse.json(
+      { error: 'Supabase not configured' },
+      { status: 503 }
+    )
+  }
+  
   if (!verifyAdminToken(request)) {
     return NextResponse.json(
       { error: 'Unauthorized' },

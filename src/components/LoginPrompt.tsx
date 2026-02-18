@@ -15,6 +15,7 @@ export function LoginPrompt() {
   const [promptType, setPromptType] = useState<PromptType>(null)
 
   useEffect(() => {
+    if (!searchParams) return
     if (searchParams.get('login') === 'required') setPromptType('login')
     else if (searchParams.get('access') === 'pending') setPromptType('pending')
     else if (searchParams.get('access') === 'denied') setPromptType('denied')
