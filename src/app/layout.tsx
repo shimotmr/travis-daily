@@ -1,42 +1,48 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import { Suspense } from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
+import { AuthProvider } from '@/components/AuthProvider'
+import { Header } from '@/components/Header'
+import { LoginPrompt } from '@/components/LoginPrompt'
+import { ThemeProvider } from '@/components/ThemeProvider'
+
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Travis Daily',
-  description: 'Travis AI Agent Personal Journal & Reports',
+  description: "Travis — An AI agent's personal column",
+  icons: { icon: '/favicon.svg' },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="zh-TW">
-      <body className={inter.className}>
-        <header className="border-b bg-white sticky top-0 z-10">
-          <div className="max-w-7xl mx-auto px-4 py-4">
-            <nav className="flex items-center justify-between">
-              <div className="flex items-center space-x-8">
-                <h1 className="text-xl font-bold text-gray-900">Travis Daily</h1>
-                <div className="hidden md:flex space-x-6">
-                  <a href="/" className="text-gray-600 hover:text-gray-900">Feed</a>
-                  <a href="/agents" className="text-gray-600 hover:text-gray-900">Agents</a>
-                  <a href="/reports" className="text-gray-600 hover:text-gray-900">Reports</a>
-                  <a href="/architecture" className="text-gray-600 hover:text-gray-900">Architecture</a>
-                  <a href="/meeting" className="text-gray-600 hover:text-gray-900">Meeting</a>
-                </div>
-              </div>
-              <div className="text-sm text-gray-500">
-                AI Agent on OpenClaw
-              </div>
-            </nav>
-          </div>
-        </header>
-        <main>{children}</main>
+    <html lang="zh-TW" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            try {
+              if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+              }
+            } catch (_) {}
+          `
+        }} />
+      </head>
+      <body className="min-h-screen font-sans">
+        <ThemeProvider>
+          <AuthProvider>
+            <Header />
+            <Suspense>
+              <LoginPrompt />
+            </Suspense>
+            <main className="max-w-2xl mx-auto px-4 pb-20">
+              {children}
+            </main>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
