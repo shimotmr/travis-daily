@@ -13,7 +13,9 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABAS
 
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null
 
+// Support both work-reports and content/reports directories
 const WORK_REPORTS_DIR = path.join(process.cwd(), 'work-reports')
+const CONTENT_REPORTS_DIR = path.join(process.cwd(), 'content', 'reports')
 
 /**
  * 從 Supabase 獲取報告
@@ -110,41 +112,67 @@ function parseMarkdownFile(filePath) {
 function fetchReportsFromFilesystem() {
   const reports = []
   
-  try {
-    if (!fs.existsSync(WORK_REPORTS_DIR)) {
-      console.log('work-reports 目錄不存在')
-      return reports
+  // 嘗試多個可能的目錄
+  const directories = [WORK_REPORTS_DIR, CONTENT_REPORTS_DIR]
+  
+  for (const dir of directories) {
+    if (!fs.existsSync(dir)) {
+      console.log(`目錄不存在: ${dir}`)
+      continue
     }
     
-    const categories = fs.readdirSync(WORK_REPORTS_DIR)
-      .filter(item => {
-        const itemPath = path.join(WORK_REPORTS_DIR, item)
-        return fs.statSync(itemPath).isDirectory()
-      })
+    console.log(`掃描目錄: ${dir}`)
     
-    for (const category of categories) {
-      const categoryPath = path.join(WORK_REPORTS_DIR, category)
-      const files = fs.readdirSync(categoryPath)
-        .filter(file => file.endsWith('.md'))
+    try {
+      const stats = fs.statSync(dir)
       
-      for (const file of files) {
-        const filePath = path.join(categoryPath, file)
-        const parsedFile = parseMarkdownFile(filePath)
+      if (stats.isDirectory()) {
+        // 子目錄結構 (work-reports/council/*.md)
+        const categories = fs.readdirSync(dir).filter(item => {
+          const itemPath = path.join(dir, item)
+          return fs.statSync(itemPath).isDirectory()
+        })
         
-        if (parsedFile) {
-          reports.push(parsedFile)
+        for (const category of categories) {
+          const categoryPath = path.join(dir, category)
+          const files = fs.readdirSync(categoryPath).filter(f => f.endsWith('.md'))
+          
+          for (const file of files) {
+            const filePath = path.join(categoryPath, file)
+            const parsedFile = parseMarkdownFile(filePath)
+            if (parsedFile) {
+              parsedFile.category = category // 強制使用目錄名作為分類
+              reports.push(parsedFile)
+            }
+          }
+        }
+      } else if (stats.isFile() && dir.endsWith('reports')) {
+        // 直接在 reports 目錄下 (content/reports/*.md)
+        const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'))
+        
+        for (const file of files) {
+          const filePath = path.join(dir, file)
+          const parsedFile = parseMarkdownFile(filePath)
+          if (parsedFile) {
+            reports.push(parsedFile)
+          }
         }
       }
+    } catch (error) {
+      console.error(`掃描目錄失敗 ${dir}:`, error)
     }
-    
-    // 按創建時間排序
-    reports.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-    
-  } catch (error) {
-    console.error('掃描報告目錄失敗:', error)
   }
   
-  return reports
+  // 去重 (基於 id)
+  const uniqueReports = Array.from(
+    new Map(reports.map(r => [r.id, r])).values()
+  )
+  
+  // 按創建時間排序
+  uniqueReports.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+  
+  console.log(`總共找到 ${uniqueReports.length} 個報告`)
+  return uniqueReports
 }
 
 /**
