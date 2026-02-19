@@ -1,21 +1,53 @@
 /**
- * William Hub Reports API - 基於檔案系統的實作
- * 讀取 /work-reports/ 目錄中的 Markdown 檔案
+ * William Hub Reports API - 支援 Supabase 和檔案系統
+ * 優先從 Supabase 獲取，若失敗則使用本地檔案
  */
 
+import { createClient } from '@supabase/supabase-js'
 import fs from 'fs'
 import path from 'path'
 
-const WORK_REPORTS_DIR = path.join(process.cwd(), '../work-reports')
+// Supabase client (server-side)
+const supabaseUrl = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null
+
+const WORK_REPORTS_DIR = path.join(process.cwd(), 'work-reports')
 
 /**
- * 讀取並解析 Markdown 檔案的 frontmatter 和內容
+ * 從 Supabase 獲取報告
+ */
+async function fetchReportsFromSupabase() {
+  if (!supabase) return null
+  
+  try {
+    const { data, error } = await supabase
+      .from('reports')
+      .select('*')
+      .order('created_at', { ascending: false })
+    
+    if (error) {
+      console.log('Supabase error:', error.message)
+      return null
+    }
+    
+    return data || []
+  } catch (error) {
+    console.log('Supabase fetch error:', error)
+    return null
+  }
+}
+
+/**
+ * 讀取並解析 Markdown 檔案
  */
 function parseMarkdownFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf-8')
+    const stats = fs.statSync(filePath)
     
-    // 簡單的 frontmatter 解析
+    // 解析 frontmatter
     const lines = content.split('\n')
     let frontmatter = {}
     let contentStart = 0
@@ -28,76 +60,70 @@ function parseMarkdownFile(filePath) {
         }
         const match = lines[i].match(/^(\w+):\s*(.+)$/)
         if (match) {
-          frontmatter[match[1]] = match[2]
+          frontmatter[match[1]] = match[2].trim()
         }
       }
     }
     
     const bodyContent = lines.slice(contentStart).join('\n')
     
-    // 提取標題（第一個 # 標題）
+    // 提取標題
     const titleMatch = bodyContent.match(/^#\s+(.+)$/m)
     const title = frontmatter.title || (titleMatch ? titleMatch[1] : path.basename(filePath, '.md'))
     
-    // 生成摘要（前 200 字符）
-    const summary = bodyContent.replace(/^#.+$/gm, '').trim().substring(0, 200)
+    // 生成摘要
+    const summary = bodyContent.replace(/^#.+$/gm, '').trim().substring(0, 200).trim()
     
     return {
+      id: path.basename(filePath, '.md'),
       title,
       summary: summary + (summary.length >= 200 ? '...' : ''),
       content: bodyContent,
-      frontmatter,
-      fileSize: content.length
+      category: frontmatter.category || 'council',
+      source: 'grok-council',
+      tags: frontmatter.tags ? frontmatter.tags.split(',').map(t => t.trim()) : ['grok'],
+      author: frontmatter.author || 'William Hub',
+      created_at: stats.mtime.toISOString(),
+      updated_at: stats.mtime.toISOString()
     }
   } catch (error) {
-    console.error(`解析檔案 ${filePath} 失敗:`, error)
+    console.error(`解析檔案失敗: ${filePath}`, error)
     return null
   }
 }
 
 /**
- * 掃描報告目錄並建立報告清單
+ * 從檔案系統獲取報告
  */
-function scanReportsDirectory() {
+function fetchReportsFromFilesystem() {
   const reports = []
   
   try {
     if (!fs.existsSync(WORK_REPORTS_DIR)) {
-      console.warn('work-reports 目錄不存在:', WORK_REPORTS_DIR)
+      console.log('work-reports 目錄不存在')
       return reports
     }
     
     const categories = fs.readdirSync(WORK_REPORTS_DIR)
-      .filter(item => fs.statSync(path.join(WORK_REPORTS_DIR, item)).isDirectory())
+      .filter(item => {
+        const itemPath = path.join(WORK_REPORTS_DIR, item)
+        return fs.statSync(itemPath).isDirectory()
+      })
     
-    categories.forEach(category => {
+    for (const category of categories) {
       const categoryPath = path.join(WORK_REPORTS_DIR, category)
       const files = fs.readdirSync(categoryPath)
         .filter(file => file.endsWith('.md'))
       
-      files.forEach(file => {
+      for (const file of files) {
         const filePath = path.join(categoryPath, file)
-        const stats = fs.statSync(filePath)
         const parsedFile = parseMarkdownFile(filePath)
         
         if (parsedFile) {
-          reports.push({
-            id: `${category}-${path.basename(file, '.md')}`,
-            title: parsedFile.title,
-            summary: parsedFile.summary,
-            category,
-            source: 'work-reports',
-            file_path: file,
-            created_at: stats.mtime.toISOString(),
-            updated_at: stats.mtime.toISOString(),
-            author: parsedFile.frontmatter.author || 'Travis AI Agent',
-            tags: parsedFile.frontmatter.tags ? parsedFile.frontmatter.tags.split(',') : [category],
-            is_work_output: true,
-            file_size: parsedFile.fileSize
-          })
+          reports.push(parsedFile)
         }
-      })
-    })
+      }
+    }
     
     // 按創建時間排序
     reports.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -118,16 +144,27 @@ function filterReports(reports, query) {
   // 關鍵字搜尋
   if (query.search) {
     const searchTerm = query.search.toLowerCase()
-    filtered = filtered.filter(report => 
-      report.title.toLowerCase().includes(searchTerm) ||
-      report.summary.toLowerCase().includes(searchTerm) ||
-      report.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-    )
+    filtered = filtered.filter(report => {
+      const title = (report.title || '').toLowerCase()
+      const summary = (report.summary || '').toLowerCase()
+      const content = (report.content || '').toLowerCase()
+      const tags = Array.isArray(report.tags) ? report.tags.join(' ').toLowerCase() : ''
+      
+      return title.includes(searchTerm) || 
+             summary.includes(searchTerm) || 
+             content.includes(searchTerm) ||
+             tags.includes(searchTerm)
+    })
   }
   
   // 分類過濾
   if (query.category) {
     filtered = filtered.filter(report => report.category === query.category)
+  }
+  
+  // 來源過濾
+  if (query.source) {
+    filtered = filtered.filter(report => report.source === query.source)
   }
   
   // 日期範圍過濾
@@ -156,29 +193,27 @@ function generateStatistics(reports) {
   const oneWeekAgo = new Date()
   oneWeekAgo.setDate(oneWeekAgo.getDate() - 7)
   
-  reports.forEach(report => {
-    // 按分類統計
-    stats.by_category[report.category] = (stats.by_category[report.category] || 0) + 1
+  for (const report of reports) {
+    const category = report.category || 'uncategorized'
+    stats.by_category[category] = (stats.by_category[category] || 0) + 1
     
-    // 按來源統計
-    stats.by_source[report.source] = (stats.by_source[report.source] || 0) + 1
+    const source = report.source || 'unknown'
+    stats.by_source[source] = (stats.by_source[source] || 0) + 1
     
-    // 最近一週統計
     if (new Date(report.created_at) > oneWeekAgo) {
       stats.recent_count++
     }
-  })
+  }
   
   return stats
 }
 
 /**
- * 主要 API 處理函數
+ * API 處理函數
  */
 export default async function handler(req, res) {
   const { method, query } = req
   
-  // 設定 CORS
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
@@ -191,8 +226,15 @@ export default async function handler(req, res) {
   }
   
   try {
-    // 掃描報告目錄
-    const allReports = scanReportsDirectory()
+    // 優先從 Supabase 獲取，失敗則使用檔案系統
+    let allReports = await fetchReportsFromSupabase()
+    
+    if (!allReports || allReports.length === 0) {
+      console.log('使用檔案系統獲取報告')
+      allReports = fetchReportsFromFilesystem()
+    } else {
+      console.log(`從 Supabase 獲取 ${allReports.length} 個報告`)
+    }
     
     // 統計資訊請求
     if (query.stats === 'true') {
@@ -219,12 +261,7 @@ export default async function handler(req, res) {
         limit,
         total: filteredReports.length
       },
-      debug: {
-        work_reports_dir: WORK_REPORTS_DIR,
-        directory_exists: fs.existsSync(WORK_REPORTS_DIR),
-        total_scanned: allReports.length,
-        after_filter: filteredReports.length
-      }
+      source: allReports.length > 0 ? 'database' : 'filesystem'
     })
     
   } catch (error) {
@@ -232,11 +269,7 @@ export default async function handler(req, res) {
     return res.status(500).json({
       success: false,
       error: '內部伺服器錯誤',
-      details: process.env.NODE_ENV === 'development' ? error.message : undefined,
-      debug: {
-        work_reports_dir: WORK_REPORTS_DIR,
-        directory_exists: fs.existsSync(WORK_REPORTS_DIR)
-      }
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
     })
   }
 }
