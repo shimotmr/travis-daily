@@ -4,13 +4,17 @@
  */
 
 import React, { useState, useEffect, useCallback } from 'react'
-import { Search, Filter, Calendar, FileText, Tag, AlertCircle } from 'lucide-react'
+import { Search, Filter, Calendar, FileText, Tag, AlertCircle, Check, CheckSquare, Square, ChevronDown, ChevronUp } from 'lucide-react'
+import Link from 'next/link'
 
 const ReportSystem = () => {
   const [reports, setReports] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [statistics, setStatistics] = useState<any>({})
+  const [selectedReports, setSelectedReports] = useState<Set<string>>(new Set())
+  const [selectAll, setSelectAll] = useState(false)
+  const [showFilters, setShowFilters] = useState(true)
   
   // 篩選狀態
   const [filters, setFilters] = useState({
@@ -148,12 +152,48 @@ const ReportSystem = () => {
     })
   }
 
+  /**
+   * 處理單一選擇
+   */
+  const toggleSelect = (id: string) => {
+    setSelectedReports(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(id)) {
+        newSet.delete(id)
+      } else {
+        newSet.add(id)
+      }
+      return newSet
+    })
+  }
+
+  /**
+   * 處理全選
+   */
+  const toggleSelectAll = () => {
+    if (selectAll) {
+      setSelectedReports(new Set())
+      setSelectAll(false)
+    } else {
+      setSelectedReports(new Set(reports.map(r => r.id)))
+      setSelectAll(true)
+    }
+  }
+
+  /**
+   * 清除所有選擇
+   */
+  const clearSelection = () => {
+    setSelectedReports(new Set())
+    setSelectAll(false)
+  }
+
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
       {/* 標題和統計 */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          工作報告系統
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+          📊 工作報告系統
         </h1>
         
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
@@ -225,6 +265,8 @@ const ReportSystem = () => {
               onChange={(e) => handleFilterChange('category', e.target.value)}
             >
               <option value="">所有分類</option>
+              <option value="council">🏛️ 議事廳</option>
+              <option value="technical">💻 技術報告</option>
               <option value="work-output">工作產出</option>
               <option value="project-analysis">專案分析</option>
               <option value="weekly-summary">週報</option>
@@ -288,29 +330,87 @@ const ReportSystem = () => {
       {/* 報告列表 */}
       {!loading && reports.length > 0 && (
         <div className="space-y-4">
+          {/* 批量操作工具欄 */}
+          {reports.length > 0 && (
+            <div className="bg-white rounded-lg border p-4 mb-4 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={toggleSelectAll}
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-blue-600"
+                >
+                  {selectAll ? (
+                    <CheckSquare className="w-5 h-5 text-blue-600" />
+                  ) : (
+                    <Square className="w-5 h-5" />
+                  )}
+                  <span className="hidden sm:inline">全選 ({reports.length})</span>
+                </button>
+                {selectedReports.size > 0 && (
+                  <span className="text-sm text-gray-500">
+                    已選擇 {selectedReports.size} 項
+                  </span>
+                )}
+              </div>
+              {selectedReports.size > 0 && (
+                <button
+                  onClick={clearSelection}
+                  className="text-sm text-red-600 hover:text-red-800"
+                >
+                  清除選擇
+                </button>
+              )}
+            </div>
+          )}
+          
           {reports.map((report) => (
-            <div key={report.id} className="bg-white rounded-lg border p-6 hover:shadow-md transition-shadow">
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {report.title}
-                  </h3>
+            <div 
+              key={report.id} 
+              className={`bg-white rounded-lg border p-4 sm:p-6 hover:shadow-md transition-shadow ${
+                selectedReports.has(report.id) ? 'ring-2 ring-blue-500' : ''
+              }`}
+            >
+              <div className="flex items-start gap-3 sm:gap-4">
+                {/* 選擇框 */}
+                <button
+                  onClick={() => toggleSelect(report.id)}
+                  className="mt-1 flex-shrink-0 text-gray-400 hover:text-blue-600"
+                >
+                  {selectedReports.has(report.id) ? (
+                    <CheckSquare className="w-5 h-5 text-blue-600" />
+                  ) : (
+                    <Square className="w-5 h-5" />
+                  )}
+                </button>
+                
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 break-words">
+                      {report.title}
+                    </h3>
+                    <Link 
+                      href={`/reports/${report.id}`}
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium whitespace-nowrap"
+                    >
+                      查看詳情 →
+                    </Link>
+                  </div>
                   
                   {report.summary && (
-                    <p className="text-gray-600 mb-4 line-clamp-3">
+                    <p className="text-gray-600 mt-2 line-clamp-2 sm:line-clamp-3">
                       {report.summary}
                     </p>
                   )}
                   
-                  <div className="flex items-center space-x-6 text-sm text-gray-500">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3 text-sm text-gray-500">
                     <div className="flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
-                      {formatDate(report.created_at)}
+                      <span className="hidden sm:inline">{formatDate(report.created_at)}</span>
+                      <span className="sm:hidden">{new Date(report.created_at).toLocaleDateString('zh-TW')}</span>
                     </div>
                     
                     <div className="flex items-center">
                       <Tag className="w-4 h-4 mr-1" />
-                      {report.category}
+                      <span className="capitalize">{report.category}</span>
                     </div>
                     
                     <div className="flex items-center">
@@ -334,12 +434,6 @@ const ReportSystem = () => {
                       </div>
                     </div>
                   )}
-                </div>
-                
-                <div className="ml-4">
-                  <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                    查看詳情
-                  </button>
                 </div>
               </div>
             </div>

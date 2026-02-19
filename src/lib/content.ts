@@ -2,9 +2,12 @@ import fs from 'fs'
 import path from 'path'
 
 import matter from 'gray-matter'
-import { remark } from 'remark'
 import gfm from 'remark-gfm'
-import html from 'remark-html'
+import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeStringify from 'rehype-stringify'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
 
 const contentDir = path.join(process.cwd(), 'content')
 
@@ -89,8 +92,25 @@ export function getPrivatePosts(): Post[] {
 }
 
 export async function renderMarkdown(md: string): Promise<string> {
-  const result = await remark().use(gfm).use(html, { sanitize: false }).process(md)
-  return result.toString()
+  const file = await unified()
+    .use(remarkParse)
+    .use(gfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypePrettyCode, {
+      theme: 'github-dark',
+      keepBackground: true,
+      defaultLang: 'plaintext',
+      onVisitLine(node: any) {
+        // Prevent lines from collapsing in `display: grid` mode, and allow empty lines to be copy/pasted
+        if (node.children.length === 0) {
+          node.children = [{ type: 'text', value: ' ' }]
+        }
+      },
+    })
+    .use(rehypeStringify, { allowDangerousHtml: true })
+    .process(md)
+  
+  return String(file)
 }
 
 export function getPostsByType(type: string): Post[] {

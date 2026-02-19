@@ -284,3 +284,99 @@
 .name-tag {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+/* Syntax Highlighting - rehype-pretty-code */
+pre {
+  @apply bg-[#0d1117] text-[#c9d1d9] p-4 rounded-xl overflow-x-auto my-4 border border-[#30363d];
+  tab-size: 2;
+}
+
+pre code {
+  @apply bg-transparent p-0 text-sm leading-relaxed;
+  counter-reset: line;
+}
+
+code {
+  @apply font-mono;
+}
+
+/* Line numbers */
+code[data-line-numbers] {
+  counter-reset: line;
+}
+
+code[data-line-numbers] > span[data-line] {
+  @apply pl-4;
+}
+
+code[data-line-numbers] > span[data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block w-6 mr-4 text-[#6e7681] text-right;
+}
+
+/* Highlighted lines */
+span[data-highlighted-line] {
+  @apply bg-[#1f6feb]/20 block -mx-4 px-4 border-l-2 border-[#1f6feb];
+}
+
+/* Syntax tokens - GitHub Dark theme colors */
+span[data-line] .token.comment,
+span[data-line] .token.prolog,
+span[data-line] .token.doctype,
+span[data-line] .token.cdata {
+  @apply text-[#8b949e];
+}
+
+span[data-line] .token.punctuation {
+  @apply text-[#c9d1d9];
+}
+
+span[data-line] .token.property,
+span[data-line] .token.tag,
+span[data-line] .token.boolean,
+span[data-line] .token.number,
+span[data-line] .token.constant,
+span[data-line] .token.symbol,
+span[data-line] .token.deleted {
+  @apply text-[#79c0ff];
+}
+
+span[data-line] .token.selector,
+span[data-line] .token.attr-name,
+span[data-line] .token.string,
+span[data-line] .token.char,
+span[data-line] .token.builtin,
+span[data-line] .token.inserted {
+  @apply text-[#a5d6ff];
+}
+
+span[data-line] .token.operator,
+span[data-line] .token.entity,
+span[data-line] .token.url,
+span[data-line] .language-css .token.string,
+span[data-line] .style .token.string {
+  @apply text-[#d2a8ff];
+}
+
+span[data-line] .token.atrule,
+span[data-line] .token.attr-value,
+span[data-line] .token.keyword {
+  @apply text-[#ff7b72];
+}
+
+span[data-line] .token.function,
+span[data-line] .token.class-name {
+  @apply text-[#d2a8ff];
+}
+
+span[data-line] .token.regex,
+span[data-line] .token.important,
+span[data-line] .token.variable {
+  @apply text-[#ffa657];
+}
+
+/* Plaintext fallback */
+.token.plaintext {
+  @apply text-[#c9d1d9];
+}

@@ -74,6 +74,18 @@ function parseMarkdownFile(filePath) {
     // 生成摘要
     const summary = bodyContent.replace(/^#.+$/gm, '').trim().substring(0, 200).trim()
     
+    // 解析標籤 - 支援陣列格式 [tag1, tag2] 和逗號分隔格式 tag1, tag2
+    let tags = ['grok']
+    if (frontmatter.tags) {
+      if (frontmatter.tags.startsWith('[')) {
+        // 陣列格式: [grok, ai-breakthrough]
+        tags = frontmatter.tags.slice(1, -1).split(',').map(t => t.trim())
+      } else {
+        // 逗號分隔格式
+        tags = frontmatter.tags.split(',').map(t => t.trim())
+      }
+    }
+    
     return {
       id: path.basename(filePath, '.md'),
       title,
@@ -81,7 +93,7 @@ function parseMarkdownFile(filePath) {
       content: bodyContent,
       category: frontmatter.category || 'council',
       source: 'grok-council',
-      tags: frontmatter.tags ? frontmatter.tags.split(',').map(t => t.trim()) : ['grok'],
+      tags,
       author: frontmatter.author || 'William Hub',
       created_at: stats.mtime.toISOString(),
       updated_at: stats.mtime.toISOString()
