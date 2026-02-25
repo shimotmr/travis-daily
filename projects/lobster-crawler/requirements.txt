@@ -1,0 +1,32 @@
+# Firecrawl API
+firecrawl-py>=1.0.0
+
+# HTTP 請求
+requests>=2.31.0
+
+# 資料處理
+beautifulsoup4>=4.12.0
+markdownify>=0.11.6
+
+# 翻譯
+deep-translator>=1.11.4
+googletrans==4.0.0-rc1
+
+# 報表生成
+jinja2>=3.1.2
+weasyprint>=60.0
+
+# GitHub 整合
+PyGithub>=2.1.1
+
+# 資料處理
+pandas>=2.0.0
+python-dateutil>=2.8.0
+
+# 設定檔
+pyyaml>=6.0.1
+
+# 其他工具
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+rich>=13.5.0

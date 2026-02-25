@@ -1,0 +1,61 @@
+# 龍蝦爬蟲大法系統設定檔
+
+# Firecrawl API 設定
+firecrawl:
+  api_key: ""  # 填入你的 Firecrawl API Key
+  base_url: "https://api.firecrawl.dev"
+  rate_limit: 10  # 每秒請求限制
+  timeout: 60
+  formats:
+    - "markdown"
+    - "html"
+    - "screenshot"
+
+# 翻譯設定
+translation:
+  enabled: true
+  service: "google"  # 選項: google, deep_translator
+  source_lang: "auto"  # 自動偵測
+  target_lang: "zh-TW"  # 預設翻譯為繁體中文
+  fallback_lang: "en"
+
+# GitHub 同步設定
+github:
+  token: ""  # GitHub Personal Access Token
+  repo_owner: ""
+  repo_name: "lobster-intelligence"
+  branch: "main"
+  data_path: "data"
+  reports_path: "reports"
+  auto_commit: true
+  commit_message_template: "[龍蝦爬蟲] 自動更新情報 - {timestamp}"
+
+# 爬蟲設定
+crawler:
+  max_pages: 100
+  follow_links: false
+  respect_robots: true
+  user_agent: "LobsterCrawler/1.0 (Intelligence Bot)"
+  delay: 1.0  # 請求間隔（秒）
+  
+# 報表設定
+report:
+  format: "markdown"  # 選項: markdown, html, pdf
+  template_dir: "templates"
+  include_summary: true
+  include_translation: true
+  include_metadata: true
+
+# 目標網站設定
+targets:
+  - name: "Tech News"
+    url: "https://news.ycombinator.com"
+    category: "technology"
+    schedule: "0 9 * * *"  # 每天早上 9 點
+    translate: true
+    
+  - name: "AI News"
+    url: "https://www.reddit.com/r/MachineLearning"
+    category: "ai"
+    schedule: "0 10 * * *"
+    translate: true
