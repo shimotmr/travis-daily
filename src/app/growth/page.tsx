@@ -8,7 +8,7 @@ import { getPostBySlug, renderMarkdown } from '@/lib/content'
 import { formatDate } from '@/lib/utils'
 
 export default async function GrowthPage() {
-  const post = getPostBySlug('growth')
+  const post = await getPostBySlug('growth')
 
   if (!post) {
     return (

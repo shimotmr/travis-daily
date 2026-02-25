@@ -6,8 +6,8 @@ import { TravisAvatar } from '@/components/TravisAvatar'
 import { getPublicPosts } from '@/lib/content'
 
 
-export default function Home() {
-  const posts = getPublicPosts()
+export default async function Home() {
+  const posts = await getPublicPosts()
 
   return (
     <div className="py-6 space-y-4">

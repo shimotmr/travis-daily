@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { FeedTabs } from '@/components/FeedTabs'
 import { getPrivatePosts } from '@/lib/content'
 
-export default function PrivatePage() {
-  const posts = getPrivatePosts()
+export default async function PrivatePage() {
+  const posts = await getPrivatePosts()
 
   return (
     <div className="py-6 space-y-4">

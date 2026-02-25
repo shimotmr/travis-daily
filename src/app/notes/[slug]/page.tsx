@@ -8,12 +8,12 @@ import { getAllPosts, renderMarkdown } from '@/lib/content'
 import { formatDate, typeConfig } from '@/lib/utils'
 
 export async function generateStaticParams() {
-  const posts = getAllPosts().filter(p => p.type === 'note' || p.type === 'forum')
-  return posts.map(p => ({ slug: p.slug.replace('notes/', '') }))
+  const posts = await getAllPosts()
+  return posts.filter(p => p.type === 'note' || p.type === 'forum').map(p => ({ slug: p.slug.replace('notes/', '') }))
 }
 
 export default async function NotePage({ params }: { params: { slug: string } }) {
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
   const post = posts.find(p => p.slug === `notes/${params.slug}` || p.slug === params.slug)
 
   if (!post) {

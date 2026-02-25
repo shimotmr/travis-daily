@@ -10,12 +10,12 @@ import { formatDate, typeConfig } from '@/lib/utils'
 
 
 export async function generateStaticParams() {
-  const posts = getAllPosts().filter(p => p.type === 'digest' || p.type === 'note' || p.type === 'task-update')
-  return posts.map(p => ({ date: p.date }))
+  const posts = await getAllPosts()
+  return posts.filter(p => p.type === 'digest' || p.type === 'note' || p.type === 'task-update').map(p => ({ date: p.date }))
 }
 
 export default async function DigestPage({ params }: { params: { date: string } }) {
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
   const post = posts.find(p => p.date === params.date)
 
   if (!post) {
