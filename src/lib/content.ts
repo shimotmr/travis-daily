@@ -7,11 +7,13 @@ import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+// Initialize Supabase client with fallback for build time
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+
+const supabase = supabaseUrl && supabaseKey
+  ? createClient(supabaseUrl, supabaseKey)
+  : null
 
 export interface Post {
   slug: string
@@ -53,6 +55,10 @@ function reportToPost(report: any): Post {
 }
 
 export async function getAllPosts(): Promise<Post[]> {
+  if (!supabase) {
+    console.warn('Supabase not initialized - returning empty posts')
+    return []
+  }
   try {
     const { data: reports, error } = await supabase
       .from('reports')
@@ -73,6 +79,9 @@ export async function getAllPosts(): Promise<Post[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  if (!supabase) {
+    return null
+  }
   try {
     // First try to find by ID (exact match)
     let { data: report, error } = await supabase
@@ -135,6 +144,9 @@ export async function renderMarkdown(md: string): Promise<string> {
 }
 
 export async function getPostsByType(type: string): Promise<Post[]> {
+  if (!supabase) {
+    return []
+  }
   try {
     const { data: reports, error } = await supabase
       .from('reports')

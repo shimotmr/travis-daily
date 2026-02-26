@@ -333,12 +333,18 @@ async function getSubagentStatus(agentId: string): Promise<{
 
 // Get agent task stats from Supabase board_tasks
 async function getAgentTaskStatsFromSupabase(): Promise<Record<string, { executing: number; completedToday: number; latestTask: string | null }>> {
+  // Check if Supabase credentials are available
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.warn('Supabase credentials not available - returning empty stats');
+    return {};
+  }
+  
   const { createClient } = await import('@supabase/supabase-js');
   
   try {
     const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.SUPABASE_SERVICE_ROLE_KEY
     );
     
     const today = new Date();
