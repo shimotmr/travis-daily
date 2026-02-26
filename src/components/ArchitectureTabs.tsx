@@ -89,7 +89,7 @@ const tabs = [
     description: '完整的系統架構——Mac mini 為核心，OpenClaw Gateway 管理多 Agent，連結 Supabase、Vercel 網站、LINE Bot、Telegram，以及 Zimbra 郵件資料流。',
     details: [
       { title: 'Mac mini (Travis AI)', icon: Server, desc: 'OpenClaw Gateway 主機，運行 Scripts、Cron Jobs，所有 Agent 的執行環境' },
-      { title: 'OpenClaw Gateway', icon: Workflow, desc: '管理多 Agent 派遣：Travis（主）、Coder（開發）、Inspector（監控）等' },
+      { title: 'OpenClaw Gateway', icon: Workflow, desc: '管理多 Agent 派遣：Travis（主）、Blake（開發）、Rex（研究）、Oscar（行政）、Warren（交易）、Griffin（監控）' },
       { title: 'Supabase', icon: Database, desc: 'PostgreSQL 資料庫，儲存 Portal 業績、看板任務、使用者資料' },
       { title: 'Travis Daily + William Hub', icon: Globe, desc: '兩個 Next.js 網站，部署於 Vercel，透過 GitHub 自動 CI/CD' },
       { title: 'LINE Bot + Telegram', icon: Smartphone, desc: 'LINE：業績通知推送；Telegram：Travis AI 主要對話介面' },
@@ -100,8 +100,11 @@ const tabs = [
       Gateway["OpenClaw Gateway"]
       Scripts["Scripts + Cron Jobs"]
       Gateway --> Travis_Agent["Travis\nMain Agent"]
-      Gateway --> Coder["Coder\nDev Agent"]
-      Gateway --> Inspector["Inspector\nMonitor Agent"]
+      Gateway --> Blake["Blake\nBuilder"]
+      Gateway --> Rex["Rex\nThinker"]
+      Gateway --> Oscar["Oscar\nOperator"]
+      Gateway --> Warren["Warren\nTrader"]
+      Gateway --> Griffin["Griffin\nGuardian"]
     end
 
     subgraph Cloud["Cloud Services"]

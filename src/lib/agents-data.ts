@@ -17,10 +17,10 @@ export const agents: Agent[] = [
   {
     id: 'travis',
     name: 'Travis',
-    role: 'Main Agent',
+    role: 'Manager',
     description: 'William 的主要 AI 助手，負責協調其他 agents、處理複雜任務、做出決策。',
     expertise: ['任務編排', '決策制定', '系統監控', '記憶管理'],
-    model: 'Claude Opus 4.6',
+    model: 'Claude Sonnet 4.6',
     status: 'online',
     avatar: '/avatars/travis.png',
     avatarPosition: 'center center',
@@ -31,14 +31,14 @@ export const agents: Agent[] = [
     ]
   },
   {
-    id: 'analyst',
-    name: 'Analyst',
-    role: 'Data Analyst',
-    description: '專注於數據分析、業績追蹤、趨勢洞察。',
-    expertise: ['數據分析', '業績追蹤', 'Pipeline 風險評估', '趨勢預測'],
-    model: 'Claude Sonnet 4.5',
+    id: 'warren',
+    name: 'Warren',
+    role: 'Trader',
+    description: '專注於數據分析、交易決策、風險管理。',
+    expertise: ['數據分析', '交易策略', '風險管理', '趨勢預測'],
+    model: 'MiniMax M2.5',
     status: 'online',
-    avatar: '/avatars/analyst.png',
+    avatar: '/avatars/warren.png',
     avatarPosition: 'center 30%',
     recentTasks: [
       '週度 Pipeline 風險分析',
@@ -47,14 +47,14 @@ export const agents: Agent[] = [
     ]
   },
   {
-    id: 'coder',
-    name: 'Coder',
-    role: 'Software Developer',
+    id: 'blake',
+    name: 'Blake',
+    role: 'Builder',
     description: '負責程式開發、bug 修復、功能實作。',
     expertise: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    model: 'Claude Sonnet 4.5',
+    model: 'MiniMax M2.5',
     status: 'online',
-    avatar: '/avatars/coder.png',
+    avatar: '/avatars/blake.png',
     avatarPosition: 'center 35%',
     recentTasks: [
       '實作 Agent 詳情頁',
@@ -63,30 +63,14 @@ export const agents: Agent[] = [
     ]
   },
   {
-    id: 'designer',
-    name: 'Designer',
-    role: 'UI/UX Designer',
-    description: '負責視覺設計、使用者體驗、品牌一致性審查。',
-    expertise: ['UI 設計', 'UX 審查', '響應式設計', '品牌一致性'],
-    model: 'Claude Sonnet 4.5',
-    status: 'online',
-    avatar: '/avatars/designer.png',
-    avatarPosition: 'center 40%',
-    recentTasks: [
-      '審查 Agent 卡片設計',
-      '優化手機版排版',
-      '暗色主題調整'
-    ]
-  },
-  {
-    id: 'inspector',
-    name: 'Inspector',
-    role: 'Quality Assurance',
-    description: '負責功能測試、內容審查、連結驗證。',
+    id: 'griffin',
+    name: 'Griffin',
+    role: 'Guardian',
+    description: '負責功能測試、內容審查、連結驗證、品質把關。',
     expertise: ['功能測試', '內容審查', 'Bug 追蹤', '品質控制'],
-    model: 'Claude Sonnet 4.5',
+    model: 'MiniMax M2.5',
     status: 'online',
-    avatar: '/avatars/inspector.png',
+    avatar: '/avatars/griffin.png',
     avatarPosition: 'center 25%',
     recentTasks: [
       '每日網站巡檢',
@@ -95,14 +79,14 @@ export const agents: Agent[] = [
     ]
   },
   {
-    id: 'researcher',
-    name: 'Researcher',
-    role: 'Research Specialist',
+    id: 'rex',
+    name: 'Rex',
+    role: 'Thinker',
     description: '負責深度研究、技能發掘、市場調查。',
     expertise: ['深度研究', '技能評估', '市場分析', '趨勢追蹤'],
-    model: 'Claude Sonnet 4.5',
+    model: 'MiniMax M2.5',
     status: 'online',
-    avatar: '/avatars/researcher.png',
+    avatar: '/avatars/rex.png',
     avatarPosition: 'center 30%',
     recentTasks: [
       '每日掃描錯誤日誌',
@@ -111,35 +95,19 @@ export const agents: Agent[] = [
     ]
   },
   {
-    id: 'secretary',
-    name: 'Secretary',
-    role: 'Personal Assistant',
+    id: 'oscar',
+    name: 'Oscar',
+    role: 'Operator',
     description: '負責郵件處理、行程管理、文件整理。',
     expertise: ['郵件管理', '行程安排', '文件整理', '提醒通知'],
-    model: 'Claude Sonnet 4.5',
+    model: 'MiniMax M2.5',
     status: 'online',
-    avatar: '/avatars/secretary.png',
+    avatar: '/avatars/oscar.png',
     avatarPosition: 'center 35%',
     recentTasks: [
       '早晨郵件摘要',
       'Zimbra 簽核檢查',
       '行事曆同步'
-    ]
-  },
-  {
-    id: 'writer',
-    name: 'Writer',
-    role: 'Content Writer',
-    description: '負責文章撰寫、報告產出、文案優化。',
-    expertise: ['文章撰寫', '報告產出', 'SEO 優化', '內容策劃'],
-    model: 'Claude Sonnet 4.5',
-    status: 'online',
-    avatar: '/avatars/writer.png',
-    avatarPosition: 'center 30%',
-    recentTasks: [
-      '撰寫週度研究報告',
-      '優化專欄文章',
-      '產出技術文件'
     ]
   }
 ]

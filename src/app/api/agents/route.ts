@@ -11,36 +11,47 @@ const OFFLINE_THRESHOLD_MS = 60 * 60 * 1000; // 60 minutes - 紅燈
 // Status types matching the requirement
 type AgentStatus = 'active' | 'idle' | 'offline' | 'executing';
 
-// Agent configuration from openclaw.json
+// Agent configuration - Updated to new agent names
 const agentsConfig = [
   {
     id: 'main',
     name: 'Travis',
     emoji: '🤖',
-    role: '協調者',
+    role: 'Manager',
     description: 'William 的 AI 助手，負責任務派發與流水線管理，協調所有執行者',
     color: '#8B5CF6',
     skills: ['任務派發', '流水線管理', '決策', '協調'],
     model: 'claude-sonnet-4-20250514',
-    quote: '協調者上線 - 隨時可對話，負責任務派發與流水線管理',
+    quote: '協調者隨時可對上線 - 話，負責任務派發與流水線管理',
     isCoordinator: true
   },
   {
-    id: 'coder',
-    name: 'Coder',
+    id: 'blake',
+    name: 'Blake',
     emoji: '💻',
-    role: '程式開發',
+    role: 'Builder',
     description: '專注於程式開發和技術實現',
     color: '#10B981',
     skills: ['程式開發', '重構', '調試', 'Code Review'],
     model: 'minimax/MiniMax-M2.5',
-    quote: '程式碼是詩，邏輯是藝術。'
+    quote: '沒有我寫不出來的程式，只有還沒想到的架構。'
   },
   {
-    id: 'secretary',
-    name: 'Secretary',
+    id: 'rex',
+    name: 'Rex',
+    emoji: '🔬',
+    role: 'Thinker',
+    description: '負責市場研究和深度分析',
+    color: '#3B82F6',
+    skills: ['研究分析', '市場調查', '數據分析', '報告產出'],
+    model: 'minimax/MiniMax-M2.5',
+    quote: '答案永遠藏在下一頁。'
+  },
+  {
+    id: 'oscar',
+    name: 'Oscar',
     emoji: '📋',
-    role: '行政助理',
+    role: 'Operator',
     description: '處理日程、郵件和行政事務',
     color: '#EC4899',
     skills: ['日程管理', '郵件處理', '會議安排', '文件整理'],
@@ -48,37 +59,26 @@ const agentsConfig = [
     quote: '效率是成功的關鍵。'
   },
   {
-    id: 'writer',
-    name: 'Writer',
-    emoji: '✍️',
-    role: '內容創作',
-    description: '專注於文章、報告和創意寫作',
-    color: '#8B5CF6',
-    skills: ['寫作', '編輯', '翻譯', '內容策略'],
-    model: 'moonshot/moonshot-v1-128k',
-    quote: '文字的力量，改變世界的起點。'
-  },
-  {
-    id: 'researcher',
-    name: 'Researcher',
-    emoji: '🔬',
-    role: '研究分析',
-    description: '負責市場研究和深度分析',
-    color: '#3B82F6',
-    skills: ['研究分析', '市場調查', '數據分析', '報告產出'],
+    id: 'warren',
+    name: 'Warren',
+    emoji: '📈',
+    role: 'Trader',
+    description: '負責交易分析、風險管理和投資決策',
+    color: '#F59E0B',
+    skills: ['交易分析', '風險管理', '投資決策', '數據追蹤'],
     model: 'minimax/MiniMax-M2.5',
     quote: '數據驅動決策，洞見創造價值。'
   },
   {
-    id: 'designer',
-    name: 'Designer',
-    emoji: '🎨',
-    role: '設計師',
-    description: '負責視覺設計和用戶體驗優化',
-    color: '#F59E0B',
-    skills: ['UI設計', 'UX優化', '品牌設計', '動效'],
+    id: 'griffin',
+    name: 'Griffin',
+    emoji: '🛡️',
+    role: 'Guardian',
+    description: '負責品質稽核、安全審查和風險評估',
+    color: '#EF4444',
+    skills: ['品質稽核', '安全審查', '風險評估', '合規檢查'],
     model: 'minimax/MiniMax-M2.5',
-    quote: '設計讓世界更美好。'
+    quote: '通過我的審查，才算真正完成。'
   }
 ];
 
@@ -331,11 +331,66 @@ async function getSubagentStatus(agentId: string): Promise<{
   }
 }
 
+// Get agent task stats from Supabase board_tasks
+async function getAgentTaskStatsFromSupabase(): Promise<Record<string, { executing: number; completedToday: number; latestTask: string | null }>> {
+  const { createClient } = await import('@supabase/supabase-js');
+  
+  try {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayISO = today.toISOString();
+    
+    const { data, error } = await supabase
+      .from('board_tasks')
+      .select('assignee, status, title, updated_at, completed_at')
+      .gte('updated_at', todayISO);
+    
+    if (error || !data) {
+      console.error('Error fetching agent stats:', error);
+      return {};
+    }
+    
+    const stats: Record<string, { executing: number; completedToday: number; latestTask: string | null }> = {};
+    
+    // Initialize all agents
+    const agentIds = ['blake', 'rex', 'oscar', 'warren', 'griffin'];
+    for (const id of agentIds) {
+      stats[id] = { executing: 0, completedToday: 0, latestTask: null };
+    }
+    
+    for (const task of data) {
+      const assignee = task.assignee;
+      if (!assignee || !agentIds.includes(assignee)) continue;
+      
+      if (task.status === '執行中') {
+        stats[assignee].executing++;
+        stats[assignee].latestTask = task.title;
+      } else if (task.status === '已完成' && task.completed_at && new Date(task.completed_at) >= today) {
+        stats[assignee].completedToday++;
+        if (!stats[assignee].latestTask) {
+          stats[assignee].latestTask = task.title;
+        }
+      }
+    }
+    
+    return stats;
+  } catch (error) {
+    console.error('Supabase error:', error);
+    return {};
+  }
+}
+
 // Build dynamic agent data
 async function buildAgentsData() {
   const isGatewayRunning = await checkGatewayHealth();
   const mainAgentLastActivity = await getMainAgentLastActivity();
   const runningTasks = await getRunningTasks();
+  const agentTaskStats = await getAgentTaskStatsFromSupabase();
   
   const now = Date.now();
   
@@ -366,6 +421,19 @@ async function buildAgentsData() {
     let finalStatusColor = statusInfo.statusColor;
     let finalPulse = statusInfo.pulse;
     
+    // Check Supabase task stats for subagents
+    const taskStats = agentTaskStats[config.id];
+    if (taskStats) {
+      if (taskStats.executing > 0) {
+        finalStatus = 'executing';
+        finalStatusText = `🔶 執行中（${taskStats.executing}任務）`;
+        finalStatusColor = 'bg-orange-500';
+        finalPulse = true;
+      } else if (taskStats.completedToday > 0) {
+        finalStatusText = `✅ 今日完成 ${taskStats.completedToday} 項任務`;
+      }
+    }
+    
     if (isExecuting) {
       finalStatus = 'executing';
       finalStatusText = '🔶 執行任務中';
@@ -389,7 +457,9 @@ async function buildAgentsData() {
       lastStatus: finalStatus,
       model: config.model,
       quote: config.quote,
-      isCoordinator: config.isCoordinator || false
+      isCoordinator: config.isCoordinator || false,
+      // Add Supabase task info
+      taskStats: taskStats || null
     };
   }));
   

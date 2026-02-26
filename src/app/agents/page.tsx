@@ -33,6 +33,11 @@ interface Agent {
   model: string
   quote: string
   isCoordinator: boolean
+  taskStats?: {
+    executing: number
+    completedToday: number
+    latestTask: string | null
+  } | null
 }
 
 interface TaskStats {

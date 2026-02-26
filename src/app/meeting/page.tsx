@@ -18,13 +18,11 @@ interface Message {
 
 const AGENT_COLORS: Record<string, string> = {
   travis: '#3b82f6',
-  inspector: '#ef4444',
-  secretary: '#f59e0b',
-  writer: '#8b5cf6',
-  researcher: '#06b6d4',
-  coder: '#10b981',
-  designer: '#ec4899',
-  analyst: '#f97316',
+  blake: '#10b981',
+  rex: '#8b5cf6',
+  oscar: '#ec4899',
+  warren: '#f59e0b',
+  griffin: '#ef4444',
 }
 
 function relTime(d: string) {
@@ -97,7 +95,7 @@ export default function MeetingPage() {
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
-  const [online] = useState(8) // Agent count
+  const [online] = useState(6) // Agent count
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const chatRef = useRef<HTMLDivElement>(null)
   const supabase = createClient()

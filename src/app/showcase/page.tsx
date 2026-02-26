@@ -11,60 +11,44 @@ export default function ShowcasePage() {
       color: 'bg-gradient-to-br from-blue-400 to-blue-600'
     },
     {
-      id: 'researcher',
-      name: 'Researcher',
-      title: '情報分析師',
-      description: '深度調查，交叉比對，挖掘真相',
-      image: '/agents/showcase/researcher-male.jpg',
-      color: 'bg-gradient-to-br from-teal-400 to-blue-500'
-    },
-    {
-      id: 'inspector',
-      name: 'Inspector',
-      title: '品質守門員',
-      description: '零容忍瑕疵，上線前的最後防線',
-      image: '/agents/showcase/inspector-male.jpg',
-      color: 'bg-gradient-to-br from-red-400 to-red-600'
-    },
-    {
-      id: 'secretary',
-      name: 'Secretary',
-      title: '辦公室管家',
-      description: '郵件、行程、會議，一切井井有條',
-      image: '/agents/showcase/secretary-male.jpg',
-      color: 'bg-gradient-to-br from-amber-400 to-orange-500'
-    },
-    {
-      id: 'coder',
-      name: 'Coder',
-      title: '程式煉金師',
-      description: '寫程式是藝術，debug 是修行',
-      image: '/agents/showcase/coder-male.jpg',
+      id: 'blake',
+      name: 'Blake',
+      title: '技術架構師',
+      description: '寫程式是藝術，架構是思想',
+      image: '/agents/showcase/blake-male.jpg',
       color: 'bg-gradient-to-br from-green-400 to-emerald-600'
     },
     {
-      id: 'writer',
-      name: 'Writer',
-      title: '文字魔術師',
-      description: '用文字說故事，讚資訊有溫度',
-      image: '/agents/showcase/writer-male.jpg',
-      color: 'bg-gradient-to-br from-yellow-400 to-amber-600'
+      id: 'rex',
+      name: 'Rex',
+      title: '情報分析師',
+      description: '深度調查，交叉比對，挖掘真相',
+      image: '/agents/showcase/rex-male.jpg',
+      color: 'bg-gradient-to-br from-teal-400 to-blue-500'
     },
     {
-      id: 'designer',
-      name: 'Designer',
-      title: '視覺藝術家',
-      description: '每個像素都有它存在的理由',
-      image: '/agents/showcase/designer-male.jpg',
-      color: 'bg-gradient-to-br from-purple-400 to-pink-600'
+      id: 'oscar',
+      name: 'Oscar',
+      title: '行政協調官',
+      description: '郵件、行程、會議，一切井井有條',
+      image: '/agents/showcase/oscar-male.jpg',
+      color: 'bg-gradient-to-br from-amber-400 to-orange-500'
     },
     {
-      id: 'analyst',
-      name: 'Analyst',
-      title: '數據預言家',
+      id: 'warren',
+      name: 'Warren',
+      title: '數據分析師',
       description: '在數字中發現未來的趨勢',
-      image: '/agents/showcase/analyst-male.jpg',
+      image: '/agents/showcase/warren-male.jpg',
       color: 'bg-gradient-to-br from-gray-400 to-gray-600'
+    },
+    {
+      id: 'griffin',
+      name: 'Griffin',
+      title: '品質守門員',
+      description: '零容忍瑕疵，上線前的最後防線',
+      image: '/agents/showcase/griffin-male.jpg',
+      color: 'bg-gradient-to-br from-red-400 to-red-600'
     }
   ]
 
@@ -82,12 +66,12 @@ export default function ShowcasePage() {
             AI Agent Team
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 font-medium">
-            ✨ 8 位 AI 助理，各有所長 ✨
+            ✨ 6 位 AI 助理，各有所長 ✨
           </p>
         </div>
 
         {/* 角色卡片網格 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {agents.map((agent, index) => (
             <div
               key={agent.id}

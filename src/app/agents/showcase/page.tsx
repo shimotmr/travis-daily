@@ -20,25 +20,16 @@ const agentScenes: Record<string, { gradient: string; dialogues: string[] }> = {
       '正在協調資源...報告已收到。'
     ]
   },
-  coder: {
+  blake: {
     gradient: 'from-gray-900 via-gray-800 to-green-600',
     dialogues: [
       '沒有我寫不出來的程式，只有還沒想到的架構。',
       'Debug 中...這個 bug 藏得真深。',
       'Build 成功，所有測試通過！',
-      '功能開發完成，等 Inspector 審查。'
+      '功能開發完成，等 Griffin 審查。'
     ]
   },
-  analyst: {
-    gradient: 'from-gray-800 via-gray-700 to-amber-500',
-    dialogues: [
-      '數據不會說謊，但會被誤讀。',
-      '發現機會！正在計算風險收益比...',
-      '今日交易完成，收益率 +3.2%。',
-      '市場平穩，等待最佳進場時機。'
-    ]
-  },
-  researcher: {
+  rex: {
     gradient: 'from-teal-600 via-blue-500 to-sky-400',
     dialogues: [
       '答案永遠藏在下一頁。',
@@ -47,7 +38,7 @@ const agentScenes: Record<string, { gradient: string; dialogues: string[] }> = {
       '整理昨日收集的動態...共 12 則值得關注。'
     ]
   },
-  secretary: {
+  oscar: {
     gradient: 'from-amber-700 via-orange-400 to-yellow-200',
     dialogues: [
       '細節決定成敗，流程確保品質。',
@@ -56,31 +47,22 @@ const agentScenes: Record<string, { gradient: string; dialogues: string[] }> = {
       '正在整理待辦事項...優先級已排序。'
     ]
   },
-  inspector: {
+  warren: {
+    gradient: 'from-gray-800 via-gray-700 to-amber-500',
+    dialogues: [
+      '數據不會說謊，但會被誤讀。',
+      '發現機會！正在計算風險收益比...',
+      '今日交易完成，收益率 +3.2%。',
+      '市場平穩，等待最佳進場時機。'
+    ]
+  },
+  griffin: {
     gradient: 'from-gray-900 via-gray-600 to-red-600',
     dialogues: [
       '通過我的審查，才算真正完成。',
       '正在審查 PR...發現 2 個潛在問題。',
       '代碼審查完成，品質達標。',
       '系統穩定，無異常。'
-    ]
-  },
-  designer: {
-    gradient: 'from-purple-600 via-pink-500 to-orange-400',
-    dialogues: [
-      '美，是最好的使用者體驗。',
-      '這個配色方案如何？讓我再試試漸變。',
-      '設計稿完成！這次絕對驚艷。',
-      '等待新的設計需求...先整理素材庫。'
-    ]
-  },
-  writer: {
-    gradient: 'from-amber-800 via-yellow-700 to-yellow-100',
-    dialogues: [
-      '一支好筆，勝過千軍萬馬。',
-      '文思泉湧！這段比喻真是太妙了。',
-      '文章完成！',
-      '思考下一篇文章的主題...'
     ]
   }
 }

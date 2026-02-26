@@ -1,15 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
+// Updated agent names: Travis, Blake, Rex, Oscar, Warren, Griffin
 const AGENTS: Record<string, { name: string; avatar: string }> = {
   travis: { name: 'Travis', avatar: '/avatars/travis.png' },
-  inspector: { name: 'Inspector', avatar: '/avatars/inspector.png' },
-  secretary: { name: 'Secretary', avatar: '/avatars/secretary.png' },
-  writer: { name: 'Writer', avatar: '/avatars/writer.png' },
-  researcher: { name: 'Researcher', avatar: '/avatars/researcher.png' },
-  coder: { name: 'Coder', avatar: '/avatars/coder.png' },
-  designer: { name: 'Designer', avatar: '/avatars/designer.png' },
-  analyst: { name: 'Analyst', avatar: '/avatars/analyst.png' },
+  blake: { name: 'Blake', avatar: '/avatars/blake.png' },
+  rex: { name: 'Rex', avatar: '/avatars/rex.png' },
+  oscar: { name: 'Oscar', avatar: '/avatars/oscar.png' },
+  warren: { name: 'Warren', avatar: '/avatars/warren.png' },
+  griffin: { name: 'Griffin', avatar: '/avatars/griffin.png' },
 }
 
 function getSupabase() {

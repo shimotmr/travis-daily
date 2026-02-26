@@ -1,15 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
+// Updated agent names: Travis, Blake, Rex, Oscar, Warren, Griffin
 const AGENTS: Record<string, { name: string; avatar: string; prefix: string }> = {
-  travis: { name: 'Travis', avatar: '/avatars/travis.png', prefix: 'A:' },
-  inspector: { name: 'Inspector', avatar: '/avatars/inspector.png', prefix: 'I:' },
-  secretary: { name: 'Secretary', avatar: '/avatars/secretary.png', prefix: 'S:' },
-  writer: { name: 'Writer', avatar: '/avatars/writer.png', prefix: 'W:' },
-  researcher: { name: 'Researcher', avatar: '/avatars/researcher.png', prefix: 'R:' },
-  coder: { name: 'Coder', avatar: '/avatars/coder.png', prefix: 'C:' },
-  designer: { name: 'Designer', avatar: '/avatars/designer.png', prefix: 'D:' },
-  analyst: { name: 'Analyst', avatar: '/avatars/analyst.png', prefix: 'A:' },
+  travis: { name: 'Travis', avatar: '/avatars/travis.png', prefix: 'T:' },
+  blake: { name: 'Blake', avatar: '/avatars/blake.png', prefix: 'B:' },
+  rex: { name: 'Rex', avatar: '/avatars/rex.png', prefix: 'R:' },
+  oscar: { name: 'Oscar', avatar: '/avatars/oscar.png', prefix: 'O:' },
+  warren: { name: 'Warren', avatar: '/avatars/warren.png', prefix: 'W:' },
+  griffin: { name: 'Griffin', avatar: '/avatars/griffin.png', prefix: 'G:' },
 }
 
 function getSupabase() {
