@@ -33,24 +33,26 @@ function reportToPost(report: any): Post {
   const { data: frontmatter } = matter(content)
   
   // Extract clean content without frontmatter for excerpt
-  const cleanContent = content.replace(/^---[\s\S]*?---\n?/, '')
+  const cleanContent = (content || '').replace(/^---[\s\S]*?---\n?/, '')
   
-  const excerpt = cleanContent
+  const excerpt = (cleanContent || '')
     .replace(/^#.*$/gm, '')
     .replace(/\n{2,}/g, '\n')
     .trim()
     .slice(0, 200)
 
+  const title = String(report.title || frontmatter?.title || 'Untitled')
+
   return {
-    slug: report.id || report.slug || report.title?.toLowerCase().replace(/\s+/g, '-') || '',
-    title: report.title || frontmatter.title || 'Untitled',
-    date: report.date || report.created_at || '2026-01-01',
-    type: report.type || frontmatter.type || 'note',
-    tags: report.tags || frontmatter.tags || [],
-    cover: frontmatter.cover,
+    slug: String(report.id || report.slug || title.toLowerCase().replace(/\s+/g, '-') || ''),
+    title,
+    date: String(report.date || report.created_at || '2026-01-01'),
+    type: String(report.type || frontmatter?.type || 'note'),
+    tags: Array.isArray(report.tags) ? report.tags : (frontmatter?.tags || []),
+    cover: frontmatter?.cover,
     content: cleanContent,
     excerpt,
-    visibility: frontmatter.visibility || 'public',
+    visibility: String(frontmatter?.visibility || 'public'),
   } as Post
 }
 
