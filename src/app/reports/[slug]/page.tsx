@@ -9,7 +9,9 @@ import { formatDate, typeConfig } from '@/lib/utils'
 
 export async function generateStaticParams() {
   const posts = await getAllPosts()
-  return posts.filter(p => p.type === 'research').map(p => ({ slug: p.slug.replace('reports/', '') }))
+  return posts
+    .filter(p => p.type === 'research' && p.slug)
+    .map(p => ({ slug: String(p.slug).replace('reports/', '') }))
 }
 
 export default async function ReportPage({ params }: { params: { slug: string } }) {
