@@ -3,6 +3,9 @@ import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { NextResponse, type NextRequest } from 'next/server'
 
+// Dynamic rendering to avoid Vercel build-time Supabase calls
+export const dynamic = 'force-dynamic'
+
 function getServiceClient() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

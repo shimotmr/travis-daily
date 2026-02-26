@@ -3,6 +3,9 @@ import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
+// Dynamic rendering to avoid Vercel build-time Supabase calls
+export const dynamic = 'force-dynamic'
+
 const OWNER_GITHUB_USERNAME = 'shimotmr'
 
 // Service role client for admin operations

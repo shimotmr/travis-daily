@@ -2,6 +2,9 @@ import { createClient } from '@supabase/supabase-js'
 import matter from 'gray-matter'
 import { NextRequest, NextResponse } from 'next/server'
 
+// Dynamic rendering to avoid Vercel build-time Supabase calls
+export const dynamic = 'force-dynamic'
+
 interface PostVisibility {
   slug: string
   visibility: 'public' | 'private' | 'vip'
