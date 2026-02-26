@@ -1,12 +1,9 @@
-import { existsSync } from 'fs';
+import { NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
+import { existsSync } from 'fs';
 import { join } from 'path';
 
-import { NextResponse } from 'next/server';
-
-// Dynamic rendering to avoid Vercel build-time Supabase calls
 export const dynamic = 'force-dynamic';
-export const revalidate = 60;
 
 // Threshold constants (in milliseconds)
 const ACTIVE_THRESHOLD_MS = 10 * 60 * 1000; // 10 minutes - 綠燈
@@ -352,14 +349,14 @@ async function getAgentTaskStatsFromSupabase(): Promise<Record<string, { executi
       process.env.SUPABASE_SERVICE_ROLE_KEY
     );
     
-    // Use 24 hours ago for completed tasks
-    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    const twentyFourHoursAgoISO = twentyFourHoursAgo.toISOString();
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayISO = today.toISOString();
     
     const { data, error } = await supabase
       .from('board_tasks')
       .select('assignee, status, title, updated_at, completed_at')
-      .gte('updated_at', twentyFourHoursAgoISO);
+      .gte('updated_at', todayISO);
     
     if (error || !data) {
       console.error('Error fetching agent stats:', error);
@@ -381,7 +378,7 @@ async function getAgentTaskStatsFromSupabase(): Promise<Record<string, { executi
       if (task.status === '執行中') {
         stats[assignee].executing++;
         stats[assignee].latestTask = task.title;
-      } else if (task.status === '已完成' && task.completed_at && new Date(task.completed_at) >= twentyFourHoursAgo) {
+      } else if (task.status === '已完成' && task.completed_at && new Date(task.completed_at) >= today) {
         stats[assignee].completedToday++;
         if (!stats[assignee].latestTask) {
           stats[assignee].latestTask = task.title;

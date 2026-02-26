@@ -7,6 +7,8 @@ import { TravisAvatar } from '@/components/TravisAvatar'
 import { getAllPosts, renderMarkdown } from '@/lib/content'
 import { formatDate, typeConfig } from '@/lib/utils'
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   const posts = await getAllPosts()
   return posts

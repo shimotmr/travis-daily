@@ -1,8 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Dynamic rendering to avoid Vercel build-time Supabase calls
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 // Initialize Supabase only if env vars are available
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL

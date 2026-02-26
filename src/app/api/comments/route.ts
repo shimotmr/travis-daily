@@ -1,8 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Dynamic rendering to avoid Vercel build-time Supabase calls
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 // Updated agent names: Travis, Blake, Rex, Oscar, Warren, Griffin
 const AGENTS: Record<string, { name: string; avatar: string; prefix: string }> = {

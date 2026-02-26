@@ -413,7 +413,7 @@ function TeamView({
         <h1 className="text-5xl md:text-6xl font-black mb-4 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 bg-clip-text text-transparent">
           Travis AI Team
         </h1>
-        <p className="text-xl text-gray-700 font-medium">八位專業 Agent，隨時待命</p>
+        <p className="text-xl text-gray-700 font-medium">六位專業 Agent，隨時待命</p>
       </div>
 
       {/* 角色陣列 */}
