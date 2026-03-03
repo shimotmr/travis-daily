@@ -1,6 +1,6 @@
 'use client'
 
-import { Sun, Moon, Newspaper, LayoutDashboard, Network, Shield, Lock, Users } from 'lucide-react'
+import { Sun, Moon, Newspaper, LayoutDashboard, Network, Shield, Lock, Users, Activity } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -11,6 +11,7 @@ import { TravisAvatar } from './TravisAvatar'
 
 const navItems = [
   { href: '/', icon: Newspaper, label: 'Feed' },
+  { href: '/status', icon: Activity, label: 'Status' },
   { href: '/architecture', icon: Network, label: 'Architecture' },
   { href: '/meeting', icon: Users, label: 'Meeting' },
   { href: '/private', icon: Lock, label: 'Private' },
