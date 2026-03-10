@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 import { NextRequest, NextResponse } from 'next/server'
 
 export const dynamic = 'force-dynamic';

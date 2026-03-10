@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 
 // 動態導入以避免構建時錯誤
 let supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL

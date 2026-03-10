@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from 'clsx'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {

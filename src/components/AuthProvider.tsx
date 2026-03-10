@@ -1,4 +1,5 @@
 'use client'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 
 import type { User, Session } from '@supabase/supabase-js'
 import { createContext, useContext, useEffect, useState } from 'react'

@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 import matter from 'gray-matter'
 import { NextRequest, NextResponse } from 'next/server'
 

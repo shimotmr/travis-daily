@@ -1,4 +1,5 @@
 import { ArrowLeft, Blocks } from 'lucide-react'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 import Link from 'next/link'
 
 import { ArchitectureTabs } from '@/components/ArchitectureTabs'

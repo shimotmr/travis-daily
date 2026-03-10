@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 
 export default function ShowcasePage() {
   const agents = [

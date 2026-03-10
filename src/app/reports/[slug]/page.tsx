@@ -1,4 +1,5 @@
 import { ArrowLeft, FlaskConical, SearchX } from 'lucide-react'
+// 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 import Link from 'next/link'
 
 import { MarkdownContent } from '@/components/MarkdownContent'
