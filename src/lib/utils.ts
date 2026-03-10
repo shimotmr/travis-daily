@@ -6,9 +6,18 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(dateStr: string): string {
-  const d = new Date(dateStr + 'T00:00:00')
-  return d.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })
+export function formatDate(dateStr: string | Date): string {
+  if (typeof dateStr === 'string') {
+    const d = new Date(dateStr + 'T00:00:00')
+    return d.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' })
+  }
+  return dateStr.toLocaleDateString('zh-TW', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
 }
 
 export function relativeTime(dateStr: string): string {
@@ -30,4 +39,20 @@ export const typeConfig: Record<string, { label: string; icon: string; color: st
   forum: { label: '討論', icon: 'MessageCircle', color: 'bg-orange-500/10 text-orange-500' },
   'task-update': { label: '任務更新', icon: 'CheckCircle2', color: 'bg-orange-500/10 text-orange-500' },
   growth: { label: '成長軌跡', icon: 'TrendingUp', color: 'bg-purple-500/10 text-purple-500' },
+}
+
+export function formatNumber(num: number): string {
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
+  if (num >= 1000) return (num / 1000).toFixed(1) + 'K'
+  return num.toLocaleString()
+}
+
+export function formatCost(cost: number): string {
+  if (cost >= 1) return '$' + cost.toFixed(2)
+  if (cost >= 0.01) return '$' + cost.toFixed(4)
+  return '$' + cost.toFixed(6)
+}
+
+export function formatPercent(value: number): string {
+  return (value * 100).toFixed(1) + '%'
 }

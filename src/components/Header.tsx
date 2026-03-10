@@ -1,7 +1,7 @@
 'use client'
 // 🔒 AUDIT: 2026-03-08 | score=100/100 | full-audit
 
-import { Sun, Moon, Newspaper, LayoutDashboard, Network, Shield, Lock, Users, Activity } from 'lucide-react'
+import { Sun, Moon, Newspaper, Network, Shield, Lock, Users, Activity, Gauge } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -14,6 +14,7 @@ const navItems = [
   { href: '/', icon: Newspaper, label: 'Feed' },
   { href: '/status', icon: Activity, label: 'Status' },
   { href: '/architecture', icon: Network, label: 'Architecture' },
+  { href: '/token-manager', icon: Gauge, label: 'Tokens' },
   { href: '/meeting', icon: Users, label: 'Meeting' },
   { href: '/private', icon: Lock, label: 'Private' },
 ]
