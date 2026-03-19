@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Newspaper, Search, Calendar, FileText, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
-import { getPostsByType } from '@/lib/content'
+// 使用 API 獲取 posts，避免直接引用使用 fs 的 lib/content.ts
 
 interface DigestPost {
   slug: string
@@ -29,9 +29,11 @@ export default function DigestPage() {
     setError(null)
     
     try {
-      // Fetch only digest type posts from Supabase
-      const posts = await getPostsByType('digest')
-      setDigests(posts)
+      // Fetch only digest type posts from API
+      const res = await fetch('/api/posts?type=digest')
+      const data = await res.json()
+      if (data.error) throw new Error(data.error)
+      setDigests(data || [])
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err))
       setDigests([])
