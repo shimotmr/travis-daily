@@ -482,7 +482,7 @@ export async function GET() {
       taskStats,
       lastUpdate: new Date().toISOString(),
       gatewayRunning: isGatewayRunning,
-      // Model usage stats (simulated - in production, read from model_usage table)
+      // Model usage stats (simulated - in production, read from model_usage_log table)
       modelUsage: {
         todayTokens: 125000,
         yesterdayTokens: 98000,
